@@ -6,7 +6,7 @@ import { siteConfig } from '@/lib/site';
 export default function HomePage() {
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 text-fd-foreground">
-      <section className="grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2">
+      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2">
         <div>
           <p className="mb-4 text-sm text-fd-muted-foreground">Beta · version 0.1.0</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
@@ -43,7 +43,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
         <p className="mt-4 text-fd-muted-foreground">
           Everything listed here is covered by the app's end-to-end tests, which run on every change.
@@ -94,7 +94,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[300px_1fr]">
+      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[300px_1fr]">
         <div className="w-[300px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <Image
             src="/screenshots/sale-phone.png"
@@ -112,7 +112,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
@@ -126,7 +126,7 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="border-t border-fd-border py-16 sm:py-24 text-center">
+      <section className="border-t border-fd-border py-12 sm:py-16 text-center">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Try it with your store</h2>
         <p className="mt-4 text-fd-muted-foreground">
           Install the plugin, allow the POS origin, and sign in. The quick start walks through it.
