@@ -9,6 +9,6 @@ export function baseOptions(): BaseLayoutProps {
       title: siteConfig.name,
     },
     githubUrl: siteConfig.githubUrl,
-    links: [{ text: 'Docs', url: '/docs', active: 'nested-url' }],
+    links: [{ text: 'Docs', url: '/docs', active: 'nested-url' }, { text: 'Live demo', url: siteConfig.demoUrl, external: true }],
   };
 }
