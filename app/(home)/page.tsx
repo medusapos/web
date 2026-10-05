@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { siteConfig } from '@/lib/site';
 
 export default function HomePage() {
   return (
@@ -19,10 +20,10 @@ export default function HomePage() {
           Documentation
         </Link>
         <a
-          href="https://demo.medusapos.com"
+          href={siteConfig.appUrl}
           className="rounded-lg border border-fd-border px-6 py-3 hover:bg-fd-accent"
         >
-          Live Demo
+          Open the web app
         </a>
       </div>
       <div className="mt-12 flex gap-8 text-sm text-fd-muted-foreground">
