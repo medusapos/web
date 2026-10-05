@@ -9,4 +9,8 @@ export const siteConfig = {
   demoUrl: 'https://demo.medusapos.com/demo',
   githubUrl: 'https://github.com/medusapos/app',
   docsRepo: { user: 'medusapos', repo: 'web', branch: 'main' },
+  // The UI kit the app is built with, linked from the home footer.
+  builtWith: { name: 'TallyUI', url: 'https://tallyui.com' },
+  // The same app for another commerce platform, linked from the home footer.
+  sibling: { name: 'VendurePOS', url: 'https://vendurepos.com', platform: 'Vendure' },
 } as const;
