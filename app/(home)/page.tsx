@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Banknote, Calculator, ScanBarcode, Smartphone, Store, WifiOff } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default function HomePage() {
   return (
