@@ -1,3 +1,8 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+/* Fumadocs' light muted text (hsl 0 0% 45.1%) is 4.19:1 on cards; 40% gives 5.07:1 (WCAG AA). Dark mode keeps the .dark value. */
+@theme {
+  --color-fd-muted-foreground: hsl(0, 0%, 40%);
+}
