@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions';
 import { gitConfig } from '@/lib/layout.shared';
+import { siteConfig } from '@/lib/site';
+import { breadcrumbJsonLd, serializeJsonLd, type Breadcrumb } from '@/lib/structured-data';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -13,9 +15,18 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const crumbs: Breadcrumb[] = [
+    { name: 'Home', path: '/' },
+    { name: 'Docs', path: '/docs' },
+  ];
+  if (page.url !== '/docs') crumbs.push({ name: page.data.title, path: page.url });
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd(siteConfig, crumbs)) }}
+      />
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pb-6">

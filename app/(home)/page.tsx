@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Banknote, Calculator, ScanBarcode, Smartphone, Store, WifiOff } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
+import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 text-fd-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd(siteConfig)) }}
+      />
       <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2">
         <div>
           <p className="mb-4 text-sm text-fd-muted-foreground">Beta · version 0.1.0</p>

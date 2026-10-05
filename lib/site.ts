@@ -8,6 +8,8 @@ export const siteConfig = {
   appUrl: 'https://app.medusapos.com',
   demoUrl: 'https://demo.medusapos.com/demo',
   githubUrl: 'https://github.com/medusapos/app',
+  // The GitHub organisation, used as the Organization's sameAs in structured data.
+  githubOrgUrl: 'https://github.com/medusapos',
   docsRepo: { user: 'medusapos', repo: 'web', branch: 'main' },
   // The UI kit the app is built with, linked from the home footer.
   builtWith: { name: 'TallyUI', url: 'https://tallyui.com' },
