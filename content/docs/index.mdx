@@ -1,24 +1,32 @@
 ---
-title: Getting Started
-description: MedusaPOS documentation
+title: Introduction
+description: What MedusaPOS is, what it does today, and what it needs.
 ---
 
-MedusaPOS is an open source point of sale application for [MedusaJS](https://medusajs.com).
+MedusaPOS is an open-source point of sale for [Medusa](https://medusajs.com) v2 stores. It is a browser app, hosted at [app.medusapos.com](https://app.medusapos.com), plus a Medusa plugin that records each POS sale as an order in your store. It is built on [TallyUI](https://github.com/TallyUI/tallyui).
 
-Built on [TallyUI](https://github.com/TallyUI/tallyui) — composable UI primitives for POS systems.
+## What it does today
 
-## Features
+- Sells offline from the loaded catalogue; queued sales sync when you're back online and land in Medusa exactly once.
+- Records each sale as a paid, completed Medusa order with stock deducted.
+- Takes cash, and records payments taken on a separate card terminal. It does not charge cards itself.
+- Runs a register: open with a float, cash paid in and out, count and close, with manager approval for a large difference.
+- Scans with a keyboard-wedge barcode scanner, or searches by name, SKU or barcode.
+- Works on a counter screen and on a phone.
 
-- **Multi-platform** — iOS, Android, Web, and Desktop from a single codebase
-- **Local-first** — Works offline with RxDB, syncs when connected
-- **Modular** — Built on TallyUI's composable architecture
-- **Open source** — MIT licensed
+## What you need
+
+- A Medusa 2.21 store, with the MedusaPOS plugin installed.
+- An admin user who signs in with email and password, without multi-factor authentication.
+- An HTTPS backend URL (or `localhost` for local testing).
+- A current Chrome, Edge, Safari or Firefox.
 
 ## Status
 
-MedusaPOS is currently in **beta**. We're working toward an MVP release.
+MedusaPOS is in **beta**; the current release is 0.1.0. Start with the [quick start](/docs/quick-start).
 
 ## Links
 
-- [GitHub](https://github.com/medusapos)
 - [Web app](https://app.medusapos.com)
+- [Source on GitHub](https://github.com/medusapos/app)
+- [Release notes for 0.1.0](https://github.com/medusapos/app/blob/main/docs/release-notes/v0.1.0.md)

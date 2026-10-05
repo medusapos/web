@@ -9,7 +9,7 @@ export const contentType = 'image/png';
 export default function Image() {
   return new ImageResponse(
     <DefaultImage
-      title={siteConfig.name}
+      title={siteConfig.tagline}
       description={siteConfig.description}
       site={siteConfig.name}
     />,
