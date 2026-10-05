@@ -15,8 +15,14 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href={siteConfig.appUrl}
+              href={siteConfig.demoUrl}
               className="rounded-lg px-5 py-2.5 font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
+            >
+              Live demo
+            </a>
+            <a
+              href={siteConfig.appUrl}
+              className="rounded-lg px-5 py-2.5 font-medium border border-fd-border hover:bg-fd-accent"
             >
               Open the web app
             </a>
@@ -28,7 +34,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            Needs a Medusa 2.21 store with the MedusaPOS plugin installed.
+            The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed.
           </p>
         </div>
         <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
