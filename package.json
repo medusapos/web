@@ -8,7 +8,7 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs",
+    "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs tests/site-config.test.mjs",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx"
   },
@@ -28,6 +28,9 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "core-js"
     ]
   },
   "devDependencies": {
