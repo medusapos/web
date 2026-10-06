@@ -1,0 +1,76 @@
+---
+title: Troubleshooting
+description: Sync status, offline selling, orders that need attention, and what the banners mean.
+---
+{/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md */}
+
+For CORS, **Could not reach the backend** or **Missing shipping option**, see the [quick start's setup troubleshooting](/docs/quick-start#troubleshooting).
+
+## Check sync status
+
+While a sale hasn't reached the store, **Products** shows how many sales are waiting to sync. **Orders** lists each as **Waiting to sync**. When all have synced, it says "Sales are up to date."
+
+## Read the banners
+
+### Sign in again
+
+Your sign-in expired. A strip says your sales are saved and waiting to send, with a **Sign in** link. Enter your password there to send them.
+
+### Not accepted
+
+The store refuses a whole batch. The strip says "N sales not accepted · Details". Use **Try again** once the store is fixed. Those sales stay safely on the till.
+
+### Saved sales can't be opened
+
+The full-screen message says "Saved sales can't be opened on this device. Nothing has been deleted. Reload to try again, or report the problem." It offers **Reload** and **Report a problem**, sometimes with an error code underneath.
+
+## Review orders that need attention
+
+Open **Orders** → **Needs attention**. A sale the store rejected shows **Retry**, which sends it again. Some rejections instead say the sale needs checking against the store first; those have no **Retry**.
+
+A warning can accompany a successfully synced sale, for example when stock is short. A rejected order needs investigation.
+
+## Sell offline
+
+You can keep selling from the catalogue already loaded on the device. Each sale queues and is sent to Medusa exactly once when you're back online. The first sign-in and initial catalogue load need a connection.
+
+After that, store settings are cached, so the till opens offline too, with an **Offline** note and **Retry**. There is no offline page cache: reloading or reopening the app while offline fails. A reload while online keeps sales still waiting to sync.
+
+## Keep one live tab per store
+
+Opening a second tab makes it take over. The first shows "MedusaPOS is open in another tab" with **Use here** to take it back. Closing the live tab lets a waiting tab take over.
+
+A browser without the private storage MedusaPOS needs shows "MedusaPOS can't run in this browser".
+
+## If a sale can't be saved
+
+The payment screen stays on the sale. **Complete sale** tries again; pressing it again never saves the sale twice.
+
+Once the sale is saved on the till, **Continue** starts the next sale and the saved one is sent as usual. **Sign out** stays greyed out until the sale is saved or you continue. If **Continue** never appears, write the sale down, reload the app and report it.
+
+## Storage messages
+
+- **Storage stopped … Reload**: the device's local storage worker died. This is rare. Reload the tab; sales already saved are kept.
+- **Saving is slow…**: a transient note. No action is needed.
+
+## Check catalogue freshness
+
+- Stock is checked against the store every 5 minutes and when the app returns to the foreground. Each variant's stock label says when it was last checked.
+- Prices are re-checked every 30 minutes, and base prices nightly.
+- Deleted products and variants are removed at app start and every 24 hours while the app stays open.
+
+Signing out clears the local catalogue. Sign in again online to load it fresh.
+
+## In the live demo and the next release
+
+These update instructions apply to the [live demo](https://demo.medusapos.com/demo) and the next release, which is not published yet. They describe storage changes after 0.1.0.
+
+Before updating, make sure every till has sent all its sales, with nothing waiting to sync. Sales saved before the update carry over when the till upgrades its storage.
+
+After updating, don't install an older version again. It can't read the new storage, shows none of the till's sales and doesn't send those still waiting. If a till shows no sales after going back to an older version, don't ring those sales again: update the till and they come back.
+
+## Report a problem
+
+**Send feedback** on the sign-in or **Orders** screen opens a GitHub issue form. You can also [open the feedback form](https://github.com/medusapos/app/issues/new?template=tester-feedback.yml).
+
+It asks for app version, backend host, device and browser, what happened, steps and what you expected. The backend URL is always reduced to its host.

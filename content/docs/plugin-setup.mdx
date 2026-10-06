@@ -1,0 +1,87 @@
+---
+title: Plugin setup
+description: What the MedusaPOS plugin needs in your Medusa store, and what it records there.
+---
+{/* Source: medusapos/app@c2db7b2 packages/medusa-plugin/README.md, README.md, docs/testers.md, docs/release-notes/next.md */}
+
+The [quick start](/docs/quick-start#install-the-plugin) walks through installation. This page covers the plugin's options and what it records in your store.
+
+## Install and configure
+
+You need Medusa 2.21. In your store's directory, run:
+
+```sh
+npm install https://github.com/medusapos/app/releases/download/v0.1.0/medusapos-medusa-plugin-0.1.0.tgz
+```
+
+Register the plugin in `medusa-config.ts`, keeping your existing plugins:
+
+```ts
+plugins: [{ resolve: '@medusapos/medusa-plugin', options: {} }]
+```
+
+Run the migration, then restart the backend:
+
+```sh
+npx medusa db:migrate
+```
+
+All options are optional:
+
+| Option | What it selects | Default |
+| --- | --- | --- |
+| `salesChannelId` | The sales channel for POS orders | The store's default sales channel |
+| `locationId` | The stock location for POS orders | The channel's first linked stock location |
+| `shippingOptionId` | The shipping option for POS orders | The location's earliest shipping option on the sale's products' shipping profile |
+
+An explicit `shippingOptionId` must use the products' shipping profile. A sale's products may use at most one shipping profile; products without one are ignored. A sale that mixes profiles is refused.
+
+## Allow the till to connect
+
+Append the app's origin to your existing origins in the backend's `.env`. Use no path or trailing slash, then restart the backend:
+
+```sh
+# Append to your existing origins — don't replace them.
+ADMIN_CORS=<your existing origins>,https://app.medusapos.com
+AUTH_CORS=<your existing origins>,https://app.medusapos.com
+```
+
+The till signs in as a Medusa admin user with email and password, without multi-factor authentication.
+
+## If you run more than one Medusa instance
+
+Configure a shared locking provider: Redis (`@medusajs/medusa/locking-redis`) or Postgres advisory locks (`@medusajs/medusa/locking-postgres`). The default in-memory provider only locks inside one process. Concurrent sales on two instances can lose stock updates and oversell.
+
+With the in-memory provider, the plugin logs a warning once at startup and still starts. One instance is fine. For Redis, add this to `medusa-config.ts`:
+
+```ts
+modules: [{ resolve: '@medusajs/medusa/locking', options: { providers: [{ resolve: '@medusajs/medusa/locking-redis',
+  id: 'locking-redis', is_default: true, options: { redisUrl: process.env.LOCKING_REDIS_URL } }] } }]
+```
+
+After switching to `locking-postgres`, run the migration again to create its `locking` table.
+
+## What a sale records
+
+Each sale becomes a paid, fulfilled and completed Medusa order with stock deducted, recorded exactly once. If the till sends it again, it gets the result already recorded, not a second order.
+
+Payments use Medusa's system payment provider, which moves no money. Take card payments on your own terminal; MedusaPOS does not charge cards.
+
+Each discounted line gets one code-less line-item adjustment named "POS discount", so tax is charged on the discounted amount. The till's receipt totals are stored on the order as the fiscal record. Medusa keeps line tax unrounded, so its reports can differ from receipts by fractions of a cent. The payment always equals the POS total.
+
+Stock never refuses an offline sale. It ends at the original stock minus what was sold and may go negative. Each short variant gets an `insufficient_stock` warning on the order; the till shows the sale under **Orders** → **Needs attention**.
+
+## When the store refuses a sale
+
+A store that can't take a sale refuses it with a `store_configuration` reason instead of retrying forever. The message names what to fix: a missing sales channel; a missing stock location or address; a `locationId` that doesn't exist or isn't assigned to the sale's channel; no shipping option at the location for the products' shipping profile; or mixed shipping profiles. Fix the store, then tap **Retry** on the sale under **Orders** → **Needs attention**.
+
+A line whose product was deleted, is not published, or is not in the sale's sales channel is refused with `unknown_variant`. It stays refused even if the product is later published or added to the channel.
+
+## In the live demo and the next release
+
+These changes are in the [live demo](https://demo.medusapos.com/demo), but not in 0.1.0. The next release is not published yet.
+
+- The store records register openings, counts and closures, and works out what the drawer should hold from sales it received. The app doesn't show the store's figure yet; it is available from `GET /tally/v1/registers/{id}`.
+- A sale that can't be finished automatically, for example because its order was changed by hand in Medusa, waits for an admin. The admin completes or rejects it with one command.
+- A split-tender sale records both payments on one order. A sale with a customer is linked to that Medusa customer.
+- A batch of more than 50 sales, or one over the size limit, is refused whole, with the limit in the answer.

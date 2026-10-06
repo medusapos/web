@@ -1,0 +1,52 @@
+---
+title: Registers
+description: Open a register with a float, record cash in and out, then count and close.
+---
+{/* Source: medusapos/app@c2db7b2 docs/testers.md, apps/expo/lib/approval.ts, docs/release-notes/next.md, packages/medusa-plugin/README.md */}
+
+## Open with your float
+
+Before taking payment, choose a register, such as **Register 1**, and open it with the cash in the drawer: your float. You can browse and fill the cart before opening it.
+
+The register's state shows under the header. On a phone, it is at the right end of a row. Tap it to choose or open the register.
+
+## Record cash in and out
+
+Tap **Register ›** to open its panel. It shows the sales this session and the cash expected in the drawer.
+
+Use **Paid in**, **Paid out** or **No sale** as needed. Each has **Undo**.
+
+## Count and close
+
+1. In the panel, tap **Close register** to open the count. On a phone, this is in the cart view.
+2. Tap the note and coin tiles, or type the cash in the drawer. The line under the amount shows what's expected and how far off you are.
+3. Tap **Close register** again to see the closure: your Z report. It shows the closure number and each tender's counted, expected and difference.
+4. Tap **Done**. The open card is filled in with the cash you just counted.
+
+Between sessions, **Register ›** shows the last closure's figures.
+
+## Get manager approval
+
+If the cash is more than €5.00 over or short, closing needs a manager's approval. The limit is fixed in the app at 500 in your currency's minor units: €5.00 in a euro store. It is not a store setting yet.
+
+An admin of your Medusa store signs in with their email and password in the **Manager approval** box. This doesn't sign you out. If you are on your own, approve with your own login.
+
+The closure then shows **Approved by** and their name.
+
+Approval needs a connection. Offline, or after 15 seconds with no answer, it says "Connect to approve, or count again." Tap **Cancel**, which is always available, and count again.
+
+Never save a manager's password in the till's browser. If the browser offers to save it after **Approve**, choose **Never** or **Not now**. If it suggests a generated "strong password", dismiss it and type the manager's own password.
+
+## Finish an interrupted close
+
+If the till stopped in the middle of a close, the register shows **Close not finished**. Tap it to see "The last close didn't finish."
+
+Tap **Finish closing** to complete the close with the count you already entered.
+
+## In the live demo and the next release
+
+These changes are in the [live demo](https://demo.medusapos.com/demo), but not in 0.1.0. The next release is not published yet.
+
+The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
+
+The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's figure yet; it is available from the plugin's register endpoint, `GET /tally/v1/registers/{id}`.

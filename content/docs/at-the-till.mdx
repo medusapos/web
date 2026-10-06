@@ -1,0 +1,84 @@
+---
+title: At the till
+description: Set up a till, take a sale, scan, discount and print the receipt.
+---
+{/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, e2e/split-tender.spec.ts, e2e/customers.spec.ts, e2e/parked-sales.spec.ts */}
+
+## Set up this till
+
+On first sign-in, MedusaPOS resolves your store's region, tax and sales channel from Medusa. With more than one region or publishable API key, you pick them on **Set up this till**. Your choice is remembered for this store.
+
+The till's country follows its stock location's country, so you don't choose it. If your chosen region doesn't cover that country, the till says so and lets you choose another.
+
+Prices are Medusa's calculated prices for the chosen region, including sale prices. Products your sales channel doesn't sell are hidden.
+
+## Take a sale
+
+1. [Open your register](/docs/registers), then scan a barcode or search for a product. Add items and check the quantities.
+2. Choose **Cash** or **Card terminal**. For a card sale, take the payment on your separate terminal; the POS records that external payment.
+3. Tap **Complete sale**, then view the receipt and print it if needed.
+4. Tap **New sale** to start the next one.
+
+## Scan a barcode
+
+A USB or Bluetooth scanner set to type like a keyboard works on **Products**, where the search box takes the code as if typed, and in the phone cart view. An unknown code shows `No product matches "…"` without adding anything. Typing into a discount box is never read as a scan.
+
+In **Settings → Scanner**, set this till's minimum characters and average time per key. Raise the time for slow Bluetooth scanners. **Test scan here** shows the last scan's average and whether it would count. The minimum also applies to the **Products** search box: shorter text followed by Enter stays a search. Camera scanning isn't available yet.
+
+## Apply a discount
+
+Use a line's **Discount** action, or **Order discount** below the lines. Choose **Percent** or **Amount**, enter the value and tap **Apply**. Remove a discount by tapping its chip (the ✕).
+
+Each chip shows what actually came off, for example "10% −€0.40", "−€0.40" or "Order discount −€0.50". MedusaPOS refuses a discount that takes more off than the line or order is worth.
+
+## Read the receipt
+
+Each line shows quantity × unit price before any discount, with its own discount underneath. An order discount row follows, then **Subtotal**, **Discount**, **VAT** (or **incl. VAT** for tax-inclusive prices) and **Total**.
+
+For 2 of a €2.00 product, with 10% off the line and €0.50 off the order:
+
+| Receipt line | Amount |
+| --- | --- |
+| 2 × €2.00 | €4.00 |
+| 10% off | −€0.40 |
+| Order discount | −€0.50 |
+| Subtotal | €4.00 |
+| Discount | −€0.90 |
+| VAT 25% | €0.78 |
+| Total | €3.88 |
+
+Subtotal is every line before its own discount. Discount is every discount together. VAT is worked out on what's left after discounts. Total is Subtotal − Discount + VAT, or Subtotal − Discount if prices already include tax.
+
+## Use a phone
+
+Below 600 px wide, the till uses one full-height view. **Products** has a cart bar pinned to the bottom, such as **Cart · 2 items €5.00 ›**. Tap it to open the cart. Adding a product keeps you on **Products**.
+
+The cart has **‹ Products** at the top. Its totals and **Cash** / **Card terminal** buttons stay in view.
+
+## In the live demo and the next release
+
+These features are in the [live demo](https://demo.medusapos.com/demo), but not in the current release, 0.1.0. The next release is not published yet.
+
+### Split payment
+
+Choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
+
+Change comes from the cash part only. A card part is capped at the balance due. Removing a part restores the balance. Complete the sale; the receipt lists the card terminal amount, cash tendered and change. The Medusa order records both payments.
+
+### Customers
+
+Tap **Customer: Guest**, search in **Search customers** and pick one. Or tap **New customer**, enter first name, last name and email, then **Save Customer**. Searching and creating need a connection.
+
+The button shows the customer's name, and the completed sale shows `Customer: <name>`. Removing the customer returns the sale to Guest. The Medusa order is linked to that customer.
+
+### Parked sales
+
+Open **Parked sales** to park the current sale and ring up the next one. Resume it from **Parked sales (1)**, or discard it. A resumed sale picks up today's catalogue prices.
+
+### Line price edit
+
+Tap a line's **Price**, enter the new unit price and an optional reason, and apply. The order reaches Medusa at the price you charged.
+
+## Not yet
+
+Medusa promotion codes (coupons), refunds and returns, and charging cards are not available in any release. See [Limitations](/docs/limitations).

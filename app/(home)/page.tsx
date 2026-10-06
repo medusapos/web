@@ -151,7 +151,7 @@ export default function HomePage() {
           <li>support more than one stock location per sales channel</li>
         </ul>
         <p className="mt-4 text-fd-muted-foreground">
-          See the <Link href="/docs/quick-start#known-mvp-limits" className="underline">quick start</Link> for the full list.
+          See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
         </p>
       </section>
 

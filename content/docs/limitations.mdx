@@ -1,0 +1,41 @@
+---
+title: Limitations
+description: What MedusaPOS does not do yet.
+---
+{/* Source: medusapos/app@c2db7b2 README.md, docs/testers.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, packages/medusa-plugin/README.md, apps/expo/lib/approval.ts */}
+
+MedusaPOS is in beta. Today it does not, or not yet:
+
+## Not yet
+
+- Charge cards. It records payments taken on your own terminal.
+- Handle refunds and returns.
+- Accept Medusa promotion codes (coupons).
+- Support multi-factor sign-in.
+- Run as a native iOS, Android or desktop app. It runs in the browser.
+- Scan barcodes with a camera. Use a keyboard-wedge USB or Bluetooth scanner.
+
+## Store setup limits
+
+- Use one stock location per sales channel. With several, Medusa may reserve stock at another location than the sale's.
+- Use one shipping profile per sale. A sale mixing profiles is refused.
+- You need Medusa 2.21.
+- Sign in with an admin user's email and password.
+
+## Till limits
+
+- Only one tab per store stays live.
+- There is no offline page cache. Reloading or reopening while offline fails.
+- The first sign-in and catalogue load need a connection.
+- Stock refreshes every 5 minutes, prices every 30 minutes and base prices nightly, not to the second.
+- Deleted products leave the till at app start or within 24 hours while it stays open.
+- Stock may go negative when an offline sale oversells, with a warning on the order.
+- Medusa's reports can differ from receipts by fractions of a cent.
+- The manager-approval limit is fixed at 500 minor units (€5.00 in a euro store). It is not a store setting.
+- In 0.1.0, with about 2,000 products, the first sync takes about 45 s and search is slow.
+
+## In the live demo and the next release
+
+Split payment, customers, parked sales and line price edit are in the [live demo](https://demo.medusapos.com/demo) and the next release, not in 0.1.0. The next release is not published yet.
+
+See [At the till](/docs/at-the-till#in-the-live-demo-and-the-next-release) for how to use them.
