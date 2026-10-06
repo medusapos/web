@@ -5,14 +5,18 @@ description: What MedusaPOS is, what it does today, and what it needs.
 
 MedusaPOS is an open-source point of sale for [Medusa](https://medusajs.com) v2 stores. It is a browser app, hosted at [app.medusapos.com](https://app.medusapos.com), plus a Medusa plugin that records each POS sale as an order in your store. It is built on [TallyUI](https://github.com/TallyUI/tallyui).
 
+**Try it first:** the [live demo](https://demo.medusapos.com/demo) signs you in to a demo store with one click. The store resets every night.
+
 ## What it does today
 
 - Sells offline from the loaded catalogue; queued sales sync when you're back online and land in Medusa exactly once.
 - Records each sale as a paid, completed Medusa order with stock deducted.
 - Takes cash, and records payments taken on a separate card terminal. It does not charge cards itself.
+- Takes a percentage or a fixed amount off a line or the whole order.
 - Runs a register: open with a float, cash paid in and out, count and close, with manager approval for a large difference.
 - Scans with a keyboard-wedge barcode scanner, or searches by name, SKU or barcode.
 - Works on a counter screen and on a phone.
+- In the live demo, and in the next release: parks a sale to resume later, and edits a line's unit price at the till.
 
 ## What you need
 
@@ -27,6 +31,7 @@ MedusaPOS is in **beta**; the current release is 0.1.0. Start with the [quick st
 
 ## Links
 
+- [Live demo](https://demo.medusapos.com/demo)
 - [Web app](https://app.medusapos.com)
 - [Source on GitHub](https://github.com/medusapos/app)
 - [Release notes for 0.1.0](https://github.com/medusapos/app/blob/main/docs/release-notes/v0.1.0.md)
