@@ -1,7 +1,7 @@
 // Each claim is backed by a test in medusapos/app; `tests` names those files (paths in that repo).
 // Add a feature here only with its test. `released` is true when the feature is in release 0.1.0,
 // false when it is only in the live demo so far (the app's docs/release-notes/next.md: "Not releasable yet").
-export type FeatureIcon = 'wifi-off' | 'store' | 'banknote' | 'calculator' | 'scan-barcode' | 'smartphone' | 'percent' | 'pause' | 'pencil';
+export type FeatureIcon = 'wifi-off' | 'store' | 'banknote' | 'calculator' | 'scan-barcode' | 'smartphone' | 'percent' | 'pause' | 'pencil' | 'coins' | 'user-round';
 
 export type Feature = {
   icon: FeatureIcon;
@@ -73,6 +73,20 @@ export const features: readonly Feature[] = [
     title: 'Line price edit',
     description: "Change a line's unit price at the till, with an optional reason. The order reaches Medusa at the price you charged.",
     tests: ['e2e/parked-sales.spec.ts', 'apps/expo/tests/parked-sales.test.tsx'],
+    released: false,
+  },
+  {
+    icon: 'coins',
+    title: 'Split tender',
+    description: 'Split one sale between your card terminal and cash. Change comes from the cash part only, and the Medusa order records both payments.',
+    tests: ['e2e/split-tender.spec.ts', 'apps/expo/tests/split-tender.test.tsx', 'packages/medusa-plugin/integration-tests/http/order-create.spec.ts'],
+    released: false,
+  },
+  {
+    icon: 'user-round',
+    title: 'Customers',
+    description: 'Search for a customer or create one at the till, and the Medusa order is linked to them. Searching and creating need a connection.',
+    tests: ['e2e/customers.spec.ts', 'apps/expo/tests/customer-picker.test.tsx'],
     released: false,
   },
 ];

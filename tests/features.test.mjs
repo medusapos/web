@@ -17,11 +17,12 @@ test('feature titles are unique', () => {
   assert.equal(new Set(features.map((feature) => feature.title)).size, features.length);
 });
 
-test('parked sales and line price edit are marked as not yet released', () => {
-  for (const title of ['Parked sales', 'Line price edit']) {
+test('features after release 0.1.0 are marked as not yet released', () => {
+  const unreleasedTitles = ['Parked sales', 'Line price edit', 'Split tender', 'Customers'];
+  for (const title of unreleasedTitles) {
     assert.equal(features.find((feature) => feature.title === title)?.released, false);
   }
-  for (const feature of features.filter((feature) => !['Parked sales', 'Line price edit'].includes(feature.title))) {
+  for (const feature of features.filter((feature) => !unreleasedTitles.includes(feature.title))) {
     assert.equal(feature.released, true, feature.title);
   }
 });
@@ -37,4 +38,10 @@ test('home page renders the features list and the comparison table', () => {
   const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(source.split('features.map(').length - 1 >= 2);
   assert.ok(source.includes('scope="row"'));
+});
+
+test('Not there yet no longer lists split tender or customers', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(!source.includes('split one payment'));
+  assert.ok(!source.includes('attach a customer'));
 });

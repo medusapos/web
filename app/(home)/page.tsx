@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Banknote, Calculator, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, WifiOff, type LucideIcon } from 'lucide-react';
+import { Banknote, Calculator, Coins, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
 import { features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
@@ -10,12 +10,14 @@ const icons: Record<FeatureIcon, LucideIcon> = {
   'wifi-off': WifiOff,
   store: Store,
   banknote: Banknote,
+  coins: Coins,
   calculator: Calculator,
   'scan-barcode': ScanBarcode,
   smartphone: Smartphone,
   percent: Percent,
   pause: Pause,
   pencil: Pencil,
+  'user-round': UserRound,
 };
 
 export const metadata: Metadata = {
@@ -144,8 +146,6 @@ export default function HomePage() {
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
-          <li>split one payment across cash and card</li>
-          <li>attach a customer to a sale</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
