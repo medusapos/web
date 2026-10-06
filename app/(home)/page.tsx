@@ -66,7 +66,9 @@ export default function HomePage() {
             alt="MedusaPOS on a desktop browser: the product grid, a cart with VAT, and Cash and Card terminal buttons"
             width={1280}
             height={800}
-            priority
+            preload
+            fetchPriority="high"
+            sizes="(min-width: 1024px) 536px, 100vw"
             className="h-auto w-full"
           />
         </div>
