@@ -1,9 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Banknote, Calculator, ScanBarcode, Smartphone, Store, WifiOff } from 'lucide-react';
+import { Banknote, Calculator, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, WifiOff, type LucideIcon } from 'lucide-react';
+import { features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
+
+const icons: Record<FeatureIcon, LucideIcon> = {
+  'wifi-off': WifiOff,
+  store: Store,
+  banknote: Banknote,
+  calculator: Calculator,
+  'scan-barcode': ScanBarcode,
+  smartphone: Smartphone,
+  percent: Percent,
+  pause: Pause,
+  pencil: Pencil,
+};
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -62,52 +75,48 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
         <p className="mt-4 text-fd-muted-foreground">
-          Everything listed here is covered by the app's end-to-end tests, which run on every change.
+          Everything listed here is covered by the app's automated tests, which run on every change.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <WifiOff size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Sells offline</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              Keep selling from the loaded catalogue when the connection drops. Queued sales sync when you're back online, and each one lands in Medusa exactly once.
-            </p>
-          </div>
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <Store size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Real Medusa orders</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              Each sale becomes a paid, completed order in your Medusa store with stock deducted, recorded by the MedusaPOS plugin.
-            </p>
-          </div>
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <Banknote size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Cash and card terminal</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              Take cash, or take a card on your own terminal and record it as an external payment. MedusaPOS does not charge cards itself.
-            </p>
-          </div>
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <Calculator size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Registers</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              Open with a float, record cash paid in and out, then count and close. A large difference needs a manager's approval.
-            </p>
-          </div>
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <ScanBarcode size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Scan or search</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              Use a keyboard-wedge barcode scanner, or search by name, SKU or barcode.
-            </p>
-          </div>
-          <div className="rounded-xl border border-fd-border bg-fd-card p-6">
-            <Smartphone size={20} className="text-fd-muted-foreground" />
-            <h3 className="mt-4 text-lg font-semibold">Phone and counter</h3>
-            <p className="mt-2 text-fd-muted-foreground">
-              The same app works on a counter screen and on a phone, with the cart a tap away.
-            </p>
-          </div>
+          {features.map((feature) => {
+            const Icon = icons[feature.icon];
+            return (
+              <div key={feature.title} className="rounded-xl border border-fd-border bg-fd-card p-6">
+                <Icon size={20} className="text-fd-muted-foreground" />
+                {!feature.released && <p className="mt-4 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
+                <h3 className={`${feature.released ? 'mt-4' : 'mt-1'} text-lg font-semibold`}>{feature.title}</h3>
+                <p className="mt-2 text-fd-muted-foreground">{feature.description}</p>
+              </div>
+            );
+          })}
         </div>
+      </section>
+
+      <section className="py-12 sm:py-16">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Live demo and release 0.1.0</h2>
+        <p className="mt-4 text-fd-muted-foreground">The live demo runs the app's latest build. Release 0.1.0 is the version you install in your store today.</p>
+        <div className="mt-8 overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <caption className="sr-only">Features in the live demo and in release 0.1.0</caption>
+            <thead>
+              <tr>
+                <th scope="col" className="py-2 pr-4 font-semibold">Feature</th>
+                <th scope="col" className="py-2 pr-4 font-semibold">Live demo</th>
+                <th scope="col" className="py-2 pr-4 font-semibold">Release 0.1.0</th>
+              </tr>
+            </thead>
+            <tbody>
+              {features.map((feature) => (
+                <tr key={feature.title} className="border-t border-fd-border">
+                  <th scope="row" className="py-2 pr-4 font-medium">{feature.title}</th>
+                  <td className="py-2 pr-4 text-fd-muted-foreground">Yes</td>
+                  <td className="py-2 text-fd-muted-foreground">{feature.released ? 'Yes' : 'Next release'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-6"><a href={siteConfig.demoUrl} className="underline">Try the live demo</a>: one click signs you in to a demo store that resets every night.</p>
       </section>
 
       <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[300px_1fr]">
@@ -133,6 +142,8 @@ export default function HomePage() {
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
+          <li>split one payment across cash and card</li>
+          <li>attach a customer to a sale</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
