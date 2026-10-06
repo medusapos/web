@@ -1,1 +1,1 @@
-{ "title": "MedusaPOS", "pages": ["index", "quick-start", "changelog"] }
+{ "title": "MedusaPOS", "pages": ["index", "quick-start", "plugin-setup", "at-the-till", "registers", "troubleshooting", "limitations", "changelog"] }

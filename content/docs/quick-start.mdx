@@ -122,8 +122,7 @@ while a rejected order needs investigation.
 
 ## Known MVP limits
 
-- A product deleted in Medusa stays in the POS catalogue until you sign out
-  and back in. Signing out clears the local catalogue.
+- A product deleted in Medusa leaves the POS catalogue at the next app start, or within 24 hours while the app stays open. Signing out clears the local catalogue.
 - Medusa keeps line tax unrounded, so its reports can differ from receipts by
   fractions of a cent. The payment always equals the POS total.
 - Use one stock location per sales channel. With several locations, Medusa
@@ -131,6 +130,7 @@ while a rejected order needs investigation.
 - Stock may go negative when an offline sale oversells it. The order shows a
   warning so you can review the shortfall.
 - Multi-factor sign-in is not supported.
+- See [Limitations](/docs/limitations) for the full list.
 
 ## Troubleshooting
 
@@ -152,3 +152,11 @@ while a rejected order needs investigation.
 - **Sales stuck "waiting to sync":** check your internet connection and that
   the backend is reachable. Open **Orders** for each sale's status and any
   rejection or warning details.
+
+## Next steps
+
+- [Plugin setup](/docs/plugin-setup): options and what sales record in Medusa.
+- [At the till](/docs/at-the-till): take a sale, scan, discount and print.
+- [Registers](/docs/registers): open with a float, count and close.
+- [Troubleshooting](/docs/troubleshooting): sync, offline selling and orders that need attention.
+- [Limitations](/docs/limitations): what MedusaPOS does not do yet.
