@@ -3,10 +3,13 @@ title: Limitations
 description: What MedusaPOS does not do yet.
 ---
 {/* Source: medusapos/app@c2db7b2 README.md, docs/testers.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, packages/medusa-plugin/README.md, apps/expo/lib/approval.ts */}
+{/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Known MVP limits). */}
 
 MedusaPOS is in beta. Today it does not, or not yet:
 
 ## Not yet
+
+{/* Promotion codes (coupons) line: no source states it; absence at medusapos/app@c2db7b2. git grep -i -E "promotion|coupon" over apps/ and packages/ (lockfiles excluded) finds only packages/medusa-plugin/src/workflows/tally-order-create/plan.ts:31, where the POS discount adjustment carries no promotion code; nothing under docs/ or in README.md mentions promotions or coupons. Card charging, refunds and returns: docs/release-notes/v0.1.0.md:44. */}
 
 - Charge cards. It records payments taken on your own terminal.
 - Handle refunds and returns.
