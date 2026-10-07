@@ -21,11 +21,17 @@ test('each store-owner page has frontmatter and an app source citation', () => {
   }
 });
 
-test('unreleased till features have the demo and next-release heading and link', () => {
+test('0.2.0 till features have their heading and link', () => {
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   const limitations = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
-  assert.match(till, /^## In the live demo and the next release$/m);
-  assert.ok(limitations.includes('/docs/at-the-till#in-the-live-demo-and-the-next-release'));
+  assert.match(till, /^## New in 0\.2\.0$/m);
+  assert.ok(limitations.includes('/docs/at-the-till#new-in-020'));
+  const tarballUrl = 'https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz';
+  for (const name of ['quick-start.mdx', 'plugin-setup.mdx']) {
+    const source = readFileSync(new URL(`../content/docs/${name}`, import.meta.url), 'utf8');
+    assert.ok(source.includes(tarballUrl), name);
+    assert.ok(!source.includes('v0.1.0/medusapos-medusa-plugin-0.1.0.tgz'), name);
+  }
 });
 
 test('home page points to the limitations page', () => {

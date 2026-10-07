@@ -3,6 +3,7 @@ title: Troubleshooting
 description: Sync status, offline selling, orders that need attention, and what the banners mean.
 ---
 {/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md */}
+{/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Make a sale, Troubleshooting), apps/expo/tests/products-screen.test.tsx (sync status), apps/expo/tests/storage-health.test.tsx (storage messages). */}
 
 For CORS, **Could not reach the backend** or **Missing shipping option**, see the [quick start's setup troubleshooting](/docs/quick-start#troubleshooting).
@@ -62,9 +63,9 @@ Once the sale is saved on the till, **Continue** starts the next sale and the sa
 
 Signing out clears the local catalogue. Sign in again online to load it fresh.
 
-## In the live demo and the next release
+## Updating to 0.2.0
 
-These update instructions apply to the [live demo](https://demo.medusapos.com/demo) and the next release, which is not published yet. They describe storage changes after 0.1.0.
+These instructions apply when you update from 0.1.0 to 0.2.0, which changes how each till stores its sales. Update the plugin first (see [Plugin setup](/docs/plugin-setup#install-and-configure)), then the tills. The hosted app at `https://app.medusapos.com` updates itself: reload each till's tab once its sales have synced.
 
 Before updating, make sure every till has sent all its sales, with nothing waiting to sync. Sales saved before the update carry over when the till upgrades its storage.
 

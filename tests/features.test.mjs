@@ -17,12 +17,8 @@ test('feature titles are unique', () => {
   assert.equal(new Set(features.map((feature) => feature.title)).size, features.length);
 });
 
-test('features after release 0.1.0 are marked as not yet released', () => {
-  const unreleasedTitles = ['Parked sales', 'Line price edit', 'Split tender', 'Customers'];
-  for (const title of unreleasedTitles) {
-    assert.equal(features.find((feature) => feature.title === title)?.released, false);
-  }
-  for (const feature of features.filter((feature) => !unreleasedTitles.includes(feature.title))) {
+test('every feature is in release 0.2.0', () => {
+  for (const feature of features) {
     assert.equal(feature.released, true, feature.title);
   }
 });
