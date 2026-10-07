@@ -3,6 +3,7 @@ title: At the till
 description: Set up a till, take a sale, scan, discount and print the receipt.
 ---
 {/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, e2e/split-tender.spec.ts, e2e/customers.spec.ts, e2e/parked-sales.spec.ts */}
+{/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Make a sale), apps/expo/tests/store-settings-flow.test.tsx, apps/expo/lib/catalogue.test.ts, apps/expo/tests/products-screen.test.tsx, apps/expo/tests/discount.test.tsx, apps/expo/tests/parked-sales.test.tsx. */}
 
 ## Set up this till
 
@@ -80,5 +81,7 @@ Open **Parked sales** to park the current sale and ring up the next one. Resume 
 Tap a line's **Price**, enter the new unit price and an optional reason, and apply. The order reaches Medusa at the price you charged.
 
 ## Not yet
+
+{/* Promotion codes (coupons): no source states them; absence at medusapos/app@c2db7b2. git grep -i -E "promotion|coupon" over apps/ and packages/ (lockfiles excluded) finds only packages/medusa-plugin/src/workflows/tally-order-create/plan.ts:31, where the POS discount adjustment carries no promotion code; nothing under docs/ or in README.md mentions promotions or coupons. Refunds, returns and card charging: docs/release-notes/v0.1.0.md:44. */}
 
 Medusa promotion codes (coupons), refunds and returns, and charging cards are not available in any release. See [Limitations](/docs/limitations).
