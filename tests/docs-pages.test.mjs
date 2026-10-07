@@ -46,3 +46,10 @@ test('quick start links all five store-owner pages', () => {
     assert.ok(source.includes(`/docs/${slug}`), slug);
   }
 });
+
+test('docs first load defers search and sidebar prefetch', () => {
+  const rootLayout = readFileSync(new URL('../app/layout.tsx', import.meta.url), 'utf8');
+  const docsLayout = readFileSync(new URL('../app/docs/layout.tsx', import.meta.url), 'utf8');
+  assert.ok(rootLayout.includes('search={{ preload: false }}'));
+  assert.ok(docsLayout.includes('sidebar={{ prefetch: false }}'));
+});
