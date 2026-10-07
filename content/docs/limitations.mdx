@@ -9,7 +9,7 @@ MedusaPOS is in beta. Today it does not, or not yet:
 
 ## Not yet
 
-{/* Promotion codes (coupons) line: no source states it; absence at medusapos/app@c2db7b2. git grep -i -E "promotion|coupon" over apps/ and packages/ (lockfiles excluded) finds only packages/medusa-plugin/src/workflows/tally-order-create/plan.ts:31, where the POS discount adjustment carries no promotion code; nothing under docs/ or in README.md mentions promotions or coupons. Card charging, refunds and returns: docs/release-notes/v0.1.0.md:44. */}
+{/* Card charging, refunds and returns, and promotion codes (coupons) lines: medusapos/app@91fac0a docs/V2-PARITY.md:77 (Take a card on a terminal: Missing), docs/V2-PARITY.md:96 (Refunds: Missing), docs/V2-PARITY.md:97 (Coupons in the cart: Missing; the plugin still needs a promotion-code mapping), docs/release-notes/v0.1.0.md:44 (no card charging, refunds or returns); docs/release-notes/next.md adds none of them. */}
 
 - Charge cards. It records payments taken on your own terminal.
 - Handle refunds and returns.
