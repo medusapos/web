@@ -3,6 +3,7 @@ title: Plugin setup
 description: What the MedusaPOS plugin needs in your Medusa store, and what it records there.
 ---
 {/* Source: medusapos/app@c2db7b2 packages/medusa-plugin/README.md, README.md, docs/testers.md, docs/release-notes/next.md */}
+{/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (plugin options, CORS origins without a path or trailing slash, sign-in without multi-factor, the earliest shipping option). */}
 
 The [quick start](/docs/quick-start#install-the-plugin) walks through installation. This page covers the plugin's options and what it records in your store.
@@ -12,7 +13,7 @@ The [quick start](/docs/quick-start#install-the-plugin) walks through installati
 You need Medusa 2.21. In your store's directory, run:
 
 ```sh
-npm install https://github.com/medusapos/app/releases/download/v0.1.0/medusapos-medusa-plugin-0.1.0.tgz
+npm install https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz
 ```
 
 Register the plugin in `medusa-config.ts`, keeping your existing plugins:
@@ -26,6 +27,8 @@ Run the migration, then restart the backend:
 ```sh
 npx medusa db:migrate
 ```
+
+Updating from 0.1.0? Run the same install and migration, then restart the backend. Keep your existing `@medusapos/medusa-plugin` entry in `medusa-config.ts`.
 
 All options are optional:
 
@@ -78,9 +81,9 @@ A store that can't take a sale refuses it with a `store_configuration` reason in
 
 A line whose product was deleted, is not published, or is not in the sale's sales channel is refused with `unknown_variant`. It stays refused even if the product is later published or added to the channel.
 
-## In the live demo and the next release
+## New in 0.2.0
 
-These changes are in the [live demo](https://demo.medusapos.com/demo), but not in 0.1.0. The next release is not published yet.
+These changes arrived in [release 0.2.0](https://github.com/medusapos/app/releases/tag/v0.2.0).
 
 - The store records register openings, counts and closures, and works out what the drawer should hold from sales it received. The app doesn't show the store's figure yet; it is available from `GET /tally/v1/registers/{id}`.
 - A sale that can't be finished automatically, for example because its order was changed by hand in Medusa, waits for an admin. The admin completes or rejects it with one command.

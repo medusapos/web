@@ -3,6 +3,7 @@ title: Registers
 description: Open a register with a float, record cash in and out, then count and close.
 ---
 {/* Source: medusapos/app@c2db7b2 docs/testers.md, apps/expo/lib/approval.ts, docs/release-notes/next.md, packages/medusa-plugin/README.md */}
+{/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: apps/expo/tests/register-screen.test.tsx (Finish closing), apps/expo/components/register-close.tsx (APPROVE_OFFLINE, the offline approval text). */}
 
 ## Open with your float
@@ -44,9 +45,9 @@ If the till stopped in the middle of a close, the register shows **Close not fin
 
 Tap **Finish closing** to complete the close with the count you already entered.
 
-## In the live demo and the next release
+## New in 0.2.0
 
-These changes are in the [live demo](https://demo.medusapos.com/demo), but not in 0.1.0. The next release is not published yet.
+These changes arrived in [release 0.2.0](https://github.com/medusapos/app/releases/tag/v0.2.0).
 
 The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
 

@@ -33,7 +33,7 @@ export default function HomePage() {
       />
       <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2">
         <div>
-          <p className="mb-4 text-sm text-fd-muted-foreground">Beta · version 0.1.0</p>
+          <p className="mb-4 text-sm text-fd-muted-foreground">Beta · version 0.2.0</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
             MedusaPOS is an open-source, MIT-licensed till for Medusa v2 stores. It runs in the browser, keeps selling when the connection drops, and records every sale in your Medusa store exactly once.
@@ -97,16 +97,16 @@ export default function HomePage() {
       </section>
 
       <section className="py-12 sm:py-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Live demo and release 0.1.0</h2>
-        <p className="mt-4 text-fd-muted-foreground">The live demo runs the app's latest build. Release 0.1.0 is the version you install in your store today.</p>
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Live demo and release 0.2.0</h2>
+        <p className="mt-4 text-fd-muted-foreground">The live demo runs the app's latest build. Release 0.2.0 is the version you install in your store today.</p>
         <div className="mt-8 overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <caption className="sr-only">Features in the live demo and in release 0.1.0</caption>
+            <caption className="sr-only">Features in the live demo and in release 0.2.0</caption>
             <thead>
               <tr>
                 <th scope="col" className="py-2 pr-4 font-semibold">Feature</th>
                 <th scope="col" className="py-2 pr-4 font-semibold">Live demo</th>
-                <th scope="col" className="py-2 pr-4 font-semibold">Release 0.1.0</th>
+                <th scope="col" className="py-2 pr-4 font-semibold">Release 0.2.0</th>
               </tr>
             </thead>
             <tbody>
