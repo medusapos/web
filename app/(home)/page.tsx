@@ -58,6 +58,7 @@ export default function HomePage() {
               Quick start
             </Link>
           </div>
+          <img src="/x.png" />
           <p className="mt-4 text-sm text-fd-muted-foreground">
             The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed.
           </p>
