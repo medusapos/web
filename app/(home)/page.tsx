@@ -27,7 +27,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 text-fd-foreground">
-      <img src="/x.png" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd(siteConfig)) }}
