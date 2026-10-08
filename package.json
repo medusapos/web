@@ -8,6 +8,7 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
+    "links:check": "linkinator http://localhost:3000 --recurse --skip '^(?!http://localhost:3000)'",
     "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs tests/site-config.test.mjs tests/docs-pages.test.mjs tests/llm-text.test.mjs tests/analytics-interaction.test.mjs tests/sitemap.test.mjs",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx"
