@@ -8,6 +8,9 @@ export const siteConfig = {
   appUrl: 'https://app.medusapos.com',
   demoUrl: 'https://demo.medusapos.com/demo',
   githubUrl: 'https://github.com/medusapos/app',
+  // The MedusaPOS release the site describes (medusapos/app tag v0.2.0). The home page uses it;
+  // tests/release-version.test.mjs keeps it equal to the changelog's newest entry and the docs.
+  release: '0.2.0',
   // The GitHub organisation, used as the Organization's sameAs in structured data.
   githubOrgUrl: 'https://github.com/medusapos',
   docsRepo: { user: 'medusapos', repo: 'web', branch: 'main' },

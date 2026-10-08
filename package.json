@@ -9,7 +9,7 @@
     "dev": "next dev",
     "start": "next start",
     "links:check": "linkinator --recurse --check-fragments --skip '^(?!http://localhost:3000)'",
-    "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs tests/site-config.test.mjs tests/docs-pages.test.mjs tests/llm-text.test.mjs tests/analytics-interaction.test.mjs tests/sitemap.test.mjs tests/sitemap-seeds.test.mjs",
+    "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs tests/site-config.test.mjs tests/docs-pages.test.mjs tests/llm-text.test.mjs tests/analytics-interaction.test.mjs tests/sitemap.test.mjs tests/sitemap-seeds.test.mjs tests/release-version.test.mjs",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx"
   },
