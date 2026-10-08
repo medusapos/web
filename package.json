@@ -9,6 +9,7 @@
     "dev": "next dev",
     "start": "next start",
     "links:check": "linkinator --recurse --check-fragments --skip '^(?!http://localhost:3000)'",
+    "lint": "eslint",
     "test": "node --test tests/structured-data.test.mjs tests/features.test.mjs tests/site-config.test.mjs tests/docs-pages.test.mjs tests/llm-text.test.mjs tests/analytics-interaction.test.mjs tests/sitemap.test.mjs tests/sitemap-seeds.test.mjs tests/release-version.test.mjs",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx"
@@ -31,7 +32,8 @@
       "sharp"
     ],
     "ignoredBuiltDependencies": [
-      "core-js"
+      "core-js",
+      "unrs-resolver"
     ]
   },
   "devDependencies": {
@@ -40,6 +42,8 @@
     "@types/node": "^25.2.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.3.8",
     "linkinator": "8.1.0",
     "postcss": "^8.5.29",
     "tailwindcss": "^4.3.3",

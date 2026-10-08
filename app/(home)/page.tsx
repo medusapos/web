@@ -79,7 +79,7 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
         <p className="mt-4 text-fd-muted-foreground">
-          Everything listed here is covered by the app's automated tests, which run on every change.
+          Everything listed here is covered by the app&apos;s automated tests, which run on every change.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
@@ -136,7 +136,7 @@ export default function HomePage() {
         <div>
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
-            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store's backend URL and an admin account. The catalogue and unsent sales are kept in the browser's own storage, so a page reload or a dropped connection doesn't lose a sale.
+            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a page reload or a dropped connection doesn&apos;t lose a sale.
           </p>
         </div>
       </section>
