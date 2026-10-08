@@ -35,7 +35,7 @@ jobs:
       - run: pnpm build
       - run: pnpm test
 
-  # Crawls the built site and fails on any broken internal link (marketing backlog item 87).
+  # Crawls from / and every built sitemap.xml page (marketing backlog items 87 and 92).
   links:
     name: Internal links
     runs-on: ubuntu-latest
@@ -65,5 +65,7 @@ jobs:
           done
           cat /tmp/next-start.log
           exit 1
+      - name: List link-check seeds
+        run: node scripts/sitemap-seeds.mjs > /tmp/link-seeds.txt
       - name: Check internal links
-        run: pnpm links:check
+        run: xargs pnpm links:check < /tmp/link-seeds.txt
