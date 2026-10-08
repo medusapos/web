@@ -2,9 +2,10 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 
 // Sitemap lastmod is each page source's last git commit (marketing backlog item 86).
-// Shallow clones (CI, Vercel) cannot see that commit, so they use this map.
-// Each value is the file's git log -1 --format=%cI on a full clone, checked 2026-10-08.
-// Bump the value when the page changes.
+// CI (fetch-depth: 0) and Vercel (VERCEL_DEEP_CLONE=true) build from full history;
+// this map is only a backup without history: no git, or a shallow clone whose
+// boundary commit hides the real one. Values are each file's
+// git log -1 --format=%cI on a full clone, checked 2026-10-08. Bump on page changes.
 export const PAGE_DATE_FALLBACK: Record<string, string> = {
   'app/(home)/page.tsx': '2026-10-07T16:46:29+02:00',
   'content/docs/at-the-till.mdx': '2026-10-07T16:46:29+02:00',
