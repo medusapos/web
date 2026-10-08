@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const useProbe = () => 0; if (features.length) useProbe();
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 text-fd-foreground">
       <script
