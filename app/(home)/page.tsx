@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allReleased = features.every((feature) => feature.released);
+  // With an odd count that leaves two over at three columns (11 today), the first card spans two columns so every row is full at two and three columns.
+  const spanFirst = features.length % 2 === 1 && features.length % 3 === 2;
   const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
   const { props: heroDesktop } = getImageProps({
     src: '/screenshots/sale-desktop.png',
@@ -102,10 +104,10 @@ export default function HomePage() {
           <a href="#not-there-yet" className="underline">What it doesn&apos;t do yet</a>
         </p>
         <div className="mt-8 grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => {
+          {features.map((feature, i) => {
             const Icon = icons[feature.icon];
             return (
-              <div key={feature.title} className="rounded-xl border border-fd-border bg-fd-card p-4 sm:p-6">
+              <div key={feature.title} className={`rounded-xl border border-fd-border bg-fd-card p-4 sm:p-6${spanFirst && i === 0 ? ' sm:col-span-2' : ''}`}>
                 {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground sm:mb-0 sm:mt-0">In the live demo · next release</p>}
                 <div className="flex items-center gap-3 sm:block">
                   <Icon size={20} className="shrink-0 text-fd-muted-foreground" />
@@ -149,8 +151,8 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[300px_1fr]">
-        <div className="hidden md:block w-[300px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
+      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[220px_1fr]">
+        <div className="hidden md:block w-[220px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <Image
             src="/screenshots/sale-phone.png"
             alt="MedusaPOS on a phone: a café and gift-shop catalogue in a two-column product grid, with the cart bar showing 4 items for €31.45"
@@ -159,7 +161,7 @@ export default function HomePage() {
             className="h-auto w-full"
           />
         </div>
-        <div>
+        <div className="max-w-prose">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
             Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale. Offline, the app can&apos;t reload or reopen, so keep the tab open until you&apos;re back online.
