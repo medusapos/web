@@ -165,7 +165,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-12 sm:py-16">
-        <h2 id="not-there-yet" className="text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
+        <h2 id="not-there-yet" className="scroll-mt-20 text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
