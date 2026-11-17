@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allReleased = features.every((feature) => feature.released);
-  const heroAlt = 'MedusaPOS sale screen in the browser: search, category filters and the product grid with prices and stock';
+  const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
   const { props: heroDesktop } = getImageProps({
     src: '/screenshots/sale-desktop.png',
     alt: heroAlt,
