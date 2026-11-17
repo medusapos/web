@@ -15,7 +15,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'wifi-off',
     title: 'Sells offline',
-    description: "Keep selling from the loaded catalogue when the connection drops. Queued sales sync when you're back online, and each one lands in Medusa exactly once.",
+    description: "Keep selling from the loaded catalogue when the connection drops. Queued sales sync when you're back online, and Medusa never records one twice.",
     tests: ['e2e/offline.spec.ts'],
     released: true,
   },

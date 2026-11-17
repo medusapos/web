@@ -9,7 +9,7 @@ MedusaPOS is an open-source point of sale for [Medusa](https://medusajs.com) v2 
 
 ## What it does today
 
-- Sells offline from the loaded catalogue; queued sales sync when you're back online and land in Medusa exactly once.
+- Sells offline from the loaded catalogue; queued sales sync when you're back online, and Medusa never records one twice. A sale the store refuses waits under **Orders** → **Needs attention** ([Troubleshooting](/docs/troubleshooting#review-orders-that-need-attention)).
 - Records each sale as a paid, completed Medusa order with stock deducted.
 - Takes cash, and records payments taken on a separate card terminal. It does not charge cards itself.
 - Takes a percentage or a fixed amount off a line or the whole order.
