@@ -22,11 +22,9 @@ Updating from 0.1.0? Run the same install and migration, then restart the backen
 
 All options are optional:
 
-| Option | What it selects | Default |
-| --- | --- | --- |
-| `salesChannelId` | The sales channel for POS orders | The store's default sales channel |
-| `locationId` | The stock location for POS orders | The channel's first linked stock location |
-| `shippingOptionId` | The shipping option for POS orders | The location's earliest shipping option on the sale's products' shipping profile |
+- `salesChannelId`: the sales channel for POS orders. Default: the store's default sales channel.
+- `locationId`: the stock location for POS orders. Default: the channel's first linked stock location.
+- `shippingOptionId`: the shipping option for POS orders. Default: the location's earliest shipping option on the sale's products' shipping profile.
 
 An explicit `shippingOptionId` must use the products' shipping profile. A sale's products may use at most one shipping profile; products without one are ignored. A sale that mixes profiles is refused.
 
