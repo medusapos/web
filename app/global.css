@@ -27,3 +27,14 @@ figure.shiki .fd-scroll-container .line {
      button and its offset; 0.5rem more leaves a visible gap beside it. */
   padding-right: calc(var(--padding-right) + 0.5rem);
 }
+
+/*
+ * Inline `code` in docs prose: when a chip wraps on a phone (for example
+ * medusa-config.ts at 390 px), give each line fragment its own border,
+ * padding and radius instead of an open-ended half chip. Block code is
+ * excluded; it is styled above.
+ */
+.prose :where(code):not(:where(pre code)) {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
