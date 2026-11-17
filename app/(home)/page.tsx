@@ -146,6 +146,7 @@ export default function HomePage() {
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
+          <li>take tips, email receipts or show sales reports</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
