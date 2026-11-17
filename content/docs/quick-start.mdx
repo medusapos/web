@@ -9,7 +9,7 @@ MedusaPOS is a browser point of sale for your Medusa store. It takes cash and re
 
 ## What you need
 
-- A Medusa 2.21 store and access to its configuration.
+- A Medusa 2.21.0 store and access to its configuration.
 - An admin user's email and password, without multi-factor authentication (MFA).
 - An HTTPS backend URL. For local testing, `http://localhost:9100` or
   `http://127.0.0.1:9100` also works; use your store's port. Chrome then asks
@@ -97,7 +97,7 @@ creates its `locking` table.
    {/* Step 7: medusapos/app@v0.2.0 docs/QUICKSTART.md (Configure your store, step 7) */}
 7. Optional: choose who may use the POS. With Medusa's role-based access
    control (RBAC) off, which is Medusa's default, every admin user can sign
-   in to the POS. To limit it to the people you choose, on Medusa 2.21:
+   in to the POS. To limit it to the people you choose, on Medusa 2.21.0:
    1. Turn RBAC on. Both of these are needed: set `MEDUSA_FF_RBAC=true` in
       your backend's environment, and add the RBAC module to `modules` in
       `medusa-config.ts`:

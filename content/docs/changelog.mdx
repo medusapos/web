@@ -75,9 +75,9 @@ The 0.1.0 notes said this release would put the plugin on npm. It doesn't: you s
 ### For developers
 
 - **App 0.2.0** pins all `@tallyui/*` packages at exactly 3.8.0 (RxDB 17.5.0; browser storage is SQLite-wasm, one live tab per store). It sends `order.create` v5 and register contract 2.
-- **Plugin 0.2.3** (see `packages/medusa-plugin/CHANGELOG.md` for 0.2.0, 0.2.2 and 0.2.3):
+- **Plugin 0.2.3** (see the [plugin changelog](https://github.com/medusapos/app/blob/v0.2.0/packages/medusa-plugin/CHANGELOG.md) for 0.2.0, 0.2.2 and 0.2.3):
   - `/tally/v1/info` advertises `order.create` `[1, 2, 3, 4, 5]`, `register: [1, 2]`, `lineTax: { none: false, classes: false }` and `taxRounding: { granularity: 'per_order', mode: 'half_away_from_zero' }`.
-  - **Breaking (meaning), 0.2.0:** `insufficient_stock.quantity` is the units of this sale that stock did not cover, not the level's whole shortfall (#231).
+  - **Breaking, 0.2.0:** `insufficient_stock.quantity` is the units of this sale that stock did not cover, not the level's whole shortfall (#231).
   - **Registers:** the register commands, server-derived `expected`/`salesCount`, and `GET /tally/v1/registers/{id}` (#98, #99, #100); a stored register rejection replays unchanged (#108); `session.rejected` lists a session's unretried rejected sales (#230).
   - **Register v2 (ADR 0022):** take-over, same-device resume through session aliases, and the `register_session_unknown` warning for a sale naming a session the store doesn't know (#236). A command on a superseded session opened at contract 2 is refused `register_session_superseded` (#245). Needs the migration.
   - **POS access (ADR 0023, part 1):** the `tally_pos:use` policy on every `/tally/v1` route when RBAC is on, and the `tally-pos-roles` exec script for the "POS cashier" and "POS manager" roles (#253).
