@@ -93,15 +93,20 @@ export default function HomePage() {
         <p className="mt-4 text-fd-muted-foreground">
           Everything listed here is covered by the app&apos;s automated tests, which run on every change.
         </p>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <p className="mt-3 text-sm sm:hidden">
+          <a href="#not-there-yet" className="underline">What it doesn&apos;t do yet</a>
+        </p>
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = icons[feature.icon];
             return (
-              <div key={feature.title} className="rounded-xl border border-fd-border bg-fd-card p-6">
-                <Icon size={20} className="text-fd-muted-foreground" />
-                {!feature.released && <p className="mt-4 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
-                <h3 className={`${feature.released ? 'mt-4' : 'mt-1'} text-lg font-semibold`}>{feature.title}</h3>
-                <p className="mt-2 text-fd-muted-foreground">{feature.description}</p>
+              <div key={feature.title} className="rounded-xl border border-fd-border bg-fd-card p-4 sm:p-6">
+                {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground sm:mb-0 sm:mt-0">In the live demo · next release</p>}
+                <div className="flex items-center gap-3 sm:block">
+                  <Icon size={20} className="shrink-0 text-fd-muted-foreground" />
+                  <h3 className={`${feature.released ? 'sm:mt-4' : 'sm:mt-1'} text-base font-semibold sm:text-lg`}>{feature.title}</h3>
+                </div>
+                <p className="mt-1 text-sm text-fd-muted-foreground sm:mt-2 sm:text-base">{feature.description}</p>
               </div>
             );
           })}
@@ -160,7 +165,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-12 sm:py-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
+        <h2 id="not-there-yet" className="text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
