@@ -187,7 +187,8 @@ export default function HomePage() {
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
-          <li>add or rename registers: every store has one, Register 1</li>
+          {/* One till at a time: content/docs/registers.mdx lines 19 and 64; medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8. */}
+          <li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>
         </ul>
         <p className="mt-4 text-fd-muted-foreground">
           See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
