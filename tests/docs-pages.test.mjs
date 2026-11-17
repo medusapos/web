@@ -27,9 +27,11 @@ test('0.2.0 till features have their heading and link', () => {
   assert.match(till, /^## New in 0\.2\.0$/m);
   assert.ok(limitations.includes('/docs/at-the-till#new-in-020'));
   const tarballUrl = 'https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz';
-  for (const name of ['quick-start.mdx', 'plugin-setup.mdx']) {
-    const source = readFileSync(new URL(`../content/docs/${name}`, import.meta.url), 'utf8');
-    assert.ok(source.includes(tarballUrl), name);
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const pluginSetup = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
+  assert.ok(quickStart.includes(tarballUrl), 'quick-start.mdx');
+  assert.ok(pluginSetup.includes('[Install the plugin](/docs/quick-start#install-the-plugin)'), 'plugin-setup.mdx');
+  for (const [name, source] of [['quick-start.mdx', quickStart], ['plugin-setup.mdx', pluginSetup]]) {
     assert.ok(!source.includes('v0.1.0/medusapos-medusa-plugin-0.1.0.tgz'), name);
   }
 });

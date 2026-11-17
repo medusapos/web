@@ -10,22 +10,12 @@ The [quick start](/docs/quick-start#install-the-plugin) walks through installati
 
 ## Install and configure
 
-You need Medusa 2.21. In your store's directory, run:
-
-```sh
-npm install https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz
-```
+Install the plugin and run its migration as in the quick start's [Install the plugin](/docs/quick-start#install-the-plugin). It needs Medusa 2.21.
 
 Register the plugin in `medusa-config.ts`, keeping your existing plugins:
 
 ```ts
 plugins: [{ resolve: '@medusapos/medusa-plugin', options: {} }]
-```
-
-Run the migration, then restart the backend:
-
-```sh
-npx medusa db:migrate
 ```
 
 Updating from 0.1.0? Run the same install and migration, then restart the backend. Keep your existing `@medusapos/medusa-plugin` entry in `medusa-config.ts`.
@@ -40,17 +30,7 @@ All options are optional:
 
 An explicit `shippingOptionId` must use the products' shipping profile. A sale's products may use at most one shipping profile; products without one are ignored. A sale that mixes profiles is refused.
 
-## Allow the till to connect
-
-Append the app's origin to your existing origins in the backend's `.env`. Use no path or trailing slash, then restart the backend:
-
-```sh
-# Append to your existing origins — don't replace them.
-ADMIN_CORS=<your existing origins>,https://app.medusapos.com
-AUTH_CORS=<your existing origins>,https://app.medusapos.com
-```
-
-The till signs in as a Medusa admin user with email and password, without multi-factor authentication.
+Allow the app's origin in `ADMIN_CORS` and `AUTH_CORS` as in [Configure your store](/docs/quick-start#configure-your-store). The till signs in as a Medusa admin user with email and password, without multi-factor authentication.
 
 ## If you run more than one Medusa instance
 
