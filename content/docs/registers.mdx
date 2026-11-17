@@ -52,3 +52,9 @@ These changes arrived in [release 0.2.0](https://github.com/medusapos/app/releas
 The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
 
 The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's figure yet; it is available from the plugin's register endpoint, `GET /tally/v1/registers/{id}`.
+
+### Take over a register
+
+If a register was left open on a till that's lost, broken or replaced, another till can take it over. It shows which till holds the register, and **Take over** moves the register to this till. The old till's register commands are then refused, and it shows the register closed.
+
+A till that lost its local data and opens the same register again picks up where it left off.
