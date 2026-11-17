@@ -86,7 +86,9 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
         <p className="mt-4 text-fd-muted-foreground">
-          Everything listed here is covered by the app&apos;s automated tests, which run on every change.
+          {allReleased
+            ? `Everything listed here is in release ${siteConfig.release}, the version you install today, and is covered by the app's automated tests, which run on every change.`
+            : `Everything listed here is covered by the app's automated tests, which run on every change.`}
         </p>
         <p className="mt-3 text-sm sm:hidden">
           <a href="#not-there-yet" className="underline">What it doesn&apos;t do yet</a>
@@ -108,38 +110,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">{`Live demo and release ${siteConfig.release}`}</h2>
-        <p className="mt-4 text-fd-muted-foreground">
-          {allReleased
-            ? `The live demo runs the app's latest build. Every feature above is in release ${siteConfig.release}, the version you install in your store today.`
-            : `The live demo runs the app's latest build. Release ${siteConfig.release} is the version you install in your store today.`}
-        </p>
-        {!allReleased && (
-        <div className="mt-8 overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <caption className="sr-only">{`Features in the live demo and in release ${siteConfig.release}`}</caption>
-            <thead>
-              <tr>
-                <th scope="col" className="py-2 pr-4 font-semibold">Feature</th>
-                <th scope="col" className="py-2 pr-4 font-semibold">Live demo</th>
-                <th scope="col" className="py-2 pr-4 font-semibold">{`Release ${siteConfig.release}`}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {features.map((feature) => (
-                <tr key={feature.title} className="border-t border-fd-border">
-                  <th scope="row" className="py-2 pr-4 font-medium">{feature.title}</th>
-                  <td className="py-2 pr-4 text-fd-muted-foreground">Yes</td>
-                  <td className="py-2 text-fd-muted-foreground">{feature.released ? 'Yes' : 'Next release'}</td>
+      {!allReleased && (
+        <section className="py-12 sm:py-16">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">{`Live demo and release ${siteConfig.release}`}</h2>
+          <p className="mt-4 text-fd-muted-foreground">
+            {`The live demo runs the app's latest build. Release ${siteConfig.release} is the version you install in your store today.`}
+          </p>
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <caption className="sr-only">{`Features in the live demo and in release ${siteConfig.release}`}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" className="py-2 pr-4 font-semibold">Feature</th>
+                  <th scope="col" className="py-2 pr-4 font-semibold">Live demo</th>
+                  <th scope="col" className="py-2 pr-4 font-semibold">{`Release ${siteConfig.release}`}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        )}
-        <p className="mt-6"><a href={siteConfig.demoUrl} className="underline">Try the live demo</a>: one click signs you in to a demo store that resets every night.</p>
-      </section>
+              </thead>
+              <tbody>
+                {features.map((feature) => (
+                  <tr key={feature.title} className="border-t border-fd-border">
+                    <th scope="row" className="py-2 pr-4 font-medium">{feature.title}</th>
+                    <td className="py-2 pr-4 text-fd-muted-foreground">Yes</td>
+                    <td className="py-2 text-fd-muted-foreground">{feature.released ? 'Yes' : 'Next release'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-6"><a href={siteConfig.demoUrl} className="underline">Try the live demo</a>: one click signs you in to a demo store that resets every night.</p>
+        </section>
+      )}
 
       <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[300px_1fr]">
         <div className="hidden md:block w-[300px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
