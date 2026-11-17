@@ -54,7 +54,7 @@ export default function HomePage() {
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
-            MedusaPOS is an open-source, MIT-licensed till for Medusa v2 stores. It runs in the browser, keeps selling when the connection drops, and records every sale in your Medusa store exactly once.
+            MedusaPOS is an open-source, MIT-licensed till for Medusa v2 stores. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store. A sale the store refuses stays on the till under Needs attention.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
