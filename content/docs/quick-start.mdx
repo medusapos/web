@@ -152,36 +152,11 @@ while a rejected order needs investigation.
 
 ## Known beta limits
 
-- A product deleted in Medusa leaves the POS catalogue at the next app start, or within 24 hours while the app stays open. Signing out clears the local catalogue.
-- Medusa keeps line tax unrounded, so its reports can differ from receipts by
-  fractions of a cent. The payment always equals the POS total.
-- Use one stock location per sales channel. With several locations, Medusa
-  may reserve stock at another location.
-- Stock may go negative when an offline sale oversells it. The order shows a
-  warning so you can review the shortfall.
-- Multi-factor sign-in is not supported.
-- See [Limitations](/docs/limitations) for the full list.
+MedusaPOS is in beta. Read [Limitations](/docs/limitations) before you take it to a real till.
 
 ## Troubleshooting
 
-- **CORS errors:** check that both `ADMIN_CORS` and `AUTH_CORS` include the
-  exact origin you opened, including HTTPS and any port. Restart the backend
-  after changing them.
-- **Sign-in says "Could not reach the backend":** check the backend URL and
-  that the backend is running. With a `localhost` backend, Chrome also needs
-  the POS's permission to access your local network: allow it from the
-  prompt, or from the site settings (the icon left of the address bar).
-- **"Missing shipping option":** configure a shipping option at the POS stock
-  location, or set `shippingOptionId` in the plugin options and restart.
-- **Sign-in says "not supported yet":** multi-factor sign-in is not supported;
-  use an admin account with email/password sign-in and no MFA.
-- **"Storage stopped … Reload":** rare — the device's local storage worker
-  died. Reload the tab; sales already saved are kept.
-- **"Saving is slow…":** a transient note while a save is taking a moment;
-  no action needed.
-- **Sales stuck "waiting to sync":** check your internet connection and that
-  the backend is reachable. Open **Orders** for each sale's status and any
-  rejection or warning details.
+If sign-in or your first sale fails, see [Setup problems](/docs/troubleshooting#setup-problems). For sync, offline selling and storage messages, see [Troubleshooting](/docs/troubleshooting).
 
 ## Next steps
 
