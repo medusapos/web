@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const allReleased = features.every((feature) => feature.released);
   const heroAlt = 'MedusaPOS sale screen in the browser: the product grid and the cart with its total';
   const { props: heroDesktop } = getImageProps({
     src: '/screenshots/sale-desktop.png',
@@ -109,7 +110,12 @@ export default function HomePage() {
 
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">{`Live demo and release ${siteConfig.release}`}</h2>
-        <p className="mt-4 text-fd-muted-foreground">{`The live demo runs the app's latest build. Release ${siteConfig.release} is the version you install in your store today.`}</p>
+        <p className="mt-4 text-fd-muted-foreground">
+          {allReleased
+            ? `The live demo runs the app's latest build. Every feature above is in release ${siteConfig.release}, the version you install in your store today.`
+            : `The live demo runs the app's latest build. Release ${siteConfig.release} is the version you install in your store today.`}
+        </p>
+        {!allReleased && (
         <div className="mt-8 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">{`Features in the live demo and in release ${siteConfig.release}`}</caption>
@@ -131,6 +137,7 @@ export default function HomePage() {
             </tbody>
           </table>
         </div>
+        )}
         <p className="mt-6"><a href={siteConfig.demoUrl} className="underline">Try the live demo</a>: one click signs you in to a demo store that resets every night.</p>
       </section>
 
