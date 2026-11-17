@@ -39,6 +39,23 @@ The store has Medusa RBAC on, and this user has neither POS role. A store owner 
 
 Open **Orders** → **Needs attention**. A sale the store rejected shows **Retry**, which sends it again. Some rejections instead say the sale needs checking against the store first; those have no **Retry**.
 
+### Held sales
+
+A sale with no **Retry** is held because its order was changed by hand in Medusa, for example refunded, partly captured, paid with another payment provider, or with a cancelled fulfilment. The store logs one line for it:
+
+```text
+tally order.create needs admin: command <commandId>, order <orderId>: <detail>
+```
+
+Whoever runs the Medusa backend clears it from the store's backend directory, using the command id from that line:
+
+```sh
+npx medusa exec node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-ledger-resolve.js <commandId> apply
+```
+
+- `apply`: you have fixed the order by hand. The till's next resend finishes the sale.
+- `reject` (in place of `apply`): takes back any stock the plugin added for the sale and cancels its order. The till's next resend gets a rejection. If the order can't be cancelled, the sale stays held: cancel it by hand in Medusa Admin and run `reject` again, not `apply`.
+
 A warning can accompany a successfully synced sale, for example when stock is short. A rejected order needs investigation.
 
 ## Sell offline
