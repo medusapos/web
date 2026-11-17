@@ -41,6 +41,7 @@ export default function HomePage() {
     height: 740,
     sizes: '300px',
     fetchPriority: 'high',
+    loading: 'eager',
   });
 
   return (
@@ -54,27 +55,27 @@ export default function HomePage() {
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
-            MedusaPOS is an open-source, MIT-licensed till for Medusa v2 stores. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store. A sale the store refuses stays on the till under Needs attention.
+            MedusaPOS is an open-source, MIT-licensed till for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
               href={siteConfig.demoUrl}
-              className="rounded-lg px-5 py-2.5 font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
+              className="rounded-lg px-5 py-2.5 text-center font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
             >
               Live demo
             </a>
-            <a
-              href={siteConfig.appUrl}
-              className="rounded-lg px-5 py-2.5 font-medium border border-fd-border hover:bg-fd-accent"
-            >
-              Open the web app
-            </a>
             <Link
               href="/docs/quick-start"
-              className="rounded-lg px-5 py-2.5 font-medium border border-fd-border hover:bg-fd-accent"
+              className="rounded-lg px-5 py-2.5 text-center font-medium border border-fd-border hover:bg-fd-accent"
             >
               Quick start
             </Link>
+            <a
+              href={siteConfig.appUrl}
+              className="rounded-lg px-5 py-2.5 text-center font-medium border border-fd-border hover:bg-fd-accent"
+            >
+              Open the web app
+            </a>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
             The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend.
@@ -169,6 +170,7 @@ export default function HomePage() {
         <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
+          <li>apply Medusa promotions or coupon codes (discounts are typed at the till)</li>
           <li>take tips, email receipts or show sales reports</li>
           <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
           <li>sign in with multi-factor authentication</li>
