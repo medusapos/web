@@ -29,7 +29,7 @@ Between sessions, **Register ›** shows the last closure's figures.
 
 ## Get manager approval
 
-If the cash is more than €5.00 over or short, closing needs a manager's approval. The limit is fixed in the app at 500 in your currency's minor units: €5.00 in a euro store. It is not a store setting yet.
+If the cash is more than €5.00 over or short, closing needs a manager's approval. In other currencies the limit is 500 of the currency's smallest unit, such as 500 cents, and you can't change it yet.
 
 An admin of your Medusa store signs in with their email and password in the **Manager approval** box. This doesn't sign you out. If you are on your own, approve with your own login.
 
@@ -51,7 +51,7 @@ These changes arrived in [release 0.2.0](https://github.com/medusapos/app/releas
 
 The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
 
-The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's figure yet; it is available from the plugin's register endpoint, `GET /tally/v1/registers/{id}`.
+The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's own figure yet; whoever runs your Medusa backend can read it, as [Plugin setup](/docs/plugin-setup) describes.
 
 ### Take over a register
 
