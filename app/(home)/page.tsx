@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Banknote, Calculator, Coins, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
@@ -25,6 +25,23 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const heroAlt = 'MedusaPOS sale screen in the browser: the product grid and the cart with its total';
+  const { props: heroDesktop } = getImageProps({
+    src: '/screenshots/sale-desktop.png',
+    alt: heroAlt,
+    width: 1280,
+    height: 800,
+    sizes: '(min-width: 1024px) 536px, 100vw',
+  });
+  const { props: heroPhone } = getImageProps({
+    src: '/screenshots/sale-phone.png',
+    alt: heroAlt,
+    width: 360,
+    height: 740,
+    sizes: '300px',
+    fetchPriority: 'high',
+  });
+
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 text-fd-foreground">
       <script
@@ -62,17 +79,11 @@ export default function HomePage() {
             The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed.
           </p>
         </div>
-        <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
-          <Image
-            src="/screenshots/sale-desktop.png"
-            alt="MedusaPOS on a desktop browser: the product grid, a cart with VAT, and Cash and Card terminal buttons"
-            width={1280}
-            height={800}
-            preload
-            fetchPriority="high"
-            sizes="(min-width: 1024px) 536px, 100vw"
-            className="h-auto w-full"
-          />
+        <div className="mx-auto w-full max-w-[300px] md:max-w-none rounded-xl border border-fd-border shadow-lg overflow-hidden">
+          <picture>
+            <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1280} height={800} />
+            <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
+          </picture>
         </div>
       </section>
 
@@ -124,10 +135,10 @@ export default function HomePage() {
       </section>
 
       <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[300px_1fr]">
-        <div className="w-[300px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
+        <div className="hidden md:block w-[300px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <Image
             src="/screenshots/sale-phone.png"
-            alt="MedusaPOS on a phone: the product grid with stock badges and the cart bar"
+            alt="MedusaPOS on a phone: a café and gift-shop catalogue in a two-column product grid, with the cart bar showing 4 items for €31.45"
             width={360}
             height={740}
             className="h-auto w-full"
