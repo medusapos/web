@@ -6,7 +6,12 @@ description: Sync status, offline selling, orders that need attention, and what 
 {/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md, docs/QUICKSTART.md (Configure your store, step 7) */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Make a sale, Troubleshooting), apps/expo/tests/products-screen.test.tsx (sync status), apps/expo/tests/storage-health.test.tsx (storage messages). */}
 
-For CORS, **Could not reach the backend** or **Missing shipping option**, see the [quick start's setup troubleshooting](/docs/quick-start#troubleshooting).
+## Setup problems
+
+- **CORS errors:** check that both `ADMIN_CORS` and `AUTH_CORS` include the exact origin you opened, including HTTPS and any port. Restart the backend after changing them.
+- **Sign-in says "Could not reach the backend":** check the backend URL and that the backend is running. With a `localhost` backend, Chrome also needs the POS's permission to access your local network: allow it from the prompt, or from the site settings (the icon left of the address bar).
+- **"Missing shipping option":** configure a shipping option at the POS stock location, or set `shippingOptionId` in the plugin options and restart.
+- **Sign-in says "not supported yet":** multi-factor sign-in is not supported; use an admin account with email/password sign-in and no MFA.
 
 ## Check sync status
 
