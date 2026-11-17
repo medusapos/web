@@ -6,3 +6,24 @@
 @theme {
   --color-fd-muted-foreground: hsl(0, 0%, 40%);
 }
+
+/*
+ * Docs code blocks: wrap long lines inside the block and keep them clear of
+ * the copy button (absolute top-3 right-2, 24px wide = 2rem with its offset).
+ * Wrapping is visual only; the copy button copies the source text unchanged.
+ * Scoped to Fumadocs block figures, so inline `code` is untouched.
+ */
+figure.shiki .fd-scroll-container pre {
+  /* Take the block's width instead of Fumadocs' w-max, so lines can wrap. */
+  width: 100%;
+  /* Wrap at spaces, keep indentation and newlines as written. */
+  white-space: pre-wrap;
+  /* Let an unbroken token (a long URL) break anywhere rather than overflow. */
+  overflow-wrap: anywhere;
+}
+
+figure.shiki .fd-scroll-container .line {
+  /* Fumadocs' --padding-right (2rem without a title) exactly equals the
+     button and its offset; 0.5rem more leaves a visible gap beside it. */
+  padding-right: calc(var(--padding-right) + 0.5rem);
+}
