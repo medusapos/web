@@ -178,6 +178,7 @@ export default function HomePage() {
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
+          <li>add or rename registers: every store has one, Register 1</li>
         </ul>
         <p className="mt-4 text-fd-muted-foreground">
           See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
