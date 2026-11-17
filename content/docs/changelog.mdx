@@ -10,7 +10,7 @@ Each entry is the release note published with that version on [GitHub](https://g
 [Release on GitHub](https://github.com/medusapos/app/releases/tag/v0.2.0)
 
 
-The second tester release of Medusa POS, the browser point of sale for a Medusa store. Take part of a sale by card and the rest in cash, and attach a customer to a sale so the Medusa order is theirs. It needs the Medusa plugin 0.2.3, attached to this release, and Medusa 2.21.0.
+The second tester release of MedusaPOS, the browser point of sale for a Medusa store. Take part of a sale by card and the rest in cash, and attach a customer to a sale so the Medusa order is theirs. It needs the Medusa plugin 0.2.3, attached to this release, and Medusa 2.21.0.
 
 ### Before you update your tills
 
@@ -33,7 +33,7 @@ Update the plugin first (see [Update the plugin](#update-the-plugin)), then the 
 - **Catalogue grid or table, and categories.** Switch the catalogue between tiles and a table, and narrow it by category. Each till remembers its view. Phones show the categories without the toggle.
 - **Take over a register.** If a register was left open on a till that's lost, broken or replaced, another till can take it over: it shows which till holds the register, and Take over moves the register to this till. The old till's register commands are then refused, and it shows the register closed. A till that lost its local data and opens the same register again picks up where it left off.
 - **Name each till.** Give the till a name in Settings. It's shown to another till that finds the register open.
-- **Choose who may use the POS (optional).** With Medusa's role-based access control (RBAC) off, which is Medusa's default, every admin can sign in to the POS, as before. With RBAC on, only people with a "POS cashier" or "POS manager" role can. Anyone else sees "This account can't use the POS. Ask the store owner for POS access." Setting it up is step 7 of the [quick start's Configure your store](https://github.com/medusapos/app/blob/v0.2.0/docs/QUICKSTART.md#configure-your-store).
+- **Choose who may use the POS (optional).** With Medusa's role-based access control (RBAC) off, which is Medusa's default, every admin can sign in to the POS, as before. With RBAC on, only people with a "POS cashier" or "POS manager" role can. Anyone else sees "This account can't use the POS. Ask the store owner for POS access." Setting it up is step 7 of the [quick start's Configure your store](/docs/quick-start#configure-your-store).
 - **Clearer storage problems.** A Safari private window, a second tab holding the till, and a till that needs a reload to finish updating each get their own message saying what to do.
 
 ### What's new for your store
@@ -99,7 +99,7 @@ The plugin isn't on npm yet. Publishing it there needs a maintainer's one-time p
 
 [Release on GitHub](https://github.com/medusapos/app/releases/tag/v0.1.0)
 
-The first tester release of Medusa POS. It's a browser point of sale for a Medusa store: the hosted app at `https://app.medusapos.com`, plus a Medusa plugin you install in your store. It supports cash sales, and payments taken on a separate card terminal, recorded as external payments. The POS never charges cards itself.
+The first tester release of MedusaPOS. It's a browser point of sale for a Medusa store: the hosted app at `https://app.medusapos.com`, plus a Medusa plugin you install in your store. It supports cash sales, and payments taken on a separate card terminal, recorded as external payments. The POS never charges cards itself.
 
 ### What's in it
 
