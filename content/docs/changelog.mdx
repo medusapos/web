@@ -61,7 +61,7 @@ npx medusa db:migrate
 
 Then restart the backend. The plugin needs Medusa 2.21.0. If you already registered `@medusapos/medusa-plugin` in `medusa-config.ts` for 0.1.0, leave that entry as it is. New installs follow the [tester quick start](https://github.com/medusapos/app/blob/v0.2.0/docs/QUICKSTART.md).
 
-The plugin isn't on npm yet. Publishing it there needs a maintainer's one-time password and follows separately (#235); after that you'll install it by name, `npm install @medusapos/medusa-plugin`.
+The 0.1.0 notes said this release would put the plugin on npm. It doesn't: you still install it from the GitHub release, as above. Publishing to npm is tracked in #235; after that you'll install it by name, `npm install @medusapos/medusa-plugin`.
 
 ### Known limits
 
@@ -134,7 +134,7 @@ npm install https://github.com/medusapos/app/releases/download/v0.1.0/medusapos-
 
 Then register `@medusapos/medusa-plugin` in `medusa-config.ts`, run `npx medusa db:migrate`, and restart the backend. The [tester quick-start](https://github.com/medusapos/app/blob/v0.1.0/docs/QUICKSTART.md) covers plugin options, CORS, stock, shipping, tax and signing in.
 
-The tarball is a stopgap for this release. From the next release, the plugin is published to npm, and you'll install it by name: `npm install @medusapos/medusa-plugin`.
+The tarball is a stopgap for this release. From the next release, the plugin is published to npm, and you'll install it by name: `npm install @medusapos/medusa-plugin`. That didn't happen in 0.2.0; see [Update the plugin](#update-the-plugin).
 
 ### Known limits
 
