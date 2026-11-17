@@ -6,6 +6,7 @@ description: Open a register with a float, record cash in and out, then count an
 {/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: apps/expo/tests/register-screen.test.tsx (Finish closing), apps/expo/components/register-close.tsx (APPROVE_OFFLINE, the offline approval text). */}
 {/* Register list: medusapos/app@v0.2.0 apps/expo/lib/register-context.tsx lines 17-20 (DEFAULT_REGISTERS, same at c63f36c); demo register: @c63f36c apps/expo/lib/demo.ts lines 42-45. Paid in, Paid out and No sale: checked on the live demo (app v0.2.0), 2026-11-17. */}
+{/* One till at a time, take-over: medusapos/app@v0.2.0 docs/adr/0022-register-v2.md lines 8, 24 and 42. */}
 
 ## Where registers come from
 
@@ -59,6 +60,8 @@ Tap **Finish closing** to complete the close with the count you already entered.
 ## Take over a register
 
 If a register was left open on a till that's lost, broken or replaced, another till can take it over. It shows which till holds the register, and **Take over** moves the register to this till. The old till's register commands are then refused, and it shows the register closed.
+
+One till at a time holds a register open. With one register per store, a second till can't open **Register 1** while another till holds it; it can only take it over. Sales and cash movements the old till already recorded stay on its session, but that session never closes, so it has no Z report. Account for its cash from the old till's own record.
 
 A till that lost its local data and opens the same register again picks up where it left off.
 
