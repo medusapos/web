@@ -21,6 +21,7 @@ const icons: Record<FeatureIcon, LucideIcon> = {
 };
 
 export const metadata: Metadata = {
+  title: { absolute: 'MedusaPOS – open-source point of sale for Medusa v2' },
   alternates: { canonical: '/' },
 };
 
@@ -55,7 +56,7 @@ export default function HomePage() {
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
-            MedusaPOS is an open-source, MIT-licensed till for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store.
+            MedusaPOS is an open-source till, free of charge under the MIT licence, for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store.
           </p>
           <div className="mt-8 flex gap-3 sm:gap-4">
             <a
@@ -72,8 +73,11 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            The demo store resets every night. The web app needs a Medusa 2.21.0 store with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend. Already installed? Staff start at{' '}
-            <Link href="/docs/quick-start#sign-in" className="underline">
+            The demo store resets every night. The web app needs a Medusa 2.21.0 store with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend.
+          </p>
+          <p className="mt-1 text-sm text-fd-muted-foreground">
+            Already installed? Staff start at{' '}
+            <Link href="/docs/quick-start#sign-in" className="inline-block py-3 underline">
               Sign in
             </Link>
             .

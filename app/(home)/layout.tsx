@@ -27,9 +27,17 @@ export default function Layout({ children }: LayoutProps<'/'>) {
           </span>
           </span>
           </p>
-          <Link href="/docs/changelog" className="inline-block py-3 underline sm:py-0">
-            Changelog
-          </Link>
+          <nav aria-label="Footer" className="flex gap-6">
+            <Link href="/docs" className="inline-block py-3 underline sm:py-0">
+              Docs
+            </Link>
+            <Link href="/docs/troubleshooting#report-a-problem" className="inline-block py-3 underline sm:py-0">
+              Help
+            </Link>
+            <Link href="/docs/changelog" className="inline-block py-3 underline sm:py-0">
+              Changelog
+            </Link>
+          </nav>
         </div>
       </footer>
     </HomeLayout>
