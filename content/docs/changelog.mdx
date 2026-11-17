@@ -93,7 +93,7 @@ The 0.1.0 notes said this release would put the plugin on npm. It doesn't: you s
   - **Experimental sync:** the `tally_sync` change journal, `/changes` routes and the rescan script, behind `experimentalSync`, off by default ([#110](https://github.com/medusapos/app/pull/110), [#112](https://github.com/medusapos/app/pull/112), [#114](https://github.com/medusapos/app/pull/114)).
   - **Security:** the `majorToMinor` ReDoS fix ([#111](https://github.com/medusapos/app/pull/111)).
   - The tarball ships `.medusa/server` only; CI checks the pack ([#146](https://github.com/medusapos/app/pull/146)).
-- **Legacy sales carry-over ([#160](https://github.com/medusapos/app/pull/160)):** after the verified copy writes its marker, it never runs again; the legacy database is kept, with deletion left to a later release. Sales written later by a tab on a pre-SQLite build are not carried over.
+- **Legacy sales carry-over ([#160](https://github.com/medusapos/app/pull/160)):** after the verified copy writes its marker, it never runs again; the legacy database is kept, with deletion left to a later release. Sales written later by a tab still on a build from before 0.1.0, which kept them in the older Dexie storage, are not carried over.
 
 ## 0.1.0 (2026-09-28)
 
