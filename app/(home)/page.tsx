@@ -57,25 +57,19 @@ export default function HomePage() {
           <p className="mt-6 text-lg text-fd-muted-foreground">
             MedusaPOS is an open-source, MIT-licensed till for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser, keeps selling when the connection drops, and never records the same sale twice in your Medusa store.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+          <div className="mt-8 flex gap-3 sm:gap-4">
             <a
               href={siteConfig.demoUrl}
-              className="rounded-lg px-5 py-2.5 text-center font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
+              className="rounded-lg px-5 py-2.5 flex-1 text-center sm:flex-none font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
             >
               Live demo
             </a>
             <Link
               href="/docs/quick-start"
-              className="rounded-lg px-5 py-2.5 text-center font-medium border border-fd-border hover:bg-fd-accent"
+              className="rounded-lg px-5 py-2.5 flex-1 text-center sm:flex-none font-medium border border-fd-border hover:bg-fd-accent"
             >
               Quick start
             </Link>
-            <a
-              href={siteConfig.appUrl}
-              className="rounded-lg px-5 py-2.5 text-center font-medium border border-fd-border hover:bg-fd-accent"
-            >
-              Open the web app
-            </a>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
             The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend.
@@ -160,7 +154,7 @@ export default function HomePage() {
         <div>
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
-            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a page reload or a dropped connection doesn&apos;t lose a sale. Reloading or reopening the app while offline fails, so keep the tab open until you&apos;re back online.
+            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale. Offline, the app can&apos;t reload or reopen, so keep the tab open until you&apos;re back online.
           </p>
         </div>
       </section>
