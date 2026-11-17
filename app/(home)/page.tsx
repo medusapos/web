@@ -77,7 +77,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed.
+            The demo store resets every night. The web app needs a Medusa 2.21 store with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend.
           </p>
         </div>
         <div className="mx-auto w-full max-w-[300px] md:max-w-none rounded-xl border border-fd-border shadow-lg overflow-hidden">
@@ -178,7 +178,7 @@ export default function HomePage() {
       <section className="border-t border-fd-border py-12 sm:py-16 text-center">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Try it with your store</h2>
         <p className="mt-4 text-fd-muted-foreground">
-          Install the plugin, allow the POS origin, and sign in. The quick start walks through it.
+          Whoever runs your Medusa backend installs the plugin and allows the POS origin once; the quick start walks through it. After that, staff open the web app and sign in with their Medusa admin account.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
