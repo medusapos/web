@@ -21,11 +21,15 @@ test('each store-owner page has frontmatter and an app source citation', () => {
   }
 });
 
-test('0.2.0 till features have their heading and link', () => {
+test('till features are task sections, not release sections', () => {
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   const limitations = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
-  assert.match(till, /^## New in 0\.2\.0$/m);
-  assert.ok(limitations.includes('/docs/at-the-till#new-in-020'));
+  const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.match(till, /^## Split payment$/m);
+  assert.match(registers, /^## Take over a register$/m);
+  for (const [name, source] of [['at-the-till', till], ['registers', registers], ['limitations', limitations]]) {
+    assert.ok(!/New in 0\.2\.0/.test(source), name);
+  }
   const tarballUrl = 'https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz';
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const pluginSetup = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
