@@ -8,21 +8,26 @@ export default function Layout({ children }: LayoutProps<'/'>) {
     <HomeLayout {...baseOptions()}>
       {children}
       <footer className="border-t border-fd-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-2 sm:flex-row sm:justify-between text-sm text-fd-muted-foreground">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-0 sm:gap-2 sm:flex-row sm:justify-between text-sm text-fd-muted-foreground">
           <p>
+          <span className="block sm:inline">
           Built with{' '}
-          <a href={siteConfig.builtWith.url} className="inline-block py-2 underline sm:py-0">
+          <a href={siteConfig.builtWith.url} className="inline-block py-3 underline sm:py-0">
             {siteConfig.builtWith.name}
           </a>
-          . Running {siteConfig.sibling.platform}? See{'\u00a0'}
+          .
+          </span>{' '}
+          <span className="block sm:inline">
+          Running {siteConfig.sibling.platform}? See{'\u00a0'}
           <span className="whitespace-nowrap">
-          <a href={siteConfig.sibling.url} className="inline-block py-2 underline sm:py-0">
+          <a href={siteConfig.sibling.url} className="inline-block py-3 underline sm:py-0">
             {siteConfig.sibling.name}
           </a>
           .
           </span>
+          </span>
           </p>
-          <Link href="/docs/changelog" className="inline-block py-2 underline sm:py-0">
+          <Link href="/docs/changelog" className="inline-block py-3 underline sm:py-0">
             Changelog
           </Link>
         </div>
