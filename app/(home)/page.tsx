@@ -92,9 +92,10 @@ export default function HomePage() {
               <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
             </picture>
           </div>
-          {/* Order note: medusapos/app #286; Checkout button: #299. Both after the v0.2.0 tag. Update or remove when the release moves past 0.2.0. */}
+          {/* The demo runs medusapos/app head (c63f36c): its nav rail (#300), title bar (#348), order note (#286) and Checkout button (#299) came after the v0.2.0 tag, and apps/expo/package.json still reads 0.2.0 at head. Update or remove when the release moves past 0.2.0. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
-            From the live demo, which runs the app&apos;s latest build. The order note and the Checkout button come after release 0.2.0.
+            From the live demo, which runs the app&apos;s latest build: it is newer than release 0.2.0, though its corner reads v 0.2.0 until the next release.{' '}
+            <a href="/screenshots/sale-desktop.png" className="inline-block -my-3 py-3 underline">Open full size</a>
           </figcaption>
         </figure>
       </section>
