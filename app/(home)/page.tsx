@@ -147,7 +147,7 @@ export default function HomePage() {
         <div>
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
-            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a page reload or a dropped connection doesn&apos;t lose a sale.
+            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a page reload or a dropped connection doesn&apos;t lose a sale. Reloading or reopening the app while offline fails, so keep the tab open until you&apos;re back online.
           </p>
         </div>
       </section>
@@ -158,6 +158,7 @@ export default function HomePage() {
         <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
           <li>charge cards, or handle refunds and returns</li>
           <li>take tips, email receipts or show sales reports</li>
+          <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
