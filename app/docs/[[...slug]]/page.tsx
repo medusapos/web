@@ -28,7 +28,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd(siteConfig, crumbs)) }}
       />
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
+      <DocsDescription className="mb-0 border-b pb-6 sm:border-b-0 sm:pb-0">{page.data.description}</DocsDescription>
       <div className="hidden sm:flex flex-row gap-2 items-center border-b pb-6">
         <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
         <ViewOptions
