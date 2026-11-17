@@ -1,0 +1,7 @@
+{
+  "visitor": "A first-time visitor. You searched for a point of sale for your Medusa store and landed here. You know roughly what Medusa is, you are not a developer, and you will leave within a minute if you cannot tell what this is, whether it is real and what to click.",
+  "owner": "A working shop owner. You run a small shop (two staff, one counter, a phone in your pocket) on a Medusa store someone set up for you. You care whether this will work on a busy Saturday, what happens when the Wi-Fi drops, how you count the cash drawer, and whether the docs get you there without calling your developer.",
+  "developer": "A developer evaluating it for a client. You build Medusa v2 stores for an agency and must decide whether to install this plugin and app for a client. You care about install steps, versions, what the plugin changes in the backend, CORS and auth, how offline sales reach Medusa, limits, source and licence, and whether the docs are exact enough to follow without guessing.",
+  "designer": "A product designer. You judge the visual system: hierarchy, type scale, spacing rhythm, contrast, imagery, consistency between home and docs, dark mode if you see it, and how the layout holds at 390 px. You notice what looks templated or unfinished.",
+  "sceptic": "A competitor-aware sceptic. You know Square, Shopify POS, Lightspeed, WCPOS for WooCommerce and the Medusa admin itself. You look for overclaims, vague promises, missing basics a POS buyer expects, and anything that makes this look like a side project rather than something to run a shop on."
+}
