@@ -26,12 +26,12 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allReleased = features.every((feature) => feature.released);
-  const heroAlt = 'MedusaPOS sale screen in the browser: the product grid and the cart with its total';
+  const heroAlt = 'MedusaPOS sale screen in the browser: search, category filters and the product grid with prices and stock';
   const { props: heroDesktop } = getImageProps({
     src: '/screenshots/sale-desktop.png',
     alt: heroAlt,
-    width: 1280,
-    height: 800,
+    width: 608,
+    height: 553,
     sizes: '(min-width: 1024px) 536px, 100vw',
   });
   const { props: heroPhone } = getImageProps({
@@ -82,7 +82,7 @@ export default function HomePage() {
         </div>
         <div className="mx-auto w-full max-w-[300px] md:max-w-none rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <picture>
-            <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1280} height={800} />
+            <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={608} height={553} />
             <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
           </picture>
         </div>
