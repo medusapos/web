@@ -22,7 +22,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'store',
     title: 'Real Medusa orders',
-    description: 'Each sale becomes a paid, completed order in your Medusa store with stock deducted, recorded by the MedusaPOS plugin.',
+    description: 'Each sale becomes a paid, fulfilled and completed order in your Medusa store with stock deducted, recorded by the MedusaPOS plugin.',
     tests: ['e2e/smoke.spec.ts', 'packages/medusa-plugin/integration-tests/http/order-create.spec.ts'],
     released: true,
   },
