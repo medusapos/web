@@ -83,12 +83,18 @@ export default function HomePage() {
             .
           </p>
         </div>
-        <div className="mx-auto w-full max-w-[300px] md:max-w-none rounded-xl border border-fd-border shadow-lg overflow-hidden">
-          <picture>
-            <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={608} height={553} />
-            <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
-          </picture>
-        </div>
+        <figure className="mx-auto w-full max-w-[300px] md:max-w-none">
+          <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
+            <picture>
+              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={608} height={553} />
+              <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
+            </picture>
+          </div>
+          {/* Order note: medusapos/app #286; Checkout button: #299. Both after the v0.2.0 tag. Update or remove when the release moves past 0.2.0. */}
+          <figcaption className="mt-3 text-sm text-fd-muted-foreground">
+            From the live demo, which runs the app&apos;s latest build. The order note and the Checkout button come after release 0.2.0.
+          </figcaption>
+        </figure>
       </section>
 
       <section className="py-12 sm:py-16">
