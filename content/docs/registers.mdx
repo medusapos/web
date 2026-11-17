@@ -45,16 +45,14 @@ If the till stopped in the middle of a close, the register shows **Close not fin
 
 Tap **Finish closing** to complete the close with the count you already entered.
 
-## New in 0.2.0
-
-These changes arrived in [release 0.2.0](https://github.com/medusapos/app/releases/tag/v0.2.0).
-
-The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
-
-The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's own figure yet; whoever runs your Medusa backend can read it, as [Plugin setup](/docs/plugin-setup) describes.
-
-### Take over a register
+## Take over a register
 
 If a register was left open on a till that's lost, broken or replaced, another till can take it over. It shows which till holds the register, and **Take over** moves the register to this till. The old till's register commands are then refused, and it shows the register closed.
 
 A till that lost its local data and opens the same register again picks up where it left off.
+
+## What the store records
+
+The store records each register's sessions and closures. It works out what the drawer should hold from the sales it received. A sale an admin rejects no longer counts in the register's expected cash.
+
+The till's own expected, counted and variance figures per payment method are on **Last closure**, under **Register**. The app doesn't show the store's own figure yet; whoever runs your Medusa backend can read it, as [Plugin setup](/docs/plugin-setup) describes.

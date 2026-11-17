@@ -1,14 +1,16 @@
 ---
 title: Limitations
-description: What MedusaPOS does not do yet.
+description: What MedusaPOS doesn't do yet, and what it expects of your store and till.
 ---
 {/* Source: medusapos/app@c2db7b2 README.md, docs/testers.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, packages/medusa-plugin/README.md, apps/expo/lib/approval.ts */}
 {/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Known MVP limits). */}
 
-MedusaPOS is in beta. Today it does not, or not yet:
+MedusaPOS is in beta. This page lists what it doesn't do yet, and what it expects of your store and till.
 
 ## Not yet
+
+MedusaPOS doesn't yet:
 
 {/* Card charging, refunds and returns, and promotion codes (coupons) lines: medusapos/app@91fac0a docs/V2-PARITY.md:77 (Take a card on a terminal: Missing), docs/V2-PARITY.md:96 (Refunds: Missing), docs/V2-PARITY.md:97 (Coupons in the cart: Missing; the plugin still needs a promotion-code mapping), docs/release-notes/v0.1.0.md:44 (no card charging, refunds or returns); docs/release-notes/next.md adds none of them. */}
 
@@ -23,12 +25,16 @@ MedusaPOS is in beta. Today it does not, or not yet:
 
 ## Store setup limits
 
+Set up your store like this:
+
 - Use one stock location per sales channel. With several, Medusa may reserve stock at another location than the sale's.
 - Use one shipping profile per sale. A sale mixing profiles is refused.
 - You need Medusa 2.21.
 - Sign in with an admin user's email and password. With Medusa's RBAC on, the user also needs a "POS cashier" or "POS manager" role.
 
 ## Till limits
+
+At the till, expect this:
 
 - Only one tab per store stays live.
 - There is no offline page cache. Reloading or reopening while offline fails.
@@ -37,11 +43,5 @@ MedusaPOS is in beta. Today it does not, or not yet:
 - Deleted products leave the till at app start or within 24 hours while it stays open.
 - Stock may go negative when an offline sale oversells, with a warning on the order.
 - Medusa's reports can differ from receipts by fractions of a cent.
-- The manager-approval limit is fixed at 500 minor units (€5.00 in a euro store). It is not a store setting.
+- The manager-approval limit is fixed at 500 of the currency's smallest unit (€5.00 in a euro store). You can't change it yet.
 - A large catalogue makes the first sync slow, and search too. This was reported in 0.1.0, and the 0.2.0 release notes list no fix.
-
-## New in 0.2.0
-
-Everything release 0.2.0 added is in the [changelog](/docs/changelog#020-2026-10-07).
-
-See [At the till](/docs/at-the-till#new-in-020) for how to use them.
