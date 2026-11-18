@@ -69,8 +69,15 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
 {/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options", "Create Service Zone"), /user-guide/settings/regions ("Create", "Currency", "Countries") and /user-guide/settings/tax-regions, read 2026-11-18. Region prices: medusapos/app@bc4570a docs/testers.md (Set up this till: "Prices shown are Medusa's own calculated prices for your chosen region"). */}
 
 1. Add the POS origin `https://app.medusapos.com` to both `ADMIN_CORS` and
-   `AUTH_CORS`, keeping existing origins. Write it exactly like that, without
-   a path or trailing slash, then restart the backend.
+   `AUTH_CORS` in your backend's environment (usually its `.env` file), after
+   the origins already there and separated by a comma. Write it exactly like
+   that, without a path or trailing slash, then restart the backend:
+
+   ```text
+   ADMIN_CORS=<your existing origins>,https://app.medusapos.com
+   AUTH_CORS=<your existing origins>,https://app.medusapos.com
+   ```
+
 2. Make sure the default sales channel has a stock location with an address.
    Tax follows that address. If you set `salesChannelId` or `locationId`,
    configure the selected channel and location instead.
