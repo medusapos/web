@@ -46,7 +46,8 @@ test('the counter or phone card opens with one device taking payment at a time',
   const card = features.find((feature) => feature.title === 'Counter or phone');
   assert.ok(card, 'counter: card exists');
   assert.ok(card.description.startsWith('Every store has one register, so one device at a time takes payment. '), 'counter: limit first');
-  assert.ok(card.description.endsWith('with the cart a tap away.'), 'counter: both devices');
+  assert.equal(card.description, 'Every store has one register, so one device at a time takes payment. The same app works on a counter screen and on a phone; to switch, close the register on one and open it on the other.', 'counter: how to switch');
+  assert.ok(card.description.length <= Math.max(...features.filter((feature) => feature !== card).map((feature) => feature.description.length)), 'counter: not the longest card');
   assert.ok(!features.some((feature) => feature.title === 'Phone and counter'), 'counter: old title gone');
 });
 

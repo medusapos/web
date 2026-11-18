@@ -591,3 +591,13 @@ test('Plugin setup adds locking to the existing modules array', () => {
   assert.ok(!section.includes('modules: [{'), 'locking: no bare modules array');
   assert.ok(section.includes("resolve: '@medusajs/medusa/locking-redis'") && section.includes("resolve: '@medusajs/medusa/locking-postgres'"), 'locking: both providers kept');
 });
+
+test('code blocks get a break point after each slash', () => {
+  const config = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
+  assert.ok(config.includes("const parts = child.value.split(/(?<=\\/)(?!\\/)/);"), 'code wrap: split after a slash not followed by a slash');
+  assert.ok(config.includes("tagName: 'wbr'"), 'code wrap: wbr element');
+  const hook = config.slice(config.indexOf("name: 'medusapos:wrap-indent'"));
+  assert.ok(hook.includes('breakAfterSlashes(node'), 'code wrap: called from the line hook');
+  const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
+  assert.ok(css.includes('overflow-wrap: anywhere;'), 'code wrap: anywhere stays as the fallback');
+});
