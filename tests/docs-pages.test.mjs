@@ -390,7 +390,7 @@ test('quick start gives the sale as numbered steps', () => {
   const steps = sale.split('\n').filter((line) => /^\d\. /.test(line));
   assert.equal(steps.length, 5, 'sale steps: five');
   assert.ok(steps.every((line, i) => line.startsWith(`${i + 1}. `)), 'sale steps: in order');
-  assert.ok(steps[0].startsWith('1. Tap **Register** at the right of the header (on a phone, at the right end of the row under it), then choose **Register 1**'), 'sale steps: where to tap');
+  assert.ok(steps[0].startsWith("1. Tap the register's state at the right of the header, or on a phone at the right end of the row under it (it reads **Register** until you choose one), then choose **Register 1**"), 'sale steps: where to tap');
   assert.ok(steps[2].startsWith('3. Tap **Checkout**.') && steps[4].startsWith('5. Tap **Complete sale**'), 'sale steps: checkout then complete');
   assert.ok(sale.includes('[Take a sale](/docs/at-the-till#take-a-sale) has more on each step.'), 'sale steps: link kept');
 });
@@ -498,10 +498,9 @@ test('held sales says where the resolve script is in a workspace', () => {
 
 test('the docs name the register state label', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  assert.ok(qs.includes('1. Tap **Register** at the right of the header (on a phone, at the right end of the row under it), then choose **Register 1** and'), 'register label: quick start');
+  assert.ok(qs.includes("1. Tap the register's state at the right of the header, or on a phone at the right end of the row under it (it reads **Register** until you choose one), then choose **Register 1** and"), 'register label: quick start');
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(reg.includes("The register's state shows at the right of the header, or on a phone at the right end of the row under the header. Until a register is chosen, it reads **Register**."), 'register label: registers');
-  assert.ok(!qs.includes("Tap the register's state at the right of the header, or on a phone"), 'register label: quick start leads with the label');
   assert.ok(!qs.includes('Under the header, tap') && !reg.includes('shows under the header;'), 'register place: old wording gone');
 });
 
