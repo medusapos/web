@@ -50,4 +50,5 @@ At the till, expect this:
 - Stock may go negative when an offline sale oversells, with a warning on the order.
 - Medusa's reports can differ from receipts by fractions of a cent. The payment always equals the POS total.
 - The manager-approval limit is fixed at 500 of the currency's smallest unit (€5.00 in a euro store). You can't change it yet.
+- With plugin 0.2.3, any login for your store can approve a large difference, including the cashier's own. The till checks the email and password, not the user's role.
 - A large catalogue makes the first sync slow, and search too. This was reported in 0.1.0, and the 0.2.0 release notes list no fix.
