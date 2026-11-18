@@ -68,7 +68,7 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
 
 {/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options", "Create Service Zone"), /user-guide/settings/regions ("Create", "Currency", "Countries") and /user-guide/settings/tax-regions, read 2026-11-18. Region prices: medusapos/app@bc4570a docs/testers.md (Set up this till: "Prices shown are Medusa's own calculated prices for your chosen region"). */}
 
-1. Add the POS origin `https://app.medusapos.com` to both `ADMIN_CORS` and
+1. **Allow the POS origin.** Add the POS origin `https://app.medusapos.com` to both `ADMIN_CORS` and
    `AUTH_CORS` in your backend's environment (usually its `.env` file), after
    the origins already there and separated by a comma. Write it exactly like
    that, without a path or trailing slash, then restart the backend:
@@ -78,14 +78,14 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
    AUTH_CORS=<your existing origins>,https://app.medusapos.com
    ```
 
-2. Make sure the default sales channel has a stock location with an address.
+2. **One stock location.** Make sure the default sales channel has a stock location with an address.
    Tax follows that address. If you set `salesChannelId` or `locationId`,
    configure the selected channel and location instead.
    Link only that one stock location to the channel
    ([why](/docs/limitations#store-setup-limits)). In the Medusa admin, go to
    **Settings → Locations & Shipping**, open the location, and edit its
    **Sales Channels** section.
-3. Create a shipping option at that location, such as in-store pickup, on the
+3. **A shipping option.** Create a shipping option at that location, such as in-store pickup, on the
    shipping profile your products use, or set the plugin's `shippingOptionId`
    to the option you want to use. On the location's page:
    1. Enable **Pickup** (or **Shipping**).
@@ -94,7 +94,7 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
       **Manage areas**, check your shop's country and save.
    3. Click **Create option**
       and choose the profile in the **Shipping Profile** field.
-4. Make sure a region covers the location's country, in the currency you
+4. **A region, prices and tax.** Make sure a region covers the location's country, in the currency you
    sell in:
    1. In the Medusa admin, go to **Settings → Regions**; if no region lists
       that country, click **Create**, choose the **Currency** and add the
@@ -103,7 +103,7 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
       sell in person a price in its currency.
    3. Tax is set up separately: go to **Settings → Tax Regions** and create a region for that country.
       Prices include or exclude tax according to your currency's price preference in Medusa.
-5. Create (or reuse) a publishable API key linked to your sales channel: in
+5. **A publishable API key.** Create (or reuse) a publishable API key linked to your sales channel: in
    the Medusa admin, go to **Settings → Publishable API Keys**, then add your
    sales channel under that key's **Sales channels** tab. MedusaPOS needs
    this to price your catalogue and to see what the channel sells — see
@@ -111,7 +111,7 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
    channel choice on first sign-in.
    The till shows only the products in that sales channel, so add the
    products you'll sell in person to it.
-6. If you do not have an admin user without MFA, create one from your store's
+6. **Admin and staff logins.** If you do not have an admin user without MFA, create one from your store's
    backend directory, replacing the email and password below with your own:
 
    ```sh
