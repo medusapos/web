@@ -162,8 +162,8 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[220px_1fr]">
-        <div className="hidden md:block w-[220px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
+      <section className="mx-auto grid max-w-4xl items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr]">
+        <div className="hidden md:block w-[320px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <Image
             src="/screenshots/sale-phone.png"
             alt="MedusaPOS on a phone: a café and gift-shop catalogue in a two-column product grid, with the cart bar showing 4 items for €31.45"
