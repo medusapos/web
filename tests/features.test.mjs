@@ -108,3 +108,16 @@ test('phone list: one column, titles keep their hyphens whole', () => {
   assert.ok(list.includes(String.raw`{feature.title.replace('-', '\u2011')}`), 'phone list: non-breaking hyphen');
   assert.equal(source.split(String.raw`'\u2011'`).length, 2, 'phone list: only the phone titles change');
 });
+
+test('Not there yet groups its twelve items under four labels', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const block = source.slice(source.indexOf('id="not-there-yet"'), source.indexOf('for the full list.'));
+  const labels = [...block.matchAll(/<h3 className="text-base font-semibold text-fd-foreground">([^<]+)<\/h3>/g)].map((m) => m[1]);
+  assert.deepEqual(labels, ['Registers', 'Payments and receipts', 'Sales and sync', 'Sign-in and setup'], 'not there yet: four labels in order');
+  assert.equal(block.split('<li>').length - 1, 12, 'not there yet: twelve items');
+  assert.ok(!block.includes('list-disc space-y-2 pl-6 text-fd-muted-foreground'), 'not there yet: no single long list');
+  const groups = block.split('<h3 ').slice(1);
+  assert.ok(groups[0].includes('add or rename registers') && groups[0].includes('check who approves a large difference'), 'not there yet: registers group');
+  assert.ok(groups[2].includes('send a batch of more than 50 sales') && groups[2].includes('reload or reopen while offline'), 'not there yet: sales and sync group');
+  assert.ok(block.indexOf('{/* Batch limit:') < block.indexOf('send a batch of more than 50 sales') && block.indexOf('{/* Batch limit:') > block.indexOf('Sales and sync'), 'not there yet: source comment stays with its item');
+});
