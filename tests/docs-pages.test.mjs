@@ -379,7 +379,7 @@ test('plugin setup links to the update precautions', () => {
 test('registers says what the last closure shows for sales not yet sent', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const close = reg.slice(reg.indexOf('## Count and close'), reg.indexOf('## Get manager approval'));
-  assert.ok(close.includes("Between sessions, **Register ›** shows the last closure's figures. If sales were still waiting to sync when you closed, it shows a warning such as **1 sale not sent yet · €15.00**; [Check sync status](/docs/troubleshooting#check-sync-status) shows when they reach the store."), 'unsynced: last closure line');
+  assert.ok(close.includes("Between sessions, the register's state shows the last closure's figures. If sales were still waiting to sync when you closed, it shows a warning such as **1 sale not sent yet · €15.00**; [Check sync status](/docs/troubleshooting#check-sync-status) shows when they reach the store."), 'unsynced: last closure line');
   assert.ok(close.includes('register-close.tsx:205-206'), 'unsynced: source cited');
   const trouble = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
   assert.ok(trouble.includes('\n## Check sync status\n'), 'unsynced: link target');
@@ -676,4 +676,12 @@ test('no docs link is a bare "why"', () => {
     const src = readFileSync(new URL(`../content/docs/${file}`, import.meta.url), 'utf8');
     assert.ok(!/\[why\]\(/i.test(src), `why links: ${file}`);
   }
+});
+
+test('Registers names the register control as Quick start does', () => {
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(!reg.includes('**Register ›**'), 'register name: no Register › in Registers');
+  assert.ok(reg.includes("Tap the register's state to open its panel."), 'register name: open its panel');
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(qs.includes("Tap the register's state, as when you opened it, to open its panel"), 'register name: quick start uses the same name');
 });
