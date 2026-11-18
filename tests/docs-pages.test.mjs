@@ -443,3 +443,13 @@ test('the phone On this page bar has no progress ring', () => {
   const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
   assert.match(css, /\[data-toc-popover-trigger\] > svg\[role='progressbar'\] \{\s*display: none;\s*\}/, 'toc: ring hidden');
 });
+
+test('the quick start shows the sign-in form', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const signIn = qs.slice(qs.indexOf('## Sign in'), qs.indexOf('## Make a sale'));
+  const shot = '![The MedusaPOS sign-in form: Backend URL filled in with https://api.example.com, empty Email and Password fields, the Sign in button and a Send feedback link](/screenshots/docs/quick-start-signin.jpg)';
+  assert.ok(signIn.includes(shot), 'sign in: screenshot in Sign in');
+  assert.ok(signIn.indexOf(shot) > signIn.indexOf('you are online before selling offline.'), 'sign in: screenshot after the steps');
+  assert.ok(signIn.includes('medusapos/app main was ba317a1 at capture'), 'sign in: capture cited');
+  assert.ok(existsSync(new URL('../public/screenshots/docs/quick-start-signin.jpg', import.meta.url)), 'sign in: image file');
+});
