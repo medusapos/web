@@ -622,3 +622,12 @@ test('the optional RBAC section offers a skip to Sign in', () => {
   assert.ok(first && first.startsWith('This is optional: if every admin user may use the till, skip to\n[Sign in](#sign-in).'), 'rbac skip: first sentence links Sign in');
   assert.match(qs, /^## Sign in$/m, 'rbac skip: the anchor target exists');
 });
+
+test('the changelog intro agrees with the hosted-build paragraph', () => {
+  const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  assert.ok(!changelog.includes('Unreleased work is not listed.'), 'changelog intro: no blanket "not listed"');
+  const intro = changelog.split('\n').find((line) => line.startsWith('Each entry follows the release note'));
+  assert.ok(intro && intro.endsWith('Unreleased work gets no entry; the paragraph below says what the hosted app already has.'), 'changelog intro: points at the hosted-build paragraph');
+  const hosted = changelog.indexOf('app.medusapos.com and the live demo run the app\'s latest build.');
+  assert.ok(hosted > changelog.indexOf(intro) && hosted < changelog.indexOf('\n## '), 'changelog intro: the hosted-build paragraph follows, before the first entry');
+});
