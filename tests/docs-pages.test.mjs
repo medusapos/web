@@ -269,7 +269,7 @@ test('quick start names the take step', () => {
 
 test('quick start says how staff get their own logins', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const step6 = qs.slice(qs.indexOf('6. If you do not have an admin user'), qs.indexOf('7. Optional: choose who may use the POS'));
+  const step6 = qs.slice(qs.indexOf('6. If you do not have an admin user'), qs.indexOf('## Choose who may use the POS'));
   const flat = step6.replace(/\s+/g, ' ');
   assert.ok(flat.includes('Give each member of staff their own login: in Medusa Admin, go to **Settings → Users**, click **Invite**, enter their email and click **Send invite**.'), 'quick-start: invite steps');
   assert.ok(flat.includes('choose **Copy invite link** from the invite\'s menu'), 'quick-start: copy invite link');
@@ -298,4 +298,20 @@ test('registers says who can approve a large difference', () => {
   assert.ok(reg.includes('closing needs someone to sign in and approve it.') && reg.includes('The approver signs in with their email and password'), 'approval: registers limit line');
   assert.ok(reg.includes("This doesn't sign you out. If you are on your own, approve with your own login. With plugin 0.2.3 the till checks the email and password, not the user's role, so any login for your store can approve, including the cashier's own."), 'approval: who can approve');
   assert.ok(reg.includes('register.tsx:160'), 'approval: source cited');
+});
+
+test('quick start gives POS access its own section', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const ts = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  const cl = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  assert.match(qs, /^## Choose who may use the POS$/m, 'access: own heading');
+  assert.ok(qs.indexOf('## Configure your store') < qs.indexOf('## Choose who may use the POS') && qs.indexOf('## Choose who may use the POS') < qs.indexOf('## Sign in'), 'access: between configure and sign in');
+  assert.match(qs, /^1\. Turn RBAC on\./m, 'access: steps at top level');
+  assert.ok(!qs.includes('7. Optional'), 'access: no step 7');
+  assert.ok(!qs.includes('### Running more than one Medusa instance'), 'locking: no repeated section');
+  assert.ok(qs.includes('/docs/plugin-setup#if-you-run-more-than-one-medusa-instance'), 'locking: points at plugin setup');
+  for (const [name, text] of [['troubleshooting', ts], ['changelog', cl]]) {
+    assert.ok(text.includes('/docs/quick-start#choose-who-may-use-the-pos'), `${name}: links the new section`);
+    assert.ok(!text.includes('step 7 of'), `${name}: no step 7`);
+  }
 });

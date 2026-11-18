@@ -59,16 +59,8 @@ Then apply the plugin's database migrations and restart your Medusa backend:
 npx medusa db:migrate
 ```
 
-### Running more than one Medusa instance
-
-If you run more than one Medusa instance, configure a shared locking provider
-first: Redis (`@medusajs/medusa/locking-redis`) or Postgres advisory locks
-(`@medusajs/medusa/locking-postgres`). Medusa's default locking provider
-only locks inside one instance, so two instances selling the same item at the
-same time can lose stock updates. The plugin logs a warning at startup while
-the default provider is active; one instance is fine. After switching to
-`locking-postgres`, run `npx medusa db:migrate`: it ships a migration that
-creates its `locking` table.
+If you run more than one Medusa instance, set up a shared locking provider
+first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-instance).
 
 ## Configure your store
 
@@ -120,35 +112,39 @@ creates its `locking` table.
    under **Pending Invites**, choose **Copy invite link** from the invite's
    menu and send them the link to sign up.
 
-   {/* Step 7: medusapos/app@v0.2.0 docs/QUICKSTART.md (Configure your store, step 7) */}
-7. Optional: choose who may use the POS. With Medusa's role-based access
-   control (RBAC) off, which is Medusa's default, every admin user can sign
-   in to the POS. To limit it to the people you choose, on Medusa 2.21.0:
-   1. Turn RBAC on. Both of these are needed: set `MEDUSA_FF_RBAC=true` in
-      your backend's environment, and add the RBAC module to `modules` in
-      `medusa-config.ts`:
+## Choose who may use the POS
 
-      ```ts
-      modules: [{ resolve: '@medusajs/medusa/rbac' }],
-      ```
+{/* POS access: medusapos/app@v0.2.0 docs/QUICKSTART.md (Configure your store, step 7) */}
 
-      Then run `npx medusa db:migrate` and restart the backend.
-   2. Create the POS roles from your backend directory:
+This is optional. With Medusa's role-based access control (RBAC) off,
+which is Medusa's default, every admin user can sign in to the POS. To
+limit it to the people you choose, on Medusa 2.21.0:
 
-      ```sh
-      npx medusa exec ./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-pos-roles.js
-      ```
+1. Turn RBAC on. Both of these are needed: set `MEDUSA_FF_RBAC=true` in
+   your backend's environment, and add the RBAC module to `modules` in
+   `medusa-config.ts`:
 
-      If your project hoists packages to a workspace root, point at the
-      plugin under that root's `node_modules` instead. The script creates
-      "POS cashier" and "POS manager", and is safe to run again. A POS
-      manager can do everything a POS cashier can.
-   3. In Medusa Admin, give each person who uses the till one of those
-      roles. Super admins keep their access, and `npx medusa user` makes a
-      super admin while RBAC is on.
+   ```ts
+   modules: [{ resolve: '@medusajs/medusa/rbac' }],
+   ```
 
-   Anyone who is neither a super admin nor given a POS role sees "This
-   account can't use the POS. Ask the store owner for POS access." at sign-in.
+   Then run `npx medusa db:migrate` and restart the backend.
+2. Create the POS roles from your backend directory:
+
+   ```sh
+   npx medusa exec ./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-pos-roles.js
+   ```
+
+   If your project hoists packages to a workspace root, point at the
+   plugin under that root's `node_modules` instead. The script creates
+   "POS cashier" and "POS manager", and is safe to run again. A POS
+   manager can do everything a POS cashier can.
+3. In Medusa Admin, give each person who uses the till one of those
+   roles. Super admins keep their access, and `npx medusa user` makes a
+   super admin while RBAC is on.
+
+Anyone who is neither a super admin nor given a POS role sees "This
+account can't use the POS. Ask the store owner for POS access." at sign-in.
 
 ## Sign in
 
