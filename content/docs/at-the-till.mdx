@@ -1,20 +1,10 @@
 ---
 title: At the till
-description: Set up a till, take a sale, scan, discount and print the receipt.
+description: Take a sale, scan, discount and print the receipt, and set up a till.
 ---
 {/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, e2e/split-tender.spec.ts, e2e/customers.spec.ts, e2e/parked-sales.spec.ts */}
 {/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Make a sale), apps/expo/tests/store-settings-flow.test.tsx, apps/expo/lib/catalogue.test.ts, apps/expo/tests/products-screen.test.tsx, apps/expo/tests/discount.test.tsx, apps/expo/tests/parked-sales.test.tsx. */}
-
-## Set up this till
-
-On first sign-in, MedusaPOS resolves your store's region, tax and sales channel from Medusa. With more than one region or publishable API key, you pick them on **Set up this till**. Your choice is remembered for this store.
-
-The till's country follows its stock location's country, so you don't choose it. If your chosen region doesn't cover that country, the till says so and lets you choose another.
-
-Prices are Medusa's calculated prices for the chosen region, including sale prices. Products your sales channel doesn't sell are hidden.
-
-Give the till a name in **Settings**. Another till that finds the register open shows that name.
 
 ## Take a sale
 
@@ -106,6 +96,16 @@ Medusa can't keep one charge tax-free and has no tax classes, so the till doesn'
 ## Grid or table, and categories
 
 Switch the catalogue between tiles and a table, and narrow it by category. Each till remembers its view. Phones show the categories without the toggle.
+
+## Set up this till
+
+On first sign-in, MedusaPOS resolves your store's region, tax and sales channel from Medusa. With more than one region or publishable API key, you pick them on **Set up this till**. Your choice is remembered for this store.
+
+The till's country follows its stock location's country, so you don't choose it. If your chosen region doesn't cover that country, the till says so and lets you choose another.
+
+Prices are Medusa's calculated prices for the chosen region, including sale prices. Products your sales channel doesn't sell are hidden.
+
+Give the till a name in **Settings**. Another till that finds the register open shows that name.
 
 ## Not yet
 

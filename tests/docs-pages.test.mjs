@@ -562,3 +562,13 @@ test('the introduction asks for Medusa 2.21.0 exactly', () => {
   assert.ok(need.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits)), with the MedusaPOS plugin installed.\n'), 'intro: exactly, with the why link');
   assert.ok(!intro.includes('A Medusa 2.21.0 store'), 'intro: no bare version');
 });
+
+test('At the till opens with Take a sale, and setup comes last', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const h2s = [...till.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
+  assert.equal(h2s[0], 'Take a sale', 'till order: Take a sale first');
+  assert.deepEqual(h2s.slice(-3), ['Grid or table, and categories', 'Set up this till', 'Not yet'], 'till order: setup before Not yet');
+  const setup = till.slice(till.indexOf('## Set up this till'), till.indexOf('## Not yet'));
+  assert.ok(setup.startsWith('## Set up this till\n\nOn first sign-in, MedusaPOS resolves') && setup.endsWith('Another till that finds the register open shows that name.\n\n'), 'till order: section moved whole');
+  assert.ok(till.includes('description: Take a sale, scan, discount and print the receipt, and set up a till.'), 'till order: description');
+});
