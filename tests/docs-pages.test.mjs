@@ -168,10 +168,10 @@ test('sign in says what the backend URL is', () => {
   assert.ok(signIn.includes('leave `/app` off.'), 'quick-start: no /app');
 });
 
-test('home says each caveat once', () => {
+test('home says the offline caveat once and the one-till limit first', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.equal(home.match(/keep the tab open/g)?.length, 1, 'home: one offline caveat');
   assert.ok(home.includes('<li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>'), 'home: offline caveat in Not there yet');
-  assert.ok(home.includes('<li>add or rename registers: every store has one, Register 1</li>'), 'home: registers bullet');
-  assert.ok(!home.includes('so one till at a time takes payment'), 'home: one-device caveat only on the card');
+  assert.ok(home.includes('<li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>'), 'home: registers bullet says one till');
+  assert.ok(home.indexOf('<li>add or rename registers') < home.indexOf('<li>charge cards'), 'home: one-till limit first');
 });
