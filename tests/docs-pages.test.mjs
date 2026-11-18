@@ -37,6 +37,12 @@ test('home lists the slow large-catalogue sync, with no figure', () => {
   assert.ok(!/2,000|45 s/.test(home), 'home: no figure');
 });
 
+test('footer Help opens Troubleshooting at the top', () => {
+  const layout = readFileSync(new URL('../app/(home)/layout.tsx', import.meta.url), 'utf8');
+  assert.ok(layout.includes('<Link href="/docs/troubleshooting" className="inline-block py-3 underline sm:py-0">\n              Help\n            </Link>'), 'footer: Help to Troubleshooting');
+  assert.ok(!layout.includes('#report-a-problem'), 'footer: not the issue form');
+});
+
 test('the changelog says why the latest build shows v 0.2.0, and the home caption does not', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
