@@ -71,3 +71,9 @@ test('the home page shows the three core cards first and larger', () => {
   assert.ok(source.indexOf('core.map(') < source.indexOf('Also at the till') && source.indexOf('Also at the till') < source.indexOf('more.map('), 'core: order');
   assert.ok(source.includes('<h3 className="text-lg font-semibold sm:mt-4 sm:text-xl">'), 'core: larger titles');
 });
+
+test('the Sells offline card says to keep the tab open', () => {
+  const card = features.find((feature) => feature.title === 'Sells offline');
+  assert.ok(card.description.startsWith("Keep selling from the loaded catalogue when the connection drops, as long as the tab stays open: reloading while offline doesn't work yet. "), 'offline: tab caveat');
+  assert.equal(features[0], card, 'offline: still first');
+});
