@@ -678,6 +678,15 @@ test('no docs link is a bare "why"', () => {
   }
 });
 
+test('At the till says the Order note box does not reach the order', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const notYet = till.slice(till.indexOf('## Not yet'));
+  assert.ok(notYet.includes('With plugin 0.2.3, a note typed in the **Order note** box doesn\'t reach the order, because the plugin doesn\'t accept notes.'), 'till order note: the line');
+  assert.ok(notYet.includes('{/* Order note: limitations.mdx line 23'), 'till order note: source cited');
+  const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
+  assert.ok(lim.includes('The hosted app shows an **Order note** box, but this plugin doesn\'t accept notes, so the note doesn\'t reach the order.'), 'till order note: Limitations says the same');
+});
+
 test('Registers names the register control as Quick start does', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(!reg.includes('**Register ›**'), 'register name: no Register › in Registers');
