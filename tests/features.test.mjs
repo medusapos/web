@@ -121,3 +121,12 @@ test('Not there yet groups its twelve items under four labels', () => {
   assert.ok(groups[2].includes('send a batch of more than 50 sales') && groups[2].includes('reload or reopen while offline'), 'not there yet: sales and sync group');
   assert.ok(block.indexOf('{/* Batch limit:') < block.indexOf('send a batch of more than 50 sales') && block.indexOf('{/* Batch limit:') > block.indexOf('Sales and sync'), 'not there yet: source comment stays with its item');
 });
+
+test('Not there yet lays its four groups in two columns on a wide screen', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const band = source.slice(source.indexOf('md:grid-cols-[320px_1fr]'), source.indexOf('for the full list.'));
+  assert.ok(band.includes('<div className="mt-6 grid gap-x-10 gap-y-6 text-fd-muted-foreground lg:grid-cols-2">'), 'not there yet grid: two columns from lg');
+  assert.ok(!band.includes('<div className="max-w-prose">'), 'not there yet grid: column not capped at prose width');
+  assert.ok(band.includes('<div className="min-w-0">'), 'not there yet grid: column may shrink');
+  assert.equal(band.split('<p className="mt-4 max-w-prose text-fd-muted-foreground">').length - 1, 3, 'not there yet grid: paragraphs keep the prose measure');
+});
