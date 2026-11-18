@@ -291,10 +291,11 @@ test('registers says who can approve a large difference', () => {
   const features = readFileSync(new URL('../lib/features.ts', import.meta.url), 'utf8');
   const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
-  assert.ok(features.includes('A large difference needs a store admin to sign in and approve it.'), 'approval: home card');
-  assert.ok(intro.includes("with a store admin's approval for a large difference."), 'approval: introduction');
+  assert.ok(features.includes("A large difference needs someone to sign in and approve it. Any login for your store can, including the cashier's own."), 'approval: home card');
+  assert.ok(intro.includes('count and close. Any login for your store can approve a large difference.'), 'approval: introduction');
   assert.ok(!features.includes("manager's approval") && !intro.includes('manager approval'), 'approval: no manager promise');
-  assert.ok(reg.includes('closing needs approval from an admin of your Medusa store.'), 'approval: registers limit line');
+  assert.ok(!features.includes('store admin') && !intro.includes('store admin') && !reg.includes('admin of your Medusa store'), 'approval: no admin-only wording');
+  assert.ok(reg.includes('closing needs someone to sign in and approve it.') && reg.includes('The approver signs in with their email and password'), 'approval: registers limit line');
   assert.ok(reg.includes("This doesn't sign you out. If you are on your own, approve with your own login. With plugin 0.2.3 the till checks the email and password, not the user's role, so any login for your store can approve, including the cashier's own."), 'approval: who can approve');
   assert.ok(reg.includes('register.tsx:160'), 'approval: source cited');
 });
