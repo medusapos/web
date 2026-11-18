@@ -46,3 +46,15 @@ test('the phone and counter card says one device takes payment at a time', () =>
   const card = features.find((feature) => feature.title === 'Phone and counter');
   assert.ok(card.description.endsWith('Every store has one register, so one device at a time takes payment.'));
 });
+
+test('the feature lists include fees and one-off items', () => {
+  const card = features.find((feature) => feature.title === 'Fees and one-off items');
+  assert.ok(card, 'fees: card exists');
+  assert.ok(card.description.startsWith("Add a bag fee, a delivery charge or a one-off item that isn't in your catalogue."), 'fees: card wording');
+  assert.ok(card.tests.includes('packages/medusa-plugin/integration-tests/http/order-create-v5.spec.ts'), 'fees: plugin test cited');
+  assert.equal(features.length % 6, 0, 'fees: rows are full at two and three columns');
+  const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
+  assert.ok(intro.includes("- Adds a bag fee, a delivery charge or a one-off item that isn't in your catalogue ([At the till](/docs/at-the-till#fees-delivery-charges-and-one-off-items))."), 'fees: introduction');
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  assert.ok(till.includes('## Fees, delivery charges and one-off items'), 'fees: anchor target exists');
+});

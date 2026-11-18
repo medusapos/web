@@ -1,7 +1,7 @@
 import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Banknote, Calculator, Coins, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
+import { Banknote, Calculator, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
 import { features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
@@ -18,6 +18,7 @@ const icons: Record<FeatureIcon, LucideIcon> = {
   pause: Pause,
   pencil: Pencil,
   'user-round': UserRound,
+  'package-plus': PackagePlus,
 };
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allReleased = features.every((feature) => feature.released);
-  // With an odd count that leaves two over at three columns (11 today), the first card spans two columns so every row is full at two and three columns.
+  // With an odd count that leaves two over at three columns (none today: there are 12), the first card spans two columns so every row is full at two and three columns.
   const spanFirst = features.length % 2 === 1 && features.length % 3 === 2;
   const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
   const { props: heroDesktop } = getImageProps({

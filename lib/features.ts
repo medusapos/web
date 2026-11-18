@@ -1,7 +1,7 @@
 // Each claim is backed by a test in medusapos/app; `tests` names those files (paths in that repo).
 // Add a feature here only with its test. `released` is true when the feature is in release 0.2.0,
 // false when it is only in the live demo so far (the app's docs/release-notes/next.md: "Not releasable yet").
-export type FeatureIcon = 'wifi-off' | 'store' | 'banknote' | 'calculator' | 'scan-barcode' | 'smartphone' | 'percent' | 'pause' | 'pencil' | 'coins' | 'user-round';
+export type FeatureIcon = 'wifi-off' | 'store' | 'banknote' | 'calculator' | 'scan-barcode' | 'smartphone' | 'percent' | 'pause' | 'pencil' | 'coins' | 'user-round' | 'package-plus';
 
 export type Feature = {
   icon: FeatureIcon;
@@ -74,6 +74,13 @@ export const features: readonly Feature[] = [
     title: 'Line price edit',
     description: "Change a line's unit price at the till, with an optional reason. The order reaches Medusa at the price you charged.",
     tests: ['e2e/parked-sales.spec.ts', 'apps/expo/tests/parked-sales.test.tsx'],
+    released: true,
+  },
+  {
+    icon: 'package-plus',
+    title: 'Fees and one-off items',
+    description: "Add a bag fee, a delivery charge or a one-off item that isn't in your catalogue. Medusa records the fee and the item as order items without a product, and the delivery as a shipping method.",
+    tests: ['apps/expo/tests/cart-add-menu.test.tsx', 'packages/medusa-plugin/integration-tests/http/order-create-v5.spec.ts'],
     released: true,
   },
   {
