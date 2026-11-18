@@ -314,9 +314,9 @@ test('registers says who can approve a large difference', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const limits = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
-  assert.ok(features.includes('then count and close. Closing with a large difference asks for a sign-in to approve it.'), 'approval: home card');
+  assert.ok(features.includes('then count and close. The closure is your Z report.') && !features.includes('asks for a sign-in'), 'approval: home card');
   assert.ok(!features.includes("cashier's own"), 'approval: caveat not on the card');
-  assert.ok(intro.includes('count and close. Closing with a large difference asks for a sign-in to approve it.'), 'approval: introduction');
+  assert.ok(intro.includes('count and close. The closure is your Z report.') && !intro.includes('asks for a sign-in'), 'approval: introduction');
   assert.ok(home.includes('<li>check who approves a large difference: with plugin 0.2.3 any login for your store can, including the cashier&apos;s own</li>'), 'approval: in Not there yet');
   assert.ok(home.indexOf('id="not-there-yet"') < home.indexOf('check who approves a large difference'), 'approval: under Not there yet');
   assert.ok(limits.includes("- With plugin 0.2.3, any login for your store can approve a large difference, including the cashier's own."), 'approval: limitations');
