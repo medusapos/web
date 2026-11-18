@@ -79,7 +79,11 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            The live demo signs you in with one click and resets every night. The web app needs a store on Medusa 2.21.0 exactly, with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.
+            The live demo signs you in with one click and resets every night. The web app needs a store on{' '}
+            <Link href="/docs/quick-start#what-you-need" className="underline">
+              Medusa 2.21.0 exactly
+            </Link>
+            , with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.
           </p>
           <p className="mt-1 text-sm text-fd-muted-foreground">
             Already installed? Staff start at{' '}
