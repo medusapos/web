@@ -121,3 +121,9 @@ test('the quick start says to link one stock location', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(/Link only that one stock location to the channel\s+\(\[why\]\(\/docs\/limitations#store-setup-limits\)\)\./.test(quickStart), 'quick-start: one location');
 });
+
+test('home links automated tests to the app CI workflow', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>'), 'home: tests link');
+  assert.ok(!home.includes("automated tests, which run on every change"), 'home: no unlinked tests line');
+});
