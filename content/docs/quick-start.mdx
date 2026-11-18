@@ -76,6 +76,8 @@ creates its `locking` table.
 2. Make sure the default sales channel has a stock location with an address.
    Tax follows that address. If you set `salesChannelId` or `locationId`,
    configure the selected channel and location instead.
+   Link only that one stock location to the channel
+   ([why](/docs/limitations#store-setup-limits)).
 3. Create a shipping option at that location, such as in-store pickup, on the
    shipping profile your products use, or set the plugin's `shippingOptionId`
    to the option you want to use.
