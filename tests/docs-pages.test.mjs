@@ -270,3 +270,15 @@ test('at the till names the cart + menu for discounts and charges', () => {
   assert.ok(fees.includes("to a sale. Tap the cart's **+** button, beside the customer, and choose **Add Fee**, **Add Shipping** or **Add Miscellaneous Product**. Your store records"), 'till: fees name the control');
   assert.ok(till.includes('cart-add-menu.tsx:32-37'), 'till: menu source cited');
 });
+
+test('registers says who can approve a large difference', () => {
+  const features = readFileSync(new URL('../lib/features.ts', import.meta.url), 'utf8');
+  const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(features.includes('A large difference needs a store admin to sign in and approve it.'), 'approval: home card');
+  assert.ok(intro.includes("with a store admin's approval for a large difference."), 'approval: introduction');
+  assert.ok(!features.includes("manager's approval") && !intro.includes('manager approval'), 'approval: no manager promise');
+  assert.ok(reg.includes('closing needs approval from an admin of your Medusa store.'), 'approval: registers limit line');
+  assert.ok(reg.includes("This doesn't sign you out. If you are on your own, approve with your own login. With plugin 0.2.3 the till checks the email and password, not the user's role, so any login for your store can approve, including the cashier's own."), 'approval: who can approve');
+  assert.ok(reg.includes('register.tsx:160'), 'approval: source cited');
+});
