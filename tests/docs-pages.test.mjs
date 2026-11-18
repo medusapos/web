@@ -424,3 +424,9 @@ test('the hero says one register per store', () => {
   assert.ok(home.includes(hero), 'hero: one register');
   assert.ok(home.indexOf(hero) < home.indexOf('href={siteConfig.demoUrl}'), 'hero: before the buttons');
 });
+
+test('the changelog RBAC line keeps super admins in', () => {
+  const log = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  assert.ok(log.includes('With RBAC on, only super admins and people with a "POS cashier" or "POS manager" role can.'), 'changelog: super admins');
+  assert.ok(!log.includes('With RBAC on, only people with'), 'changelog: no roles-only line');
+});
