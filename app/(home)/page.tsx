@@ -92,10 +92,10 @@ export default function HomePage() {
               <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
             </picture>
           </div>
-          {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. Label: medusapos/app@34efcbc apps/expo/package.json:4 ("version": "0.2.0"). */}
+          {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
             <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
-            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com. The app shows v 0.2.0 until the next release.</span>
+            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
           </figcaption>
         </figure>
       </section>
