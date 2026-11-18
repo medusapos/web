@@ -562,3 +562,12 @@ test('the introduction asks for Medusa 2.21.0 exactly', () => {
   assert.ok(need.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits)), with the MedusaPOS plugin installed.\n'), 'intro: exactly, with the why link');
   assert.ok(!intro.includes('A Medusa 2.21.0 store'), 'intro: no bare version');
 });
+
+test('Quick start shows the payment screen under its Checkout step', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('## Known beta limits'));
+  const shot = '\n   ![The payment screen: the €16.95 total, the Cash and Card terminal tiles, amount keys, and the Take €16.95 in Cash button above Complete sale](/screenshots/docs/till-payment.jpg)\n';
+  assert.ok(sale.includes(shot), 'qs payment: indented image with the till page alt text');
+  assert.ok(sale.indexOf(shot) > sale.indexOf('3. Tap **Checkout**') && sale.indexOf(shot) < sale.indexOf('4. For cash'), 'qs payment: under step 3');
+  assert.equal(qs.split('till-payment.jpg').length, 2, 'qs payment: once');
+});
