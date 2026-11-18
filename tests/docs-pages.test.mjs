@@ -371,3 +371,12 @@ test('plugin setup links to the update precautions', () => {
   assert.ok(trouble.includes('\n## Updating to 0.2.0\n'), 'update: target heading');
   assert.ok(trouble.includes('Before updating, make sure every till has sent all its sales'), 'update: target says so');
 });
+
+test('registers says what the last closure shows for sales not yet sent', () => {
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  const close = reg.slice(reg.indexOf('## Count and close'), reg.indexOf('## Get manager approval'));
+  assert.ok(close.includes("Between sessions, **Register ›** shows the last closure's figures. If sales were still waiting to sync when you closed, it shows a warning such as **1 sale not sent yet · €15.00**; [Check sync status](/docs/troubleshooting#check-sync-status) shows when they reach the store."), 'unsynced: last closure line');
+  assert.ok(close.includes('register-close.tsx:205-206'), 'unsynced: source cited');
+  const trouble = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  assert.ok(trouble.includes('\n## Check sync status\n'), 'unsynced: link target');
+});
