@@ -80,7 +80,7 @@ test('the Sells offline card says to keep the tab open', () => {
 
 test('on a phone the other home cards link to their docs', () => {
   const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  assert.ok(source.includes('<ul className="mt-4 grid grid-cols-2 gap-2 sm:hidden">'), 'phone list: two columns below sm');
+  assert.ok(source.includes('<ul className="mt-4 grid auto-rows-fr grid-cols-2 gap-2 sm:hidden">'), 'phone list: two columns below sm');
   assert.ok(source.includes('<div className="mt-4 hidden gap-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">'), 'phone list: cards from sm up');
   assert.ok(source.indexOf('sm:hidden">') < source.indexOf('hidden gap-3 sm:grid'), 'phone list: before the cards');
   assert.ok(source.includes('className="flex h-full min-h-12 items-center'), 'phone list: tiles fill their row');
@@ -98,4 +98,12 @@ test('on a phone the other home cards link to their docs', () => {
     }
   }
   assert.equal(Object.keys(featureDocs).length, features.length - 3, 'phone list: no stale entries');
+});
+
+test('phone list: rows of one height, titles keep their hyphens whole', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const list = source.slice(source.indexOf('sm:hidden">'), source.indexOf('hidden gap-3 sm:grid'));
+  assert.ok(source.includes('grid auto-rows-fr grid-cols-2 gap-2 sm:hidden'), 'phone list: equal rows');
+  assert.ok(list.includes(String.raw`{feature.title.replace('-', '\u2011')}`), 'phone list: non-breaking hyphen');
+  assert.equal(source.split(String.raw`'\u2011'`).length, 2, 'phone list: only the phone titles change');
 });
