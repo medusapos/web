@@ -190,6 +190,8 @@ export default function HomePage() {
           <li>charge cards, or handle refunds and returns</li>
           <li>apply Medusa promotions or coupon codes (discounts are typed at the till)</li>
           <li>take tips, email receipts or show sales reports</li>
+          {/* Approval: content/docs/registers.mdx (Get manager approval); medusapos/app@9ee493a apps/expo/lib/approval.ts requestApproval (no role check with plugin 0.2.3). */}
+          <li>check who approves a large difference: with plugin 0.2.3 any login for your store can, including the cashier&apos;s own</li>
           {/* Order note: content/docs/limitations.mdx line 17 (sources) and line 23. */}
           <li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box, but the note doesn&apos;t reach the order</li>
           <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
