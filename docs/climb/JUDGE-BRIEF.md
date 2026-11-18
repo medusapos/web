@@ -22,7 +22,9 @@ not what a generic reviewer would.
   is `<page>-desktop.jpg` and `<page>-phone.jpg` (full page, 1440 px and
   390 px wide), `-fold.jpg` versions (first screen only), `<page>.txt` (the
   page text) and `metrics.json` (HTTP status, load time, LCP, horizontal
-  overflow at phone width, console errors, broken images). Pages: `home`,
+  overflow at phone width, console errors, broken images). Load time and
+  LCP are the median of three fresh loads; `samples` holds all three, and
+  one slow sample is network noise, not a page defect. Pages: `home`,
   `docs` (docs index), `docs_quick-start`, `docs_plugin-setup`,
   `docs_at-the-till`, `docs_registers`, `docs_troubleshooting`,
   `docs_limitations`, `docs_changelog`, and the 404 page
