@@ -107,3 +107,11 @@ test('phone list: rows of one height, titles keep their hyphens whole', () => {
   assert.ok(list.includes(String.raw`{feature.title.replace('-', '\u2011')}`), 'phone list: non-breaking hyphen');
   assert.equal(source.split(String.raw`'\u2011'`).length, 2, 'phone list: only the phone titles change');
 });
+
+test('the Sells offline card names the 50-sale batch limit', () => {
+  const card = features.find((feature) => feature.title === 'Sells offline');
+  const limit = "The store refuses a batch of more than 50 sales whole, and the till can't split one yet.";
+  assert.ok(card.description.includes(` ${limit} `), 'offline: batch limit');
+  assert.ok(card.description.indexOf('never records one twice.') < card.description.indexOf(limit), 'offline: limit after sync');
+  assert.ok(card.description.indexOf(limit) < card.description.indexOf('Needs attention'), 'offline: limit before Needs attention');
+});
