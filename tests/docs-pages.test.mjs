@@ -473,3 +473,11 @@ test('the browser band captions its phone screenshot', () => {
   assert.ok(home.includes('>The same app on a phone</figcaption>'), 'band: caption');
   assert.ok(home.includes('alt="MedusaPOS on a phone: a café and gift-shop catalogue'), 'band: alt kept');
 });
+
+test('wrapped code lines keep their indentation', () => {
+  const cfg = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
+  assert.ok(cfg.includes('...(rehypeCodeDefaultOptions.transformers ?? [])'), 'code: default transformers kept');
+  assert.ok(cfg.includes("name: 'medusapos:wrap-indent'") && cfg.includes('--wrap-indent:${indent + 2}ch'), 'code: wrap-indent transformer');
+  const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
+  assert.match(css, /padding-left: calc\(var\(--padding-left\) \+ var\(--wrap-indent, 0px\)\);\s*text-indent: calc\(-1 \* var\(--wrap-indent, 0px\)\);/, 'code: hanging indent');
+});

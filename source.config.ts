@@ -1,5 +1,6 @@
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
+import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
 
 // You can customise Zod schemas for frontmatter and `meta.json` here
 // see https://fumadocs.dev/docs/mdx/collections
@@ -31,6 +32,21 @@ export default defineConfig({
           '#22863a': '#116329',
         },
       },
+      // Fumadocs' defaults (notation highlight, word highlight, diff, focus) are kept;
+      // setting transformers replaces them otherwise. wrap-indent gives each line
+      // --wrap-indent = its leading spaces + 2ch, so a soft-wrapped continuation
+      // (app/global.css wraps code blocks) starts deeper than the line's own text.
+      transformers: [
+        ...(rehypeCodeDefaultOptions.transformers ?? []),
+        {
+          name: 'medusapos:wrap-indent',
+          line(node, line) {
+            const text = this.source.split('\n')[line - 1] ?? '';
+            const indent = text.length - text.trimStart().length;
+            node.properties.style = `--wrap-indent:${indent + 2}ch`;
+          },
+        },
+      ],
     },
   },
 });

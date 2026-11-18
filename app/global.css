@@ -29,6 +29,18 @@ figure.shiki .fd-scroll-container .line {
 }
 
 /*
+ * Hanging indent for wrapped code lines. source.config.ts sets --wrap-indent
+ * on each line to its leading spaces + 2ch. It is added to Fumadocs'
+ * --padding-left (css/lib/shiki.css) and taken back from the first row, so
+ * the first row is where it was, and a wrapped continuation starts 2ch
+ * deeper than the line's text.
+ */
+figure.shiki .fd-scroll-container .line {
+  padding-left: calc(var(--padding-left) + var(--wrap-indent, 0px));
+  text-indent: calc(-1 * var(--wrap-indent, 0px));
+}
+
+/*
  * Inline `code` in docs prose: when a chip wraps on a phone (for example
  * medusa-config.ts at 390 px), give each line fragment its own border,
  * padding and radius instead of an open-ended half chip. Block code is
