@@ -71,7 +71,8 @@ test('the pay steps follow the hosted app\'s Checkout', () => {
   assert.ok(changelog.includes('choose **Cash**, then **Split payment**'), 'changelog: 0.2.0 split note');
   assert.ok(!/from its tag|changelog#the-pay-screen-in-020/.test(till), 'at-the-till: no 0.2.0 tag note');
   assert.ok(!till.includes('2. Choose **Cash** or **Card terminal**'), 'at-the-till: old step');
-  assert.ok(quickStart.includes('Tap **Checkout** and choose **Cash** or **Card terminal**'), 'quick-start: Checkout');
+  assert.ok(quickStart.includes('Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal**\nfor a card sale.'), 'quick-start: Checkout');
+  assert.ok(till.includes('The payment screen opens on **Cash**; tap **Card terminal** for a card sale.') && !quickStart.includes('and choose **Cash** or **Card terminal**'), 'quick-start: same wording as at the till');
   assert.ok(till.includes('Its totals and the **Checkout** button stay in view.'), 'at-the-till: phone Checkout');
   assert.ok(till.includes('On the payment screen, key in part of the total on one tile and tap **Take**'), 'at-the-till: implicit split');
 });
