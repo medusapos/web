@@ -139,7 +139,7 @@ export default function HomePage() {
           })}
         </div>
         <p className="mt-10 font-semibold">Also at the till</p>
-        {/* Below 640 px the other cards are a one-column list of links to their docs, so the phone page doesn't stack nine full cards and every title stays on one line. A title's hyphen is non-breaking (U+2011), so "one-off" stays whole. */}
+        {/* Below 640 px the other cards are a one-column list of links to their docs, each with the first sentence of its description, so the phone page doesn't stack nine full cards and every title stays on one line. A title's hyphen is non-breaking (U+2011), so "one-off" stays whole. */}
         <ul className="mt-4 grid gap-2 sm:hidden">
           {more.map((feature) => {
             const Icon = icons[feature.icon];
@@ -148,8 +148,11 @@ export default function HomePage() {
                 <Link href={featureDocs[feature.title]} className="flex h-full min-h-12 items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-3 py-2 text-sm font-medium">
                   <Icon size={16} className="shrink-0 text-fd-muted-foreground" />
                   <span>
-                    {feature.title.replace('-', '\u2011')}
-                    {!feature.released && <span className="font-normal text-fd-muted-foreground"> · next release</span>}
+                    <span className="block">
+                      {feature.title.replace('-', '\u2011')}
+                      {!feature.released && <span className="font-normal text-fd-muted-foreground"> · next release</span>}
+                    </span>
+                    <span className="mt-0.5 block text-xs font-normal text-fd-muted-foreground">{feature.description.split(/(?<=\.)\s/)[0]}</span>
                   </span>
                   <ChevronRight size={16} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" />
                 </Link>
