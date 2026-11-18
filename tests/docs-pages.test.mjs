@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-test('the site says why the latest build shows v 0.2.0', () => {
+test('the changelog says why the latest build shows v 0.2.0, and the home caption does not', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
-  assert.ok(home.includes('The app shows v 0.2.0 until the next release.'), 'home: label caption');
+  assert.ok(!home.includes('until the next release'), 'home: no label caption');
   assert.ok(changelog.includes('app.medusapos.com and the live demo run the app\'s latest build. It shows **v 0.2.0** until the next release'), 'changelog: hosted build note');
 });
 
