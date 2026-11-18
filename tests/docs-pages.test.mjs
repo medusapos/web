@@ -431,3 +431,10 @@ test('the changelog RBAC line keeps super admins in', () => {
   assert.ok(log.includes('With RBAC on, only super admins and people with a "POS cashier" or "POS manager" role can.'), 'changelog: super admins');
   assert.ok(!log.includes('With RBAC on, only people with'), 'changelog: no roles-only line');
 });
+
+test('the quick start goes straight to What you need', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const intro = qs.slice(qs.indexOf('---', 3), qs.indexOf('## What you need'));
+  assert.ok(!intro.includes('MedusaPOS is a browser point of sale'), 'quick start: no repeated pitch');
+  assert.ok(intro.includes('To look around first, open the [live demo](https://demo.medusapos.com/demo): it resets every night.'), 'quick start: demo kept');
+});
