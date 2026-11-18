@@ -77,6 +77,12 @@ test('registers says how to move the register to another till', () => {
   assert.ok(registers.includes('close it on the till that holds it, then open it on the other till with a new float.'), 'registers: close then open');
 });
 
+test('the quick start names Register 1', () => {
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(quickStart.includes('choose **Register 1** and [open it](/docs/registers#open-with-your-float)'), 'quick-start: Register 1');
+  assert.ok(!quickStart.includes('choose a register'), 'quick-start: no generic register');
+});
+
 test('quick start links all five store-owner pages', () => {
   const source = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   for (const slug of ['plugin-setup', 'at-the-till', 'registers', 'troubleshooting', 'limitations']) {
