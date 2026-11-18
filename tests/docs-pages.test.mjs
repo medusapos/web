@@ -242,6 +242,13 @@ test('home says the offline caveat once and the one-till limit first', () => {
   assert.ok(home.indexOf('<li>add or rename registers') < home.indexOf('<li>charge cards'), 'home: one-till limit first');
 });
 
+test('quick start says how to add a service zone', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const flat = qs.replace(/\s+/g, ' ');
+  assert.ok(flat.includes("add a service zone, the area the option serves: in that section's three-dot menu choose **Create service zone**, enter a **Name**, click **Manage areas**, check your shop's country and save. Then click **Create option** and choose the profile in the **Shipping Profile** field."), 'zone: steps');
+  assert.ok(qs.includes('"Create Service Zone")'), 'zone: source cited');
+});
+
 test('quick start names the take step', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('At the end of the day'));

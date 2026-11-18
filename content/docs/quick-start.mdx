@@ -72,7 +72,7 @@ creates its `locking` table.
 
 ## Configure your store
 
-{/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options") and /user-guide/settings/tax-regions, read 2026-11-18. */}
+{/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options", "Create Service Zone") and /user-guide/settings/tax-regions, read 2026-11-18. */}
 
 1. Add the POS origin `https://app.medusapos.com` to both `ADMIN_CORS` and
    `AUTH_CORS`, keeping existing origins. Write it exactly like that, without
@@ -87,7 +87,10 @@ creates its `locking` table.
 3. Create a shipping option at that location, such as in-store pickup, on the
    shipping profile your products use, or set the plugin's `shippingOptionId`
    to the option you want to use. On the location's page, enable **Pickup**
-   (or **Shipping**) and add a service zone, then click **Create option**
+   (or **Shipping**) and add a service zone, the area the option serves:
+   in that section's three-dot menu choose **Create service zone**, enter a
+   **Name**, click **Manage areas**, check your shop's country and save.
+   Then click **Create option**
    and choose the profile in the **Shipping Profile** field.
 4. Configure tax rates for the location's country: go to **Settings → Tax
    Regions** and create a region for that country. Prices include or exclude
