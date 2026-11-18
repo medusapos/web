@@ -333,3 +333,16 @@ test('quick start gives POS access its own section', () => {
     assert.ok(!text.includes('step 7 of'), `${name}: no step 7`);
   }
 });
+
+test('quick start sets up the sales region', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const start = qs.indexOf('4. Make sure a region covers');
+  assert.ok(start > qs.indexOf('## Configure your store'), 'region: step 4');
+  const step = qs.slice(start, qs.indexOf('5. Create (or reuse) a publishable API key')).replace(/\s+/g, ' ');
+  assert.ok(step.startsWith("4. Make sure a region covers the location's country, in the currency you sell in."), 'region: step');
+  assert.ok(step.includes('go to **Settings → Regions**; if no region lists that country, click **Create**, choose the **Currency** and add the country under **Countries**.'), 'region: admin path');
+  assert.ok(step.includes("so give each product you'll sell in person a price in its currency."), 'region: prices');
+  assert.ok(step.indexOf('**Settings → Regions**') < step.indexOf('**Settings → Tax Regions**'), 'region: before tax');
+  assert.ok(!/inventory|stock level/i.test(step), 'region: no inventory claim');
+  assert.ok(qs.includes('/user-guide/settings/regions ("Create", "Currency", "Countries")') && qs.includes('docs/testers.md (Set up this till'), 'region: sources cited');
+});
