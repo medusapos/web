@@ -86,9 +86,12 @@ test('on a phone the other home cards link to their docs', () => {
   assert.ok(source.indexOf('sm:hidden">') < source.indexOf('hidden gap-3 sm:grid'), 'phone list: before the cards');
   assert.ok(source.includes('className="flex h-full min-h-12 items-center'), 'phone list: tiles fill their row');
   assert.ok(/<\/span>\s*<ChevronRight size=\{16\} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" \/>\s*<\/Link>/.test(source), 'phone list: each tile ends with a chevron');
+  assert.ok(source.includes('<span className="mt-0.5 block text-xs font-normal text-fd-muted-foreground">{feature.description.split(/(?<=\\.)\\s/)[0]}</span>'), 'phone list: each row has its first sentence');
   for (const feature of features.slice(3)) {
     const href = featureDocs[feature.title];
     assert.ok(href, `phone list: ${feature.title} has a docs link`);
+    const first = feature.description.split(/(?<=\.)\s/)[0];
+    assert.ok(first.endsWith('.') && first.length <= 110, `phone list: ${feature.title} first sentence is one short sentence`);
     const [path, anchor] = href.split('#');
     const file = new URL(`../content/docs/${path.replace('/docs/', '')}.mdx`, import.meta.url);
     assert.ok(existsSync(file), `phone list: ${href} page exists`);
