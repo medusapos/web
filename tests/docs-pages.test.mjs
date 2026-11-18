@@ -99,3 +99,8 @@ test('the changelog dates the 0.1.0 catalogue fix line', () => {
   const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
   assert.ok(changelog.includes('Site note, November 2026: the 0.2.0 release notes list no fix for the large-catalogue sync.'), 'changelog: site note');
 });
+
+test('the quick start says the till shows only the channel\'s products', () => {
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(/The till shows only the products in that sales channel, so add the\s+products you'll sell in person to it\./.test(quickStart), 'quick-start: channel products');
+});
