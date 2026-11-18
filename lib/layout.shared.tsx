@@ -9,7 +9,8 @@ export function baseOptions(): BaseLayoutProps {
       title: siteConfig.name,
     },
     links: [
-      { text: 'Docs', url: '/docs', active: 'nested-url' },
+      // Never shown as selected: in the docs sidebar the current page is the one selected item.
+      { text: 'Docs', url: '/docs', active: 'none' },
       { text: 'Live demo', url: siteConfig.demoUrl, external: true },
       {
         type: 'icon',

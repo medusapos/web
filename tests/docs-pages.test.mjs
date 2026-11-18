@@ -453,3 +453,9 @@ test('the quick start shows the sign-in form', () => {
   assert.ok(signIn.includes('medusapos/app main was ba317a1 at capture'), 'sign in: capture cited');
   assert.ok(existsSync(new URL('../public/screenshots/docs/quick-start-signin.jpg', import.meta.url)), 'sign in: image file');
 });
+
+test('the Docs link is never marked as the selected item', () => {
+  const layout = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
+  assert.ok(layout.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'sidebar: Docs link not active');
+  assert.ok(!layout.includes("active: 'nested-url'"), 'sidebar: no nested-url Docs pill');
+});
