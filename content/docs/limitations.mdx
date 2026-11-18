@@ -29,11 +29,13 @@ MedusaPOS doesn't yet:
 
 ## Store setup limits
 
+{/* Exact version: npm view @medusapos/medusa-plugin@0.2.3 peerDependencies ("@medusajs/medusa": "2.21.0", "@medusajs/framework": "2.21.0"). */}
+
 Set up your store like this:
 
 - Use one stock location per sales channel. With several, Medusa may reserve stock at another location than the sale's.
 - Use one shipping profile per sale. A sale mixing profiles is refused.
-- You need Medusa 2.21.0.
+- You need Medusa 2.21.0 exactly. Plugin 0.2.3 names that version, not a range, for `@medusajs/medusa` and `@medusajs/framework`, so move a store on another version to 2.21.0 first.
 - Sign in with an admin user's email and password. With Medusa's RBAC on, the user also needs a "POS cashier" or "POS manager" role; super admins keep their access.
 
 ## Till limits

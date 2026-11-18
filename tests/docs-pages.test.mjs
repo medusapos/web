@@ -97,6 +97,13 @@ test('docs first load defers search and sidebar prefetch', () => {
   assert.ok(docsLayout.includes('sidebar={{ prefetch: false }}'));
 });
 
+test('the docs say the plugin needs exactly Medusa 2.21.0', () => {
+  const limits = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(limits.includes('- You need Medusa 2.21.0 exactly. Plugin 0.2.3 names that version, not a range,'), 'limitations: exact version');
+  assert.ok(quickStart.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits))'), 'quick-start: exact version');
+});
+
 test('the site says app.medusapos.com runs the latest build', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
