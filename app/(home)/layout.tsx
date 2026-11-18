@@ -31,7 +31,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
             <Link href="/docs" className="inline-block py-3 underline sm:py-0">
               Docs
             </Link>
-            <Link href="/docs/troubleshooting#report-a-problem" className="inline-block py-3 underline sm:py-0">
+            <Link href="/docs/troubleshooting" className="inline-block py-3 underline sm:py-0">
               Help
             </Link>
             <Link href="/docs/changelog" className="inline-block py-3 underline sm:py-0">
