@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs';
 
 test('home shows the phone screenshot at 320 px', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  assert.ok(home.includes('<section className="mx-auto grid max-w-4xl items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr]">'), 'home: phone section centred, 320 px column');
+  assert.ok(home.includes('<section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">'), 'home: phone section on the content edges, 320 px column');
+  assert.ok(!home.includes('max-w-4xl'), 'home: no narrower phone section box');
   assert.ok(home.includes('<div className="hidden md:block w-[320px] max-w-full'), 'home: phone shot 320 px');
   assert.ok(!home.includes('220px'), 'home: no 220 px phone shot');
 });

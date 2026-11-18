@@ -162,7 +162,7 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="mx-auto grid max-w-4xl items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr]">
+      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">
         <div className="hidden md:block w-[320px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
           <Image
             src="/screenshots/sale-phone.png"
