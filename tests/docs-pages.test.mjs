@@ -487,3 +487,11 @@ test('Configure your store shows the CORS lines', () => {
   assert.ok(qs.includes('   ```text\n   ADMIN_CORS=<your existing origins>,https://app.medusapos.com\n   AUTH_CORS=<your existing origins>,https://app.medusapos.com\n   ```'), 'cors: block inside step 1');
   assert.ok(qs.includes('after\n   the origins already there and separated by a comma.'), 'cors: comma rule');
 });
+
+test('held sales says where the resolve script is in a workspace', () => {
+  const ts = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  const i = ts.indexOf('tally-ledger-resolve.js <commandId> apply\n```');
+  const j = ts.indexOf("If your backend is in an npm or Yarn workspace, the plugin is usually installed in the workspace root's `node_modules`");
+  const k = ts.indexOf('- `apply`: you have fixed the order by hand.');
+  assert.ok(i > 0 && j > i && k > j, 'held sales: workspace note between command and apply');
+});

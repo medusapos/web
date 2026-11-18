@@ -55,6 +55,8 @@ Whoever runs the Medusa backend clears it from the store's backend directory, us
 npx medusa exec node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-ledger-resolve.js <commandId> apply
 ```
 
+If your backend is in an npm or Yarn workspace, the plugin is usually installed in the workspace root's `node_modules`, not the backend's. If that path doesn't exist, point the command at the plugin's copy there, for example `../../node_modules/@medusapos/medusa-plugin/…`.
+
 - `apply`: you have fixed the order by hand. The till's next resend finishes the sale.
 - `reject` (in place of `apply`): takes back any stock the plugin added for the sale and cancels its order. The till's next resend gets a rejection. If the order can't be cancelled, the sale stays held: cancel it by hand in Medusa Admin and run `reject` again, not `apply`.
 
