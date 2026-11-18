@@ -533,3 +533,14 @@ test('configure your store gives each step a bold lead', () => {
     '6 Admin and staff logins.',
   ], 'configure leads: six, in order');
 });
+
+test('make a sale shows the register control under step 1', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('2. Scan a barcode'));
+  const shot = "\n   ![The right end of the till header: Register › beside the signed-in cashier's initial and email](/screenshots/docs/till-register-control.jpg)\n";
+  assert.ok(sale.includes(shot), 'register shot: indented under step 1');
+  assert.ok(sale.indexOf('1. Tap the register') < sale.indexOf(shot), 'register shot: after step 1');
+  assert.ok(sale.includes('{/* Screenshot: cropped from public/screenshots/sale-desktop-1000.png'), 'register shot: source comment');
+  const jpg = readFileSync(new URL('../public/screenshots/docs/till-register-control.jpg', import.meta.url));
+  assert.ok(jpg[0] === 0xff && jpg[1] === 0xd8 && jpg.length > 8000, 'register shot: jpeg file present');
+});
