@@ -10,6 +10,10 @@ description: Open a register with a float, record cash in and out, then count an
 
 ## Where registers come from
 
+{/* Till and register: medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8 (a till is a device that can be lost, broken or replaced; one live session per drawer). */}
+
+A till is a device running MedusaPOS, such as a counter screen or a phone. A register is the cash drawer and its record: a till opens it with a float, records cash in and out, then counts and closes it.
+
 You don't create registers. Every store has one, **Register 1**, and each till chooses it the first time it opens. You can't add or rename registers yet.
 
 In the live demo, each visitor's till gets its own **Demo register**.
