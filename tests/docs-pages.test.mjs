@@ -643,3 +643,16 @@ test('the changelog intro agrees with the hosted-build paragraph', () => {
   const hosted = changelog.indexOf('app.medusapos.com and the live demo run the app\'s latest build.');
   assert.ok(hosted > changelog.indexOf(intro) && hosted < changelog.indexOf('\n## '), 'changelog intro: the hosted-build paragraph follows, before the first entry');
 });
+
+test('the phone header shows a Docs link on the home and 404 pages', () => {
+  const shared = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
+  assert.ok(shared.includes('export function homeOptions(): BaseLayoutProps'), 'phone docs: helper');
+  assert.ok(/href="\/docs"\s+className="sm:hidden inline-flex min-h-11 items-center/.test(shared), 'phone docs: phone only, 44 px tall');
+  assert.ok(shared.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'phone docs: nav link kept');
+  for (const file of ['../app/(home)/layout.tsx', '../app/not-found.tsx']) {
+    const src = readFileSync(new URL(file, import.meta.url), 'utf8');
+    assert.ok(src.includes('<HomeLayout {...homeOptions()}>'), `phone docs: ${file}`);
+  }
+  const docs = readFileSync(new URL('../app/docs/layout.tsx', import.meta.url), 'utf8');
+  assert.ok(!docs.includes('homeOptions'), 'phone docs: docs layout unchanged');
+});

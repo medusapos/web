@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import Link from 'next/link';
 import { siteConfig } from '@/lib/site';
 
 export const gitConfig = siteConfig.docsRepo;
@@ -25,5 +26,25 @@ export function baseOptions(): BaseLayoutProps {
         external: true,
       },
     ],
+  };
+}
+
+// Below sm, Fumadocs hides the header's nav links behind the menu chevron.
+// The home and 404 pages add a Docs link after the title, shown only there.
+export function homeOptions(): BaseLayoutProps {
+  const base = baseOptions();
+  return {
+    ...base,
+    nav: {
+      ...base.nav,
+      children: (
+        <Link
+          href="/docs"
+          className="sm:hidden inline-flex min-h-11 items-center px-3 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground"
+        >
+          Docs
+        </Link>
+      ),
+    },
   };
 }

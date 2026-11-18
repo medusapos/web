@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
-import { baseOptions } from '@/lib/layout.shared';
+import { homeOptions } from '@/lib/layout.shared';
 import { siteConfig } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <HomeLayout {...baseOptions()}>
+    <HomeLayout {...homeOptions()}>
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-fd-foreground">
         <p className="text-sm text-fd-muted-foreground">404</p>
         <h1 className="mt-2 text-4xl sm:text-5xl font-bold tracking-tight">Page not found</h1>
