@@ -54,7 +54,24 @@ modules: [{
 
 Set `LOCKING_REDIS_URL` in every instance's environment to the URL of the same Redis server.
 
-After switching to `locking-postgres`, run the migration again to create its `locking` table.
+For Postgres advisory locks, which use your store's own database and need no extra settings, add this instead:
+
+{/* Postgres locking: docs.medusajs.com/resources/infrastructure-modules/locking/postgres, read 2026-11-18; provider id and migration also in medusapos/app@v0.2.0 packages/medusa-plugin/README.md lines 26-32. */}
+
+```ts
+modules: [{
+  resolve: '@medusajs/medusa/locking',
+  options: {
+    providers: [{
+      resolve: '@medusajs/medusa/locking-postgres',
+      id: 'locking-postgres',
+      is_default: true,
+    }],
+  },
+}]
+```
+
+Then run `npx medusa db:migrate` to create its `locking` table.
 
 ## What a sale records
 
