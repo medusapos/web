@@ -40,6 +40,12 @@ Update the plugin first (see [Update the plugin](#update-the-plugin)), then the 
 - **Choose who may use the POS (optional).** With Medusa's role-based access control (RBAC) off, which is Medusa's default, every admin can sign in to the POS, as before. With RBAC on, only people with a "POS cashier" or "POS manager" role can. Anyone else sees "This account can't use the POS. Ask the store owner for POS access." Setting it up is step 7 of the [quick start's Configure your store](/docs/quick-start#configure-your-store).
 - **Clearer storage problems.** A Safari private window, a second tab holding the till, and a till that needs a reload to finish updating each get their own message saying what to do.
 
+### The pay screen in 0.2.0
+
+{/* Pay flow at v0.2.0: medusapos/app@bcd2047 e2e/helpers.ts lines 154-185 (startTender: the v0.2.0 build's Cash and Card terminal buttons and "Payment approved on terminal"); docs/v2-parity/DEMO-PARITY.md row 06c. Moved from At the till in climb round 21. */}
+
+If you run 0.2.0 from its tag instead of the hosted app, the cart has **Cash** and **Card terminal** buttons in place of **Checkout**, and a card sale ends with **Payment approved on terminal**. For a split payment, choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
+
 ### What's new for your store
 
 - **Registers are recorded by the server.** When a till opens, counts and closes a register, your Medusa store records it and works out what the drawer should hold from the sales it received. The till's own figures (expected, counted and variance per payment method) are on its "Last closure" screen, under Register. The app doesn't show the store's figure yet; it's available from the plugin's register endpoint, `GET /tally/v1/registers/{id}`.

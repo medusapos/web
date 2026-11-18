@@ -19,7 +19,11 @@ test('the pay steps follow the hosted app\'s Checkout', () => {
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(till.includes('2. Tap **Checkout**. The payment screen opens on **Cash**'), 'at-the-till: Checkout step');
-  assert.ok(till.includes('in place of **Checkout**, and a card sale ends with **Payment approved on terminal**'), 'at-the-till: 0.2.0 note');
+  const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  assert.ok(changelog.includes('in place of **Checkout**, and a card sale ends with **Payment approved on terminal**'), 'changelog: 0.2.0 pay note');
+  assert.ok(changelog.includes('choose **Cash**, then **Split payment**'), 'changelog: 0.2.0 split note');
+  assert.ok(till.includes('[The pay screen in 0.2.0](/docs/changelog#the-pay-screen-in-020)'), 'at-the-till: 0.2.0 pointer');
+  assert.equal(till.match(/from its tag/g)?.length, 1, 'at-the-till: one tag mention');
   assert.ok(!till.includes('2. Choose **Cash** or **Card terminal**'), 'at-the-till: old step');
   assert.ok(quickStart.includes('Tap **Checkout**, choose **Cash** or **Card terminal**'), 'quick-start: Checkout');
   assert.ok(till.includes('Its totals and the **Checkout** button stay in view.'), 'at-the-till: phone Checkout');
