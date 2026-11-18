@@ -233,9 +233,9 @@ test('docs show the payment screen, the count and the Z report', () => {
   assert.ok(close.includes('register-close.tsx:212') && close.includes('closure-print.ts printHtml'), 'registers: print source cited');
   assert.ok(!reg.includes('open card'), 'registers: no open card');
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
-  assert.ok(mdx.includes('mx-auto w-full max-w-sm border border-fd-border'), 'mdx: framed, narrow screenshots');
-  assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: (props) => <ImageZoom'), 'mdx: screenshots zoom');
-  assert.ok(mdx.includes('border border-fd-border lg:max-w-md'), 'mdx: wider on desktop');
+  assert.ok(mdx.includes('className="mx-auto w-full border border-fd-border"') && !mdx.includes('max-w-sm') && !mdx.includes('max-w-md'), 'mdx: framed screenshots, no fixed box');
+  assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: (props) => {') && mdx.includes('<ImageZoom\n'), 'mdx: screenshots zoom');
+  assert.ok(mdx.includes("typeof src === 'object' && src ? Number(src.width)") && mdx.includes('maxWidth: width > 0 ? width / 2 : undefined'), 'mdx: half the static image width, one scale');
 });
 
 test('the quick start says to count and close the register', () => {
