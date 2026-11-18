@@ -103,10 +103,13 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
         {/* Hosted build: medusapos/app@781cd94 docs/adr/0005-web-hosting-vercel.md ("Every push to main deploys to production"), apps/expo/vercel.json (app and demo, one deployment); plugin 0.2.3 fallback: apps/expo/components/register.tsx:146. */}
+        {/* Tests: medusapos/app@c027779 .github/workflows/ci.yml runs pnpm test, pnpm e2e and pnpm e2e:rbac on every pull request and push to main. */}
         <p className="mt-4 text-fd-muted-foreground">
           {allReleased
-            ? 'Everything below works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store. Each feature is covered by the app\'s automated tests, which run on every change.'
-            : `Everything listed here is covered by the app's automated tests, which run on every change.`}
+            ? 'Everything below works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store. Each feature is covered by the app\'s '
+            : 'Everything listed here is covered by the app\'s '}
+          <a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>
+          {', which run on every change.'}
         </p>
         <p className="mt-3 text-sm sm:hidden">
           <a href="#not-there-yet" className="underline">What it doesn&apos;t do yet</a>
