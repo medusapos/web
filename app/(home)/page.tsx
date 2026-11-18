@@ -187,6 +187,8 @@ export default function HomePage() {
           {/* Order note: content/docs/limitations.mdx line 17 (sources) and line 23. */}
           <li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box, but the note doesn&apos;t reach the order</li>
           <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
+          {/* Large catalogue: content/docs/limitations.mdx line 51 (0.1.0 report, no fix listed in 0.2.0). No figure: front-desk ruling. */}
+          <li>stay fast with a large catalogue: the first sync is slow, and so is search</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>

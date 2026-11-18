@@ -2,6 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+test('home lists the slow large-catalogue sync, with no figure', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<li>stay fast with a large catalogue: the first sync is slow, and so is search</li>'), 'home: large catalogue item');
+  assert.ok(!/2,000|45 s/.test(home), 'home: no figure');
+});
+
 test('the changelog says why the latest build shows v 0.2.0, and the home caption does not', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
