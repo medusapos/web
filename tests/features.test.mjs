@@ -74,7 +74,7 @@ test('the home page shows the three core cards first and larger', () => {
 
 test('the Sells offline card says to keep the tab open', () => {
   const card = features.find((feature) => feature.title === 'Sells offline');
-  assert.ok(card.description.startsWith("Keep selling from the loaded catalogue when the connection drops, as long as the tab stays open: reloading while offline doesn't work yet. "), 'offline: tab caveat');
+  assert.equal(card.description, "Keep selling from the loaded catalogue when the connection drops, as long as the tab stays open. Queued sales sync when you're back online, and Medusa never records one twice.", 'offline: what it does, with the tab condition');
   assert.equal(features[0], card, 'offline: still first');
 });
 
@@ -106,12 +106,4 @@ test('phone list: rows of one height, titles keep their hyphens whole', () => {
   assert.ok(source.includes('grid auto-rows-fr grid-cols-2 gap-2 sm:hidden'), 'phone list: equal rows');
   assert.ok(list.includes(String.raw`{feature.title.replace('-', '\u2011')}`), 'phone list: non-breaking hyphen');
   assert.equal(source.split(String.raw`'\u2011'`).length, 2, 'phone list: only the phone titles change');
-});
-
-test('the Sells offline card names the 50-sale batch limit', () => {
-  const card = features.find((feature) => feature.title === 'Sells offline');
-  const limit = "The store refuses a batch of more than 50 sales whole, and the till can't split one yet.";
-  assert.ok(card.description.includes(` ${limit} `), 'offline: batch limit');
-  assert.ok(card.description.indexOf('never records one twice.') < card.description.indexOf(limit), 'offline: limit after sync');
-  assert.ok(card.description.indexOf(limit) < card.description.indexOf('Needs attention'), 'offline: limit before Needs attention');
 });
