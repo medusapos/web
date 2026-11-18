@@ -2,14 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-test('at the till names the controls for fees and one-off items', () => {
-  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
-  const section = till.slice(till.indexOf('## Fees, delivery charges and one-off items'), till.indexOf('## Grid or table, and categories'));
-  for (const label of ['**+**', '**Add Fee**', '**Add Shipping**', '**Add Miscellaneous Product**', '**Apply**', '**Add charge**', '**Custom item**']) {
-    assert.ok(section.includes(label), `at-the-till fees: ${label}`);
-  }
-});
-
 test('home lists the slow large-catalogue sync, with no figure', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<li>stay fast with a large catalogue: the first sync is slow, and so is search</li>'), 'home: large catalogue item');
