@@ -116,3 +116,8 @@ test('the quick start says the till shows only the channel\'s products', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(/The till shows only the products in that sales channel, so add the\s+products you'll sell in person to it\./.test(quickStart), 'quick-start: channel products');
 });
+
+test('the quick start says to link one stock location', () => {
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(/Link only that one stock location to the channel\s+\(\[why\]\(\/docs\/limitations#store-setup-limits\)\)\./.test(quickStart), 'quick-start: one location');
+});
