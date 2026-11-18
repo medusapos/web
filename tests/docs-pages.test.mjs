@@ -149,6 +149,14 @@ test('the quick start says to link one stock location', () => {
   assert.ok(/Link only that one stock location to the channel\s+\(\[why\]\(\/docs\/limitations#store-setup-limits\)\)\./.test(quickStart), 'quick-start: one location');
 });
 
+test('configure your store names the admin paths', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const configure = qs.slice(qs.indexOf('## Configure your store'), qs.indexOf('5. Create (or reuse) a publishable API key'));
+  assert.ok(/\*\*Settings → Locations & Shipping\*\*, open the location, and edit its\s+\*\*Sales Channels\*\* section\./.test(configure), 'quick-start: location path');
+  assert.ok(/click \*\*Create option\*\*\s+and choose the profile in the \*\*Shipping Profile\*\* field\./.test(configure), 'quick-start: shipping option path');
+  assert.ok(/go to \*\*Settings → Tax\s+Regions\*\* and create a region for that country\./.test(configure), 'quick-start: tax path');
+});
+
 test('home links automated tests to the app CI workflow', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>'), 'home: tests link');
