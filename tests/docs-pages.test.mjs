@@ -248,3 +248,13 @@ test('quick start says how staff get their own logins', () => {
   assert.ok(step6.includes('docs.medusajs.com/user-guide/settings/users/invites'), 'quick-start: invite source cited');
   assert.ok(step6.indexOf('The POS signs in with that email and password.') < step6.indexOf('Give each member of staff'), 'quick-start: invites after the admin user');
 });
+
+test('at the till names the cart + menu for discounts and charges', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const discount = till.slice(till.indexOf('## Apply a discount'), till.indexOf('## Read the receipt'));
+  const fees = till.slice(till.indexOf('## Fees, delivery charges and one-off items'), till.indexOf('## Grid or table, and categories'));
+  assert.ok(discount.includes("Use a line's **Discount** action, or for the whole order tap the cart's **+** button and choose **Add Discount**. Choose **Percent** or **Amount**"), 'till: order discount in the + menu');
+  assert.ok(!till.includes('below the lines'), 'till: no control below the lines');
+  assert.ok(fees.includes("to a sale. Tap the cart's **+** button, beside the customer, and choose **Add Fee**, **Add Shipping** or **Add Miscellaneous Product**. Your store records"), 'till: fees name the control');
+  assert.ok(till.includes('cart-add-menu.tsx:32-37'), 'till: menu source cited');
+});

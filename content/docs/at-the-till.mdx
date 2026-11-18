@@ -37,9 +37,11 @@ A USB or Bluetooth scanner set to type like a keyboard works on **Products**, wh
 
 In **Settings → Scanner**, set this till's minimum characters and average time per key. Raise the time for slow Bluetooth scanners. **Test scan here** shows the last scan's average and whether it would count. The minimum also applies to the **Products** search box: shorter text followed by Enter stays a search. Camera scanning isn't available yet.
 
+{/* Cart + menu: medusapos/app@5fc5b95 apps/expo/components/cart-add-menu.tsx:32-37 (Add new customer, Add Miscellaneous Product, Add Fee, Add Discount, Add Shipping) and :43 (dialog "Order discount"); seen on the live demo 2026-11-18. */}
+
 ## Apply a discount
 
-Use a line's **Discount** action, or **Order discount** below the lines. Choose **Percent** or **Amount**, enter the value and tap **Apply**. Remove a discount by tapping its chip (the ✕).
+Use a line's **Discount** action, or for the whole order tap the cart's **+** button and choose **Add Discount**. Choose **Percent** or **Amount**, enter the value and tap **Apply**. Remove a discount by tapping its chip (the ✕).
 
 Each chip shows what actually came off, for example "10% −€0.40", "−€0.40" or "Order discount −€0.50". MedusaPOS refuses a discount that takes more off than the line or order is worth.
 
@@ -89,7 +91,7 @@ Tap a line's **Price**, enter the new unit price and an optional reason, and app
 
 ## Fees, delivery charges and one-off items
 
-Add a bag fee, a delivery charge or a one-off item that isn't in your catalogue to a sale. Your store records the fee and the one-off item as order items without a product, and the delivery as a shipping method. All are taxed at your region's rate.
+Add a bag fee, a delivery charge or a one-off item that isn't in your catalogue to a sale. Tap the cart's **+** button, beside the customer, and choose **Add Fee**, **Add Shipping** or **Add Miscellaneous Product**. Your store records the fee and the one-off item as order items without a product, and the delivery as a shipping method. All are taxed at your region's rate.
 
 Medusa can't keep one charge tax-free and has no tax classes, so the till doesn't offer those for your store.
 
