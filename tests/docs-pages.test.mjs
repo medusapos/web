@@ -555,3 +555,10 @@ test('Not there yet sits beside the phone screenshot', () => {
   assert.ok(!band.includes('<section '), 'band: no other section inside');
   assert.ok(!home.includes('<section className="py-12 sm:py-16">\n        <h2 id="not-there-yet"'), 'band: no separate Not there yet section');
 });
+
+test('the introduction asks for Medusa 2.21.0 exactly', () => {
+  const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
+  const need = intro.slice(intro.indexOf('## What you need'), intro.indexOf('## Status'));
+  assert.ok(need.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits)), with the MedusaPOS plugin installed.\n'), 'intro: exactly, with the why link');
+  assert.ok(!intro.includes('A Medusa 2.21.0 store'), 'intro: no bare version');
+});
