@@ -35,7 +35,7 @@ export default function HomePage() {
     alt: heroAlt,
     width: 608,
     height: 553,
-    sizes: '(min-width: 1024px) 536px, 100vw',
+    sizes: '(min-width: 1024px) 624px, 100vw',
   });
   const { props: heroPhone } = getImageProps({
     src: '/screenshots/sale-phone.png',
@@ -53,7 +53,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd(siteConfig)) }}
       />
-      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2">
+      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <div>
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
