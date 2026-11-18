@@ -134,3 +134,9 @@ test('home links automated tests to the app CI workflow', () => {
   assert.ok(home.includes('<a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>'), 'home: tests link');
   assert.ok(!home.includes("automated tests, which run on every change"), 'home: no unlinked tests line');
 });
+
+test('the quick start says to count and close the register', () => {
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = quickStart.slice(quickStart.indexOf('## Make a sale'), quickStart.indexOf('## Known beta limits'));
+  assert.ok(sale.includes('At the end of the day, [count and close](/docs/registers#count-and-close) the register.'), 'quick-start: close line');
+});
