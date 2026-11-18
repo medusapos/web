@@ -30,7 +30,12 @@ not what a generic reviewer would.
 - Look at the home page at both widths and at least four docs pages at both
   widths, chosen for your persona.
 - You may also open https://medusapos.com and https://demo.medusapos.com
-  pages directly. Fetch no other host. The site's source is the current
+  pages directly. Fetch no other host. Fetch one page per command, with the
+  WebFetch tool on one full URL written out. Never use a loop, a script, a
+  URL held in a variable, `xargs`, `curl` or `wget`: any of those taints
+  your session, and a tainted judge's scores are dropped. The captured
+  files above already hold every page, so fetch only to check something
+  they can't show. The site's source is the current
   directory (`app/`, `content/docs/`, `lib/`) if you need to check where a
   thing comes from.
 
