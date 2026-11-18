@@ -164,6 +164,14 @@ test('configure your store names the admin paths', () => {
   assert.ok(/go to \*\*Settings → Tax\s+Regions\*\* and create a region for that country\./.test(configure), 'quick-start: tax path');
 });
 
+test('plugin setup shows the redis locking example one property per line', () => {
+  const ps = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
+  assert.ok(ps.includes("    providers: [{\n      resolve: '@medusajs/medusa/locking-redis',\n      id: 'locking-redis',\n      is_default: true,\n"), 'plugin-setup: provider one property per line');
+  assert.ok(ps.includes('        redisUrl: process.env.LOCKING_REDIS_URL,\n'), 'plugin-setup: redisUrl on its own line');
+  assert.ok(!ps.includes("modules: [{ resolve:"), 'plugin-setup: no packed example');
+  assert.ok(ps.includes("Set `LOCKING_REDIS_URL` in every instance's environment to the URL of the same Redis server."), 'plugin-setup: says to set LOCKING_REDIS_URL');
+});
+
 test('home links automated tests to the app CI workflow', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>'), 'home: tests link');
