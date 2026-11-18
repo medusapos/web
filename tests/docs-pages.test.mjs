@@ -23,7 +23,7 @@ test('quick start says how to check the Medusa version', () => {
 
 test('home shows the phone screenshot at 320 px', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  assert.ok(home.includes('<section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">'), 'home: phone section on the content edges, 320 px column');
+  assert.ok(home.includes('<section className="grid items-start gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">'), 'home: phone section on the content edges, 320 px column');
   assert.ok(!home.includes('max-w-4xl'), 'home: no narrower phone section box');
   assert.ok(home.includes('<figure className="hidden md:block w-[320px] max-w-full">'), 'home: phone shot 320 px');
   assert.ok(!home.includes('220px'), 'home: no 220 px phone shot');
@@ -543,4 +543,15 @@ test('make a sale shows the register control under step 1', () => {
   assert.ok(sale.includes('{/* Screenshot: cropped from public/screenshots/sale-desktop-1000.png'), 'register shot: source comment');
   const jpg = readFileSync(new URL('../public/screenshots/docs/till-register-control.jpg', import.meta.url));
   assert.ok(jpg[0] === 0xff && jpg[1] === 0xd8 && jpg.length > 8000, 'register shot: jpeg file present');
+});
+
+test('Not there yet sits beside the phone screenshot', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const band = home.slice(home.indexOf('md:grid-cols-[320px_1fr]'), home.indexOf('<section className="border-t border-fd-border'));
+  assert.ok(band.includes('In the browser you already have'), 'band: browser heading');
+  assert.ok(band.includes('<h2 id="not-there-yet" className="mt-12 scroll-mt-20 text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>'), 'band: Not there yet inside');
+  assert.ok(band.indexOf('In the browser you already have') < band.indexOf('id="not-there-yet"'), 'band: browser first');
+  assert.ok(band.includes('href="/docs/limitations"'), 'band: limitations link inside');
+  assert.ok(!band.includes('<section '), 'band: no other section inside');
+  assert.ok(!home.includes('<section className="py-12 sm:py-16">\n        <h2 id="not-there-yet"'), 'band: no separate Not there yet section');
 });

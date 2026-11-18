@@ -205,7 +205,7 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">
+      <section className="grid items-start gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">
         <figure className="hidden md:block w-[320px] max-w-full">
           <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
             <Image
@@ -223,34 +223,31 @@ export default function HomePage() {
           <p className="mt-4 text-fd-muted-foreground">
             Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale.
           </p>
+          <h2 id="not-there-yet" className="mt-12 scroll-mt-20 text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
+          <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
+          <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
+            {/* One till at a time: content/docs/registers.mdx line 76 and "Where registers come from"; medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8. */}
+            <li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>
+            <li>charge cards, or handle refunds and returns</li>
+            <li>apply Medusa promotions or coupon codes (discounts are typed at the till)</li>
+            <li>take tips, email receipts or show sales reports</li>
+            {/* Approval: content/docs/registers.mdx (Get manager approval); medusapos/app@9ee493a apps/expo/lib/approval.ts requestApproval (no role check with plugin 0.2.3). */}
+            <li>check who approves a large difference: with plugin 0.2.3 any login for your store can, including the cashier&apos;s own</li>
+            {/* Order note: content/docs/limitations.mdx line 17 (sources) and line 23. */}
+            <li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box, but the note doesn&apos;t reach the order</li>
+            <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
+            {/* Batch limit: content/docs/limitations.mdx (Till limits); medusapos/app v0.2.0 notes, #134 MAX_COMMANDS = 50. */}
+            <li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>
+            {/* Large catalogue: content/docs/limitations.mdx line 51 (0.1.0 report, no fix listed in 0.2.0). No figure: front-desk ruling. */}
+            <li>stay fast with a large catalogue: the first sync is slow, and so is search</li>
+            <li>sign in with multi-factor authentication</li>
+            <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
+            <li>support more than one stock location per sales channel</li>
+          </ul>
+          <p className="mt-4 text-fd-muted-foreground">
+            See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
+          </p>
         </div>
-      </section>
-
-      <section className="py-12 sm:py-16">
-        <h2 id="not-there-yet" className="scroll-mt-20 text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
-        <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
-        <ul className="mt-4 list-disc space-y-2 pl-6 text-fd-muted-foreground">
-          {/* One till at a time: content/docs/registers.mdx line 76 and "Where registers come from"; medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8. */}
-          <li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>
-          <li>charge cards, or handle refunds and returns</li>
-          <li>apply Medusa promotions or coupon codes (discounts are typed at the till)</li>
-          <li>take tips, email receipts or show sales reports</li>
-          {/* Approval: content/docs/registers.mdx (Get manager approval); medusapos/app@9ee493a apps/expo/lib/approval.ts requestApproval (no role check with plugin 0.2.3). */}
-          <li>check who approves a large difference: with plugin 0.2.3 any login for your store can, including the cashier&apos;s own</li>
-          {/* Order note: content/docs/limitations.mdx line 17 (sources) and line 23. */}
-          <li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box, but the note doesn&apos;t reach the order</li>
-          <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
-          {/* Batch limit: content/docs/limitations.mdx (Till limits); medusapos/app v0.2.0 notes, #134 MAX_COMMANDS = 50. */}
-          <li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>
-          {/* Large catalogue: content/docs/limitations.mdx line 51 (0.1.0 report, no fix listed in 0.2.0). No figure: front-desk ruling. */}
-          <li>stay fast with a large catalogue: the first sync is slow, and so is search</li>
-          <li>sign in with multi-factor authentication</li>
-          <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
-          <li>support more than one stock location per sales channel</li>
-        </ul>
-        <p className="mt-4 text-fd-muted-foreground">
-          See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
-        </p>
       </section>
 
       <section className="border-t border-fd-border py-12 sm:py-16 text-center">
