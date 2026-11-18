@@ -481,3 +481,9 @@ test('wrapped code lines keep their indentation', () => {
   const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
   assert.match(css, /padding-left: calc\(var\(--padding-left\) \+ var\(--wrap-indent, 0px\)\);\s*text-indent: calc\(-1 \* var\(--wrap-indent, 0px\)\);/, 'code: hanging indent');
 });
+
+test('Configure your store shows the CORS lines', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(qs.includes('   ```text\n   ADMIN_CORS=<your existing origins>,https://app.medusapos.com\n   AUTH_CORS=<your existing origins>,https://app.medusapos.com\n   ```'), 'cors: block inside step 1');
+  assert.ok(qs.includes('after\n   the origins already there and separated by a comma.'), 'cors: comma rule');
+});
