@@ -38,3 +38,12 @@ figure.shiki .fd-scroll-container .line {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+/*
+ * Phone and tablet "On this page" bar: hide Fumadocs' reading-progress ring
+ * (svg role="progressbar"), which reads as a loading spinner. The bar still
+ * names the current section and opens the list.
+ */
+[data-toc-popover-trigger] > svg[role='progressbar'] {
+  display: none;
+}

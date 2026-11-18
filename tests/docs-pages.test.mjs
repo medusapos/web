@@ -438,3 +438,8 @@ test('the quick start goes straight to What you need', () => {
   assert.ok(!intro.includes('MedusaPOS is a browser point of sale'), 'quick start: no repeated pitch');
   assert.ok(intro.includes('To look around first, open the [live demo](https://demo.medusapos.com/demo): it resets every night.'), 'quick start: demo kept');
 });
+
+test('the phone On this page bar has no progress ring', () => {
+  const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
+  assert.match(css, /\[data-toc-popover-trigger\] > svg\[role='progressbar'\] \{\s*display: none;\s*\}/, 'toc: ring hidden');
+});
