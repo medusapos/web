@@ -84,6 +84,7 @@ test('on a phone the other home cards link to their docs', () => {
   assert.ok(source.includes('<div className="mt-4 hidden gap-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">'), 'phone list: cards from sm up');
   assert.ok(source.indexOf('sm:hidden">') < source.indexOf('hidden gap-3 sm:grid'), 'phone list: before the cards');
   assert.ok(source.includes('className="flex h-full min-h-12 items-center'), 'phone list: tiles fill their row');
+  assert.ok(/<\/span>\s*<ChevronRight size=\{16\} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" \/>\s*<\/Link>/.test(source), 'phone list: each tile ends with a chevron');
   for (const feature of features.slice(3)) {
     const href = featureDocs[feature.title];
     assert.ok(href, `phone list: ${feature.title} has a docs link`);

@@ -1,7 +1,7 @@
 import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Banknote, Calculator, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
+import { Banknote, Calculator, ChevronRight, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
 import { featureDocs, features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
@@ -151,6 +151,7 @@ export default function HomePage() {
                     {feature.title}
                     {!feature.released && <span className="font-normal text-fd-muted-foreground"> · next release</span>}
                   </span>
+                  <ChevronRight size={16} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" />
                 </Link>
               </li>
             );
