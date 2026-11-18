@@ -60,3 +60,11 @@ test('docs first load defers search and sidebar prefetch', () => {
   assert.ok(rootLayout.includes('search={{ preload: false }}'));
   assert.ok(docsLayout.includes('sidebar={{ prefetch: false }}'));
 });
+
+test('the site says app.medusapos.com runs the latest build', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(!home.includes('the version you install today'), 'home: install-today framing');
+  assert.ok(home.includes("app.medusapos.com runs the app's latest build"), 'home: hosted build');
+  assert.ok(quickStart.includes("The hosted app at `https://app.medusapos.com` runs the app's latest build"), 'quick-start: hosted build');
+});
