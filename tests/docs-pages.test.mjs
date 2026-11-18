@@ -615,7 +615,7 @@ test('code blocks get a break point after each slash and before each member name
 test('Quick start walks through closing the register', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const close = qs.slice(qs.indexOf('At the end of the day'), qs.indexOf('You can keep selling from the loaded catalogue'));
-  assert.ok(close.includes('1. Tap the register\'s state, as when you opened it, then tap **Close register**.'), 'qs close: open the count');
+  assert.ok(close.includes('1. Tap the register\'s state, as when you opened it, to open its panel, then tap **Close register**. On a phone, **Close register** is in the cart view.'), 'qs close: open the count');
   assert.ok(close.includes('2. Tap the note and coin tiles, or type the cash in the drawer.'), 'qs close: count');
   assert.ok(close.includes('3. Tap **Close register** again. The closure is your Z report') && close.includes('**Print the Z report**') && close.includes('**Done**'), 'qs close: Z report');
   assert.equal(qs.split('The closure is your Z report').length, 2, 'qs close: Z report said once');
@@ -623,6 +623,8 @@ test('Quick start walks through closing the register', () => {
   for (const label of ['**Close register**', '**Print the Z report**', '**Done**', 'Tap the note and coin tiles, or type the cash in the drawer.']) {
     assert.ok(registers.includes(label), `qs close: ${label} matches Registers`);
   }
+  assert.ok(registers.includes('On a phone, this is in the cart view.'), 'qs close: Registers gives the same phone place');
+  assert.ok(close.includes('On a phone, **Close register** is in the cart view.'), 'qs close: phone place matches Registers');
 });
 
 test('the optional RBAC section offers a skip to Sign in', () => {
