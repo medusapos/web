@@ -195,7 +195,7 @@ test('configure your store names the admin paths', () => {
 
 test('plugin setup shows the redis locking example one property per line', () => {
   const ps = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
-  assert.ok(ps.includes("    providers: [{\n      resolve: '@medusajs/medusa/locking-redis',\n      id: 'locking-redis',\n      is_default: true,\n"), 'plugin-setup: provider one property per line');
+  assert.ok(ps.includes("      providers: [{\n        resolve: '@medusajs/medusa/locking-redis',\n        id: 'locking-redis',\n        is_default: true,\n"), 'plugin-setup: provider one property per line');
   assert.ok(ps.includes('        redisUrl: process.env.LOCKING_REDIS_URL,\n'), 'plugin-setup: redisUrl on its own line');
   assert.ok(!ps.includes("modules: [{ resolve:"), 'plugin-setup: no packed example');
   assert.ok(ps.includes("Set `LOCKING_REDIS_URL` in every instance's environment to the URL of the same Redis server."), 'plugin-setup: says to set LOCKING_REDIS_URL');
@@ -203,7 +203,7 @@ test('plugin setup shows the redis locking example one property per line', () =>
 
 test('plugin setup shows the postgres locking example', () => {
   const ps = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
-  assert.ok(ps.includes("    providers: [{\n      resolve: '@medusajs/medusa/locking-postgres',\n      id: 'locking-postgres',\n      is_default: true,\n    }],\n"), 'locking: postgres block');
+  assert.ok(ps.includes("      providers: [{\n        resolve: '@medusajs/medusa/locking-postgres',\n        id: 'locking-postgres',\n        is_default: true,\n      }],\n"), 'locking: postgres block');
   assert.ok(ps.includes('Then run `npx medusa db:migrate` to create its `locking` table.'), 'locking: postgres migration');
   assert.ok(!ps.includes('run the migration again'), 'locking: no vague migration line');
   assert.ok(ps.indexOf('locking-redis') < ps.indexOf("resolve: '@medusajs/medusa/locking-postgres'"), 'locking: postgres after redis');
@@ -580,6 +580,16 @@ test('Quick start shows the payment screen under its Checkout step', () => {
   assert.ok(sale.includes(shot), 'qs payment: indented image with the till page alt text');
   assert.ok(sale.indexOf(shot) > sale.indexOf('3. Tap **Checkout**') && sale.indexOf(shot) < sale.indexOf('4. For cash'), 'qs payment: under step 3');
   assert.equal(qs.split('till-payment.jpg').length, 2, 'qs payment: once');
+});
+
+test('Plugin setup adds locking to the existing modules array', () => {
+  const setup = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
+  const section = setup.slice(setup.indexOf('## If you run more than one Medusa instance'), setup.indexOf('## What a sale records'));
+  assert.ok(section.includes('For Redis, add this entry to the `modules` array in `medusa-config.ts`, keeping the modules already there, such as RBAC:'), 'locking: Redis sentence');
+  assert.ok(section.includes('add this entry to `modules` instead:'), 'locking: Postgres sentence');
+  assert.equal(section.split('modules: [\n  // ...the modules you already have, such as RBAC\n  {\n    resolve: \'@medusajs/medusa/locking\',').length, 3, 'locking: both blocks are one entry after the existing modules');
+  assert.ok(!section.includes('modules: [{'), 'locking: no bare modules array');
+  assert.ok(section.includes("resolve: '@medusajs/medusa/locking-redis'") && section.includes("resolve: '@medusajs/medusa/locking-postgres'"), 'locking: both providers kept');
 });
 
 test('code blocks get a break point after each slash', () => {
