@@ -188,7 +188,7 @@ test('configure your store names the admin paths', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const configure = qs.slice(qs.indexOf('## Configure your store'), qs.indexOf('5. Create (or reuse) a publishable API key'));
   assert.ok(/\*\*Settings → Locations & Shipping\*\*, open the location, and edit its\s+\*\*Sales Channels\*\* section\./.test(configure), 'quick-start: location path');
-  assert.ok(/click \*\*Create option\*\*\s+and choose the profile in the \*\*Shipping Profile\*\* field\./.test(configure), 'quick-start: shipping option path');
+  assert.ok(/[Cc]lick \*\*Create option\*\*\s+and choose the profile in the \*\*Shipping Profile\*\* field\./.test(configure), 'quick-start: shipping option path');
   assert.ok(/go to \*\*Settings → Tax\s+Regions\*\* and create a region for that country\./.test(configure), 'quick-start: tax path');
 });
 
@@ -259,7 +259,8 @@ test('home says the offline caveat once and the one-till limit first', () => {
 test('quick start says how to add a service zone', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const flat = qs.replace(/\s+/g, ' ');
-  assert.ok(flat.includes("add a service zone, the area the option serves: in that section's three-dot menu choose **Create service zone**, enter a **Name**, click **Manage areas**, check your shop's country and save. Then click **Create option** and choose the profile in the **Shipping Profile** field."), 'zone: steps');
+  assert.ok(flat.includes("2. Add a service zone, the area the option serves: in that section's three-dot menu choose **Create service zone**, enter a **Name**, click **Manage areas**, check your shop's country and save."), 'zone: steps');
+  assert.ok(flat.includes('3. Click **Create option** and choose the profile in the **Shipping Profile** field.'), 'zone: then the option');
   assert.ok(qs.includes('"Create Service Zone")'), 'zone: source cited');
 });
 
@@ -344,10 +345,20 @@ test('quick start sets up the sales region', () => {
   const start = qs.indexOf('4. Make sure a region covers');
   assert.ok(start > qs.indexOf('## Configure your store'), 'region: step 4');
   const step = qs.slice(start, qs.indexOf('5. Create (or reuse) a publishable API key')).replace(/\s+/g, ' ');
-  assert.ok(step.startsWith("4. Make sure a region covers the location's country, in the currency you sell in."), 'region: step');
+  assert.ok(step.startsWith("4. Make sure a region covers the location's country, in the currency you sell in:"), 'region: step');
   assert.ok(step.includes('go to **Settings → Regions**; if no region lists that country, click **Create**, choose the **Currency** and add the country under **Countries**.'), 'region: admin path');
   assert.ok(step.includes("so give each product you'll sell in person a price in its currency."), 'region: prices');
   assert.ok(step.indexOf('**Settings → Regions**') < step.indexOf('**Settings → Tax Regions**'), 'region: before tax');
   assert.ok(!/inventory|stock level/i.test(step), 'region: no inventory claim');
   assert.ok(qs.includes('/user-guide/settings/regions ("Create", "Currency", "Countries")') && qs.includes('docs/testers.md (Set up this till'), 'region: sources cited');
+});
+
+test('the quick start splits steps 3 and 4 into substeps', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const three = qs.slice(qs.indexOf('3. Create a shipping option'), qs.indexOf('4. Make sure a region covers'));
+  assert.ok(three.includes("On the location's page:\n   1. Enable **Pickup** (or **Shipping**).\n   2. Add a service zone"), 'substeps: step 3 opens its list');
+  assert.ok(three.includes('\n   3. Click **Create option**'), 'substeps: step 3 ends with the option');
+  const four = qs.slice(qs.indexOf('4. Make sure a region covers'), qs.indexOf('5. Create (or reuse) a publishable API key'));
+  assert.ok(four.includes('sell in:\n   1. In the Medusa admin, go to **Settings → Regions**'), 'substeps: step 4 opens its list');
+  assert.ok(four.includes('\n   3. Tax is set up separately: go to **Settings → Tax Regions**'), 'substeps: step 4 ends with tax');
 });
