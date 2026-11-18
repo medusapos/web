@@ -172,7 +172,7 @@ test('the site says app.medusapos.com runs the latest build', () => {
 
 test('the changelog dates the 0.1.0 catalogue fix line', () => {
   const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
-  assert.ok(changelog.includes('Site note, November 2026: the 0.2.0 release notes list no fix for the large-catalogue sync.'), 'changelog: site note');
+  assert.ok(changelog.includes('**Site note**, November 2026: the 0.2.0 release notes list no fix for the large-catalogue sync.'), 'changelog: site note');
 });
 
 test('the quick start says the till shows only the channel\'s products', () => {
@@ -510,4 +510,12 @@ test('the docs layout drops the shared Docs link', () => {
   assert.ok(layout.includes('{...base} links={links}'), 'docs layout: filtered links win over the shared ones');
   const shared = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
   assert.ok(shared.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'docs layout: home header keeps Docs');
+});
+
+test('the changelog says its entries are edited and marks the site notes', () => {
+  const changelog = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  assert.ok(changelog.includes('Each entry follows the release note published with that version on [GitHub](https://github.com/medusapos/app/releases), edited for this site. Notes the site added start with **Site note**.'), 'changelog intro: edited');
+  assert.ok(!changelog.includes('Each entry is the release note'), 'changelog intro: old wording gone');
+  const pay = changelog.slice(changelog.indexOf('### The pay screen in 0.2.0'), changelog.indexOf("### What's new for your store"));
+  assert.ok(/\n\*\*Site note:\*\* if you run 0\.2\.0 from its tag/.test(pay), 'changelog intro: pay screen is a site note');
 });
