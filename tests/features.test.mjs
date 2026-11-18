@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { features } from '../lib/features.ts';
+import { existsSync, readFileSync } from 'node:fs';
+import { features, featureDocs } from '../lib/features.ts';
 import { siteConfig } from '../lib/site.ts';
 
 test('every feature cites at least one app test', () => {
@@ -76,4 +76,25 @@ test('the Sells offline card says to keep the tab open', () => {
   const card = features.find((feature) => feature.title === 'Sells offline');
   assert.ok(card.description.startsWith("Keep selling from the loaded catalogue when the connection drops, as long as the tab stays open: reloading while offline doesn't work yet. "), 'offline: tab caveat');
   assert.equal(features[0], card, 'offline: still first');
+});
+
+test('on a phone the other home cards link to their docs', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(source.includes('<ul className="mt-4 grid grid-cols-2 gap-2 sm:hidden">'), 'phone list: two columns below sm');
+  assert.ok(source.includes('<div className="mt-4 hidden gap-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">'), 'phone list: cards from sm up');
+  assert.ok(source.indexOf('sm:hidden">') < source.indexOf('hidden gap-3 sm:grid'), 'phone list: before the cards');
+  assert.ok(source.includes('className="flex h-full min-h-12 items-center'), 'phone list: tiles fill their row');
+  for (const feature of features.slice(3)) {
+    const href = featureDocs[feature.title];
+    assert.ok(href, `phone list: ${feature.title} has a docs link`);
+    const [path, anchor] = href.split('#');
+    const file = new URL(`../content/docs/${path.replace('/docs/', '')}.mdx`, import.meta.url);
+    assert.ok(existsSync(file), `phone list: ${href} page exists`);
+    if (anchor) {
+      const headings = readFileSync(file, 'utf8').split('\n').filter((line) => line.startsWith('## '));
+      const slugs = headings.map((line) => line.slice(3).toLowerCase().replace(/[^a-z0-9 -]/g, '').trim().replace(/ +/g, '-'));
+      assert.ok(slugs.includes(anchor), `phone list: ${href} heading exists`);
+    }
+  }
+  assert.equal(Object.keys(featureDocs).length, features.length - 3, 'phone list: no stale entries');
 });

@@ -2,7 +2,7 @@ import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Banknote, Calculator, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
-import { features, type FeatureIcon } from '@/lib/features';
+import { featureDocs, features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
@@ -139,7 +139,24 @@ export default function HomePage() {
           })}
         </div>
         <p className="mt-10 font-semibold">Also at the till</p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+        {/* Below 640 px the other cards are a two-column list of links to their docs, so the phone page doesn't stack nine full cards. */}
+        <ul className="mt-4 grid grid-cols-2 gap-2 sm:hidden">
+          {more.map((feature, i) => {
+            const Icon = icons[feature.icon];
+            return (
+              <li key={feature.title} className={spanLast && i === more.length - 1 ? 'col-span-2' : undefined}>
+                <Link href={featureDocs[feature.title]} className="flex h-full min-h-12 items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-3 py-2 text-sm font-medium">
+                  <Icon size={16} className="shrink-0 text-fd-muted-foreground" />
+                  <span>
+                    {feature.title}
+                    {!feature.released && <span className="font-normal text-fd-muted-foreground"> · next release</span>}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="mt-4 hidden gap-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {more.map((feature, i) => {
             const Icon = icons[feature.icon];
             return (
