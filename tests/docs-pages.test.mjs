@@ -362,3 +362,12 @@ test('the quick start splits steps 3 and 4 into substeps', () => {
   assert.ok(four.includes('sell in:\n   1. In the Medusa admin, go to **Settings → Regions**'), 'substeps: step 4 opens its list');
   assert.ok(four.includes('\n   3. Tax is set up separately: go to **Settings → Tax Regions**'), 'substeps: step 4 ends with tax');
 });
+
+test('plugin setup links to the update precautions', () => {
+  const setup = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
+  assert.ok(setup.includes('Updating from 0.1.0? First read [Updating to 0.2.0](/docs/troubleshooting#updating-to-020): every till must send all its sales before you update.'), 'update: link first');
+  assert.ok(setup.includes('Then run the same install and migration, and restart the backend.'), 'update: then install');
+  const trouble = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  assert.ok(trouble.includes('\n## Updating to 0.2.0\n'), 'update: target heading');
+  assert.ok(trouble.includes('Before updating, make sure every till has sent all its sales'), 'update: target says so');
+});
