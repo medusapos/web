@@ -395,6 +395,15 @@ test('quick start gives the sale as numbered steps', () => {
   assert.ok(sale.includes('[Take a sale](/docs/at-the-till#take-a-sale) has more on each step.'), 'sale steps: link kept');
 });
 
+test("the 2.21.0 requirement links Medusa's update guide", () => {
+  const guide = "To move up from an older version, follow Medusa's [Updating Medusa](https://docs.medusajs.com/learn/update) guide.";
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const need = qs.slice(qs.indexOf('## What you need'), qs.indexOf('## Install the plugin')).replace(/\s+/g, ' ');
+  assert.ok(need.includes(`move the store to 2.21.0 first. ${guide}`), 'update: quick start');
+  const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
+  assert.ok(lim.includes(`so move a store on another version to 2.21.0 first. ${guide}`), 'update: limitations');
+});
+
 test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there yet', () => {
   const [lim, trouble, home] = ['../content/docs/limitations.mdx', '../content/docs/troubleshooting.mdx', '../app/(home)/page.tsx'].map((p) => readFileSync(new URL(p, import.meta.url), 'utf8'));
   const item = "- The store refuses a batch of more than 50 sales, or one over the size limit, whole. The till can't split it and resend it in smaller pieces yet.";
