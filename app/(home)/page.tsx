@@ -92,10 +92,10 @@ export default function HomePage() {
               <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
             </picture>
           </div>
-          {/* Order note: medusapos/app #286; Checkout button: #299. Both after the v0.2.0 tag. Update or remove when the release moves past 0.2.0. */}
+          {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
-            <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build.</span>
-            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build. The order note and the Checkout button come after release 0.2.0.</span>
+            <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
+            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
           </figcaption>
         </figure>
       </section>
@@ -105,7 +105,7 @@ export default function HomePage() {
         {/* Hosted build: medusapos/app@781cd94 docs/adr/0005-web-hosting-vercel.md ("Every push to main deploys to production"), apps/expo/vercel.json (app and demo, one deployment); plugin 0.2.3 fallback: apps/expo/components/register.tsx:146. */}
         <p className="mt-4 text-fd-muted-foreground">
           {allReleased
-            ? `Everything listed here is in release ${siteConfig.release}. app.medusapos.com runs the app's latest build, the same as the live demo, which has all of it and works with plugin 0.2.3, the version you install. Each feature is covered by the app's automated tests, which run on every change.`
+            ? 'Everything below works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store. Each feature is covered by the app\'s automated tests, which run on every change.'
             : `Everything listed here is covered by the app's automated tests, which run on every change.`}
         </p>
         <p className="mt-3 text-sm sm:hidden">
@@ -184,6 +184,8 @@ export default function HomePage() {
           <li>charge cards, or handle refunds and returns</li>
           <li>apply Medusa promotions or coupon codes (discounts are typed at the till)</li>
           <li>take tips, email receipts or show sales reports</li>
+          {/* Order note: content/docs/limitations.mdx line 17 (sources) and line 23. */}
+          <li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box, but the note doesn&apos;t reach the order</li>
           <li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>
           <li>sign in with multi-factor authentication</li>
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
