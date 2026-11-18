@@ -234,6 +234,8 @@ test('docs show the payment screen, the count and the Z report', () => {
   assert.ok(!reg.includes('open card'), 'registers: no open card');
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
   assert.ok(mdx.includes('mx-auto w-full max-w-sm border border-fd-border'), 'mdx: framed, narrow screenshots');
+  assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: (props) => <ImageZoom'), 'mdx: screenshots zoom');
+  assert.ok(mdx.includes('border border-fd-border lg:max-w-md'), 'mdx: wider on desktop');
 });
 
 test('the quick start says to count and close the register', () => {
