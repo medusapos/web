@@ -581,3 +581,13 @@ test('Quick start shows the payment screen under its Checkout step', () => {
   assert.ok(sale.indexOf(shot) > sale.indexOf('3. Tap **Checkout**') && sale.indexOf(shot) < sale.indexOf('4. For cash'), 'qs payment: under step 3');
   assert.equal(qs.split('till-payment.jpg').length, 2, 'qs payment: once');
 });
+
+test('code blocks get a break point after each slash', () => {
+  const config = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
+  assert.ok(config.includes("const parts = child.value.split(/(?<=\\/)(?!\\/)/);"), 'code wrap: split after a slash not followed by a slash');
+  assert.ok(config.includes("tagName: 'wbr'"), 'code wrap: wbr element');
+  const hook = config.slice(config.indexOf("name: 'medusapos:wrap-indent'"));
+  assert.ok(hook.includes('breakAfterSlashes(node'), 'code wrap: called from the line hook');
+  const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
+  assert.ok(css.includes('overflow-wrap: anywhere;'), 'code wrap: anywhere stays as the fallback');
+});
