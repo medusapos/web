@@ -102,9 +102,10 @@ export default function HomePage() {
 
       <section className="py-12 sm:py-16">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What it does today</h2>
+        {/* Hosted build: medusapos/app@781cd94 docs/adr/0005-web-hosting-vercel.md ("Every push to main deploys to production"), apps/expo/vercel.json (app and demo, one deployment); plugin 0.2.3 fallback: apps/expo/components/register.tsx:146. */}
         <p className="mt-4 text-fd-muted-foreground">
           {allReleased
-            ? `Everything listed here is in release ${siteConfig.release}, the version you install today, and is covered by the app's automated tests, which run on every change.`
+            ? `Everything listed here is in release ${siteConfig.release}. app.medusapos.com runs the app's latest build, the same as the live demo, which has all of it and works with plugin 0.2.3, the version you install. Each feature is covered by the app's automated tests, which run on every change.`
             : `Everything listed here is covered by the app's automated tests, which run on every change.`}
         </p>
         <p className="mt-3 text-sm sm:hidden">
@@ -131,7 +132,7 @@ export default function HomePage() {
         <section className="py-12 sm:py-16">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">{`Live demo and release ${siteConfig.release}`}</h2>
           <p className="mt-4 text-fd-muted-foreground">
-            {`The live demo runs the app's latest build. Release ${siteConfig.release} is the version you install in your store today.`}
+            {`The live demo and app.medusapos.com run the app's latest build. Release ${siteConfig.release} is the latest tagged version.`}
           </p>
           <div className="mt-8 overflow-x-auto">
             <table className="w-full text-left text-sm">
