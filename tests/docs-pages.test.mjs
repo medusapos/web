@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+test('the pay steps follow the hosted app\'s Checkout', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(till.includes('2. Tap **Checkout**. The payment screen opens on **Cash**'), 'at-the-till: Checkout step');
+  assert.ok(till.includes('in place of **Checkout**, and a card sale ends with **Payment approved on terminal**'), 'at-the-till: 0.2.0 note');
+  assert.ok(!till.includes('2. Choose **Cash** or **Card terminal**'), 'at-the-till: old step');
+  assert.ok(quickStart.includes('Tap **Checkout**, choose **Cash** or **Card terminal**'), 'quick-start: Checkout');
+  assert.ok(till.includes('Its totals and the **Checkout** button stay in view.'), 'at-the-till: phone Checkout');
+  assert.ok(till.includes('On the payment screen, key in part of the total on one tile and tap **Take**'), 'at-the-till: implicit split');
+});
+
 test('docs sidebar lists the store-owner pages in order', () => {
   const meta = JSON.parse(readFileSync(new URL('../content/docs/meta.json', import.meta.url), 'utf8'));
   assert.deepEqual(meta.pages, [

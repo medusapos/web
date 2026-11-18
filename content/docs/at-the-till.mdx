@@ -18,10 +18,15 @@ Give the till a name in **Settings**. Another till that finds the register open 
 
 ## Take a sale
 
+{/* Pay flow: medusapos/app@bcd2047 e2e/helpers.ts lines 154-185 (startTender: the current build's Checkout, then the Cash / Card terminal tiles; the v0.2.0 build's Cash and Card terminal buttons and "Payment approved on terminal"), #299, #335, docs/v2-parity/DEMO-PARITY.md row 06a. */}
+
 1. [Open your register](/docs/registers), then scan a barcode or search for a product. Add items and check the quantities.
-2. Choose **Cash** or **Card terminal**. For a card sale, take the payment on your separate terminal; the POS records that external payment.
-3. Tap **Complete sale**, then view the receipt and print it if needed.
-4. Tap **New sale** to start the next one.
+2. Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal** for a card sale.
+3. For cash, key in the amount handed over or tap **Exact**, then tap **Take**. For a card sale, take the payment on your separate terminal, tap **Take** and enter the terminal's reference; the POS records that external payment.
+4. Tap **Complete sale**, then view the receipt and print it if needed.
+5. Tap **New sale** to start the next one.
+
+If you run release 0.2.0 from its tag instead of the hosted app, the cart has **Cash** and **Card terminal** buttons in place of **Checkout**, and a card sale ends with **Payment approved on terminal**.
 
 ## Scan a barcode
 
@@ -57,13 +62,15 @@ Subtotal is every line before its own discount. Discount is every discount toget
 
 Below 600 px wide, the till uses one full-height view. **Products** has a cart bar pinned to the bottom, such as **Cart · 2 items €5.00 ›**. Tap it to open the cart. Adding a product keeps you on **Products**.
 
-The cart has **‹ Products** at the top. Its totals and **Cash** / **Card terminal** buttons stay in view.
+The cart has **‹ Products** at the top. Its totals and the **Checkout** button stay in view. Checkout opens **Checkout Order**; its **✕** returns to the cart.
 
 ## Split payment
 
-Choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
+{/* Split: medusapos/app@bcd2047 #299 (pane tiles replace the Split payment toggle), docs/v2-parity/DEMO-PARITY.md row 06c (implicit split, ledger with Cancel payment). */}
 
-Change comes from the cash part only. A card part is capped at the balance due. Removing a part restores the balance. Complete the sale; the receipt lists the card terminal amount, cash tendered and change. The Medusa order records both payments.
+On the payment screen, key in part of the total on one tile and tap **Take**, for example a card part on **Card terminal**. The payment is listed with **Cancel payment**, and the screen shows what remains. Take the rest the same way on either tile, then tap **Complete sale**. Change comes from cash only. The receipt lists each payment, and the Medusa order records them all.
+
+In release 0.2.0 from its tag, choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
 
 ## Customers
 
