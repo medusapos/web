@@ -94,7 +94,8 @@ export default function HomePage() {
           </div>
           {/* Order note: medusapos/app #286; Checkout button: #299. Both after the v0.2.0 tag. Update or remove when the release moves past 0.2.0. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
-            From the live demo, which runs the app&apos;s latest build. The order note and the Checkout button come after release 0.2.0.
+            <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build.</span>
+            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build. The order note and the Checkout button come after release 0.2.0.</span>
           </figcaption>
         </figure>
       </section>
