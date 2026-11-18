@@ -71,7 +71,7 @@ test('the pay steps follow the hosted app\'s Checkout', () => {
   assert.ok(changelog.includes('choose **Cash**, then **Split payment**'), 'changelog: 0.2.0 split note');
   assert.ok(!/from its tag|changelog#the-pay-screen-in-020/.test(till), 'at-the-till: no 0.2.0 tag note');
   assert.ok(!till.includes('2. Choose **Cash** or **Card terminal**'), 'at-the-till: old step');
-  assert.ok(quickStart.includes('Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal**\nfor a card sale.'), 'quick-start: Checkout');
+  assert.ok(quickStart.includes('3. Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal** for a card sale.'), 'quick-start: Checkout');
   assert.ok(till.includes('The payment screen opens on **Cash**; tap **Card terminal** for a card sale.') && !quickStart.includes('and choose **Cash** or **Card terminal**'), 'quick-start: same wording as at the till');
   assert.ok(till.includes('Its totals and the **Checkout** button stay in view.'), 'at-the-till: phone Checkout');
   assert.ok(till.includes('On the payment screen, key in part of the total on one tile and tap **Take**'), 'at-the-till: implicit split');
@@ -380,4 +380,15 @@ test('registers says what the last closure shows for sales not yet sent', () => 
   assert.ok(close.includes('register-close.tsx:205-206'), 'unsynced: source cited');
   const trouble = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
   assert.ok(trouble.includes('\n## Check sync status\n'), 'unsynced: link target');
+});
+
+test('quick start gives the sale as numbered steps', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('At the end of the day'));
+  const steps = sale.split('\n').filter((line) => /^\d\. /.test(line));
+  assert.equal(steps.length, 5, 'sale steps: five');
+  assert.ok(steps.every((line, i) => line.startsWith(`${i + 1}. `)), 'sale steps: in order');
+  assert.ok(steps[0].startsWith("1. Under the header, tap the register's state, then choose **Register 1**"), 'sale steps: where to tap');
+  assert.ok(steps[2].startsWith('3. Tap **Checkout**.') && steps[4].startsWith('5. Tap **Complete sale**'), 'sale steps: checkout then complete');
+  assert.ok(sale.includes('[Take a sale](/docs/at-the-till#take-a-sale) has more on each step.'), 'sale steps: link kept');
 });
