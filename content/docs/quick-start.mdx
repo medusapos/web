@@ -64,7 +64,7 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
 
 ## Configure your store
 
-{/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options", "Create Service Zone") and /user-guide/settings/tax-regions, read 2026-11-18. */}
+{/* Admin paths: Medusa user guide, docs.medusajs.com/user-guide/settings/locations-and-shipping (and /locations: "Change Associated Sales Channels", "Create Shipping Options", "Create Service Zone"), /user-guide/settings/regions ("Create", "Currency", "Countries") and /user-guide/settings/tax-regions, read 2026-11-18. Region prices: medusapos/app@bc4570a docs/testers.md (Set up this till: "Prices shown are Medusa's own calculated prices for your chosen region"). */}
 
 1. Add the POS origin `https://app.medusapos.com` to both `ADMIN_CORS` and
    `AUTH_CORS`, keeping existing origins. Write it exactly like that, without
@@ -84,7 +84,12 @@ first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-i
    **Name**, click **Manage areas**, check your shop's country and save.
    Then click **Create option**
    and choose the profile in the **Shipping Profile** field.
-4. Configure tax rates for the location's country: go to **Settings → Tax
+4. Make sure a region covers the location's country, in the currency you
+   sell in. In the Medusa admin, go to **Settings → Regions**; if no region
+   lists that country, click **Create**, choose the **Currency** and add the
+   country under **Countries**. Prices at the till come from that region,
+   so give each product you'll sell in person a price in its currency. Tax
+   is set up separately: go to **Settings → Tax
    Regions** and create a region for that country. Prices include or exclude
    tax according to your currency's price preference in Medusa.
 5. Create (or reuse) a publishable API key linked to your sales channel: in
