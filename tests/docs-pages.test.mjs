@@ -45,7 +45,7 @@ test('the pay steps follow the hosted app\'s Checkout', () => {
   assert.ok(changelog.includes('choose **Cash**, then **Split payment**'), 'changelog: 0.2.0 split note');
   assert.ok(!/from its tag|changelog#the-pay-screen-in-020/.test(till), 'at-the-till: no 0.2.0 tag note');
   assert.ok(!till.includes('2. Choose **Cash** or **Card terminal**'), 'at-the-till: old step');
-  assert.ok(quickStart.includes('Tap **Checkout**, choose **Cash** or **Card terminal**'), 'quick-start: Checkout');
+  assert.ok(quickStart.includes('Tap **Checkout** and choose **Cash** or **Card terminal**'), 'quick-start: Checkout');
   assert.ok(till.includes('Its totals and the **Checkout** button stay in view.'), 'at-the-till: phone Checkout');
   assert.ok(till.includes('On the payment screen, key in part of the total on one tile and tap **Take**'), 'at-the-till: implicit split');
 });
@@ -189,4 +189,13 @@ test('home says the offline caveat once and the one-till limit first', () => {
   assert.ok(home.includes('<li>reload or reopen while offline: keep the tab open until you&apos;re back online</li>'), 'home: offline caveat in Not there yet');
   assert.ok(home.includes('<li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>'), 'home: registers bullet says one till');
   assert.ok(home.indexOf('<li>add or rename registers') < home.indexOf('<li>charge cards'), 'home: one-till limit first');
+});
+
+test('quick start names the take step', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('At the end of the day'));
+  assert.ok(/key in\s+the amount handed over or tap \*\*Exact\*\*, then tap \*\*Take\*\*\./.test(sale), 'quick-start: cash take step');
+  assert.ok(/tap \*\*Take\*\* and enter\s+the terminal's reference/.test(sale), 'quick-start: card take step');
+  assert.ok(!sale.includes('take the payment,\nthen tap'), 'quick-start: no vague take the payment');
+  assert.ok(sale.indexOf('**Take**') < sale.indexOf('**Complete sale**'), 'quick-start: take before complete');
 });
