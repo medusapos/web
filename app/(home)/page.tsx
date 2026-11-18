@@ -75,7 +75,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            The demo store resets every night. The web app needs a store on Medusa 2.21.0 exactly, with the MedusaPOS plugin installed. Installing the plugin is a one-time job for whoever runs your Medusa backend.
+            The demo store resets every night. The web app needs a store on Medusa 2.21.0 exactly, with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.
           </p>
           <p className="mt-1 text-sm text-fd-muted-foreground">
             Already installed? Staff start at{' '}
