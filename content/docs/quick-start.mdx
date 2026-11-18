@@ -2,6 +2,7 @@
 title: Quick start
 description: Install the plugin, configure your Medusa store, and make your first sale.
 ---
+{/* Plugin install: npm @medusapos/medusa-plugin@0.2.3 is byte-identical to medusapos/app v0.2.0 release asset medusapos-medusa-plugin-0.2.3.tgz (sha1 db41b1ba), checked 2026-11-18. */}
 
 **Install the plugin** and **Configure your store** are a one-time job for whoever runs your Medusa backend. After that, you and your staff start at [Sign in](#sign-in), then [At the till](/docs/at-the-till) and [Registers](/docs/registers).
 
@@ -27,10 +28,10 @@ MedusaPOS is a browser point of sale for your Medusa store. It takes cash and re
 In your Medusa store's directory, run:
 
 ```sh
-npm install https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz
+npm install @medusapos/medusa-plugin@0.2.3
 ```
 
-Release 0.2.0 needs version 0.2.3 of the Medusa plugin, attached to that release, so the file name says 0.2.3.
+Release 0.2.0 needs version 0.2.3 of the Medusa plugin, so the command names 0.2.3.
 
 Add this entry to the `plugins` list in `medusa-config.ts`, keeping any existing
 plugins:

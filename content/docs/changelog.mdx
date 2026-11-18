@@ -10,7 +10,7 @@ Each entry is the release note published with that version on [GitHub](https://g
 [Release on GitHub](https://github.com/medusapos/app/releases/tag/v0.2.0)
 
 
-The second tester release of MedusaPOS, the browser point of sale for a Medusa store. Take part of a sale by card and the rest in cash, and attach a customer to a sale so the Medusa order is theirs. It needs the Medusa plugin 0.2.3, attached to this release, and Medusa 2.21.0.
+The second tester release of MedusaPOS, the browser point of sale for a Medusa store. Take part of a sale by card and the rest in cash, and attach a customer to a sale so the Medusa order is theirs. It needs the Medusa plugin 0.2.3 and Medusa 2.21.0.
 
 ### Before you update your tills
 
@@ -50,18 +50,16 @@ Update the plugin first (see [Update the plugin](#update-the-plugin)), then the 
 
 ### Update the plugin
 
-App 0.2.0 needs plugin 0.2.3 and its database migrations. RBAC is optional: plugin 0.2.3 is needed either way, because it is the only released plugin with the register take-over this app uses, and it adds the POS roles for stores that turn RBAC on.
+App 0.2.0 needs plugin 0.2.3 and its database migrations. RBAC is optional: plugin 0.2.3 is needed either way, because it has the register take-over this app uses, and it adds the POS roles for stores that turn RBAC on.
 
 In your Medusa store's directory:
 
 ```sh
-npm install https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz
+npm install @medusapos/medusa-plugin@0.2.3
 npx medusa db:migrate
 ```
 
 Then restart the backend. The plugin needs Medusa 2.21.0. If you already registered `@medusapos/medusa-plugin` in `medusa-config.ts` for 0.1.0, leave that entry as it is. New installs follow the [quick start](/docs/quick-start).
-
-The 0.1.0 notes said this release would put the plugin on npm. It doesn't: you still install it from the GitHub release, as above. Publishing to npm is tracked in #235; after that you'll install it by name, `npm install @medusapos/medusa-plugin`.
 
 ### Known limits
 
@@ -133,8 +131,6 @@ npm install https://github.com/medusapos/app/releases/download/v0.1.0/medusapos-
 ```
 
 Then register `@medusapos/medusa-plugin` in `medusa-config.ts`, run `npx medusa db:migrate`, and restart the backend. The [0.1.0 quick start](https://github.com/medusapos/app/blob/v0.1.0/docs/QUICKSTART.md) covered plugin options, CORS, stock, shipping, tax and signing in; the current one is [Quick start](/docs/quick-start).
-
-The tarball is a stopgap for this release. From the next release, the plugin is published to npm, and you'll install it by name: `npm install @medusapos/medusa-plugin`. That didn't happen in 0.2.0; see [Update the plugin](#update-the-plugin).
 
 ### Known limits
 

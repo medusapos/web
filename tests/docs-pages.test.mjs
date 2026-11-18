@@ -30,10 +30,11 @@ test('till features are task sections, not release sections', () => {
   for (const [name, source] of [['at-the-till', till], ['registers', registers], ['limitations', limitations]]) {
     assert.ok(!/New in 0\.2\.0/.test(source), name);
   }
-  const tarballUrl = 'https://github.com/medusapos/app/releases/download/v0.2.0/medusapos-medusa-plugin-0.2.3.tgz';
+  const npmInstall = 'npm install @medusapos/medusa-plugin@0.2.3';
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const pluginSetup = readFileSync(new URL('../content/docs/plugin-setup.mdx', import.meta.url), 'utf8');
-  assert.ok(quickStart.includes(tarballUrl), 'quick-start.mdx');
+  assert.ok(quickStart.includes(npmInstall), 'quick-start.mdx');
+  assert.ok(!quickStart.includes('releases/download'), 'quick-start.mdx tarball');
   assert.ok(pluginSetup.includes('[Install the plugin](/docs/quick-start#install-the-plugin)'), 'plugin-setup.mdx');
   for (const [name, source] of [['quick-start.mdx', quickStart], ['plugin-setup.mdx', pluginSetup]]) {
     assert.ok(!source.includes('v0.1.0/medusapos-medusa-plugin-0.1.0.tgz'), name);
