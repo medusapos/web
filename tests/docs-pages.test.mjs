@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+test('registers says what a till and a register are', () => {
+  const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  const where = registers.slice(registers.indexOf('## Where registers come from'), registers.indexOf('## Open with your float'));
+  assert.ok(where.includes('A till is a device running MedusaPOS, such as a counter screen or a phone.'), 'registers: till');
+  assert.ok(where.includes('A register is the cash drawer and its record: a till opens it with a float, records cash in and out, then counts and closes it.'), 'registers: register');
+  assert.ok(where.indexOf('A till is a device') < where.indexOf("You don't create registers."), 'registers: definitions first');
+});
+
 test('take over says how to account for the old till\'s cash', () => {
   const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(registers.includes('Count the drawer by hand to account for that session\'s cash. Its sales are orders in Medusa Admin, under **Orders**; a sale the old till never sent isn\'t there.'), 'registers: take-over cash');
