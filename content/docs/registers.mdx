@@ -57,6 +57,12 @@ If the till stopped in the middle of a close, the register shows **Close not fin
 
 Tap **Finish closing** to complete the close with the count you already entered.
 
+## Move the register to another till
+
+{/* Source: medusapos/app@7cc76cf docs/adr/0022-register-v2.md line 8 (an open session refuses every other till's open). */}
+
+To move the register from the counter to a phone, or back, close it on the till that holds it, then open it on the other till with a new float. Each close gives its session a Z report. Use **Take over** only when the till that holds the register is lost, broken or replaced.
+
 ## Take over a register
 
 If a register was left open on a till that's lost, broken or replaced, another till can take it over. It shows which till holds the register, and **Take over** moves the register to this till. The old till's register commands are then refused, and it shows the register closed.
