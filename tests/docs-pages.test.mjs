@@ -397,11 +397,12 @@ test('quick start gives the sale as numbered steps', () => {
 
 test("the 2.21.0 requirement links Medusa's update guide", () => {
   const guide = "To move up from an older version, follow Medusa's [Updating Medusa](https://docs.medusajs.com/learn/update) guide.";
+  const next = 'To ask for support for your version, [send feedback](/docs/troubleshooting#report-a-problem).';
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const need = qs.slice(qs.indexOf('## What you need'), qs.indexOf('## Install the plugin')).replace(/\s+/g, ' ');
-  assert.ok(need.includes(`directory. ${guide} A store already on a newer version can't use plugin 0.2.3.`), 'update: quick start');
+  assert.ok(need.includes(`directory. ${guide} A store already on a newer version can't use plugin 0.2.3. ${next}`), 'update: quick start');
   const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
-  assert.ok(lim.includes(`and \`@medusajs/framework\`. ${guide} A store already on a newer version can't use plugin 0.2.3.`), 'update: limitations');
+  assert.ok(lim.includes(`and \`@medusajs/framework\`. ${guide} A store already on a newer version can't use plugin 0.2.3. ${next}`), 'update: limitations');
   assert.ok([qs, lim].every((t) => !t.includes('move the store to 2.21.0 first') && !t.includes('move a store on another version')), 'newer: no move-down advice');
 });
 
