@@ -649,6 +649,8 @@ test('the phone header shows a Docs link on the home and 404 pages', () => {
   const shared = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
   assert.ok(shared.includes('export function homeOptions(): BaseLayoutProps'), 'phone docs: helper');
   assert.ok(/href="\/docs"\s+className="sm:hidden inline-flex min-h-11 items-center/.test(shared), 'phone docs: phone only, 44 px tall');
+  assert.ok(/href=\{siteConfig\.demoUrl\}\s+target="_blank"\s+rel="noreferrer noopener"\s+className="sm:hidden inline-flex min-h-11 items-center/.test(shared), 'phone demo: phone only, 44 px tall, new tab');
+  assert.ok(shared.indexOf('>\n            Docs\n') < shared.indexOf('Live demo\n'), 'phone demo: after Docs');
   assert.ok(shared.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'phone docs: nav link kept');
   for (const file of ['../app/(home)/layout.tsx', '../app/not-found.tsx']) {
     const src = readFileSync(new URL(file, import.meta.url), 'utf8');
