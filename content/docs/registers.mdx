@@ -53,9 +53,11 @@ Between sessions, **Register ›** shows the last closure's figures.
 
 ## Get manager approval
 
-If the cash is more than €5.00 over or short, closing needs a manager's approval. In other currencies the limit is 500 of the currency's smallest unit, such as 500 cents, and you can't change it yet.
+{/* Who can approve: medusapos/app@9ee493a apps/expo/components/register.tsx:160 (store-verified approval only at register contract 3, plugin 0.3.0, #254) and apps/expo/lib/approval.ts requestApproval (sign-in, then /admin/users/me, no role check). */}
 
-An admin of your Medusa store signs in with their email and password in the **Manager approval** box. This doesn't sign you out. If you are on your own, approve with your own login.
+If the cash is more than €5.00 over or short, closing needs approval from an admin of your Medusa store. In other currencies the limit is 500 of the currency's smallest unit, such as 500 cents, and you can't change it yet.
+
+An admin of your Medusa store signs in with their email and password in the **Manager approval** box. This doesn't sign you out. If you are on your own, approve with your own login. With plugin 0.2.3 the till checks the email and password, not the user's role, so any login for your store can approve, including the cashier's own.
 
 The closure then shows **Approved by** and their name.
 

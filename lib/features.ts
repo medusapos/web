@@ -36,7 +36,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'calculator',
     title: 'Registers',
-    description: "Open with a float, record cash paid in and out, then count and close. A large difference needs a manager's approval.",
+    description: "Open with a float, record cash paid in and out, then count and close. A large difference needs a store admin to sign in and approve it.",
     tests: ['e2e/register.spec.ts'],
     released: true,
   },
