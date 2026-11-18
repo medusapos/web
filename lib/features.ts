@@ -50,8 +50,8 @@ export const features: readonly Feature[] = [
   // One register: content/docs/registers.mdx lines 19 and 64; medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8.
   {
     icon: 'smartphone',
-    title: 'Phone and counter',
-    description: 'The same app works on a counter screen and on a phone, with the cart a tap away. Every store has one register, so one device at a time takes payment.',
+    title: 'Counter or phone',
+    description: 'Every store has one register, so one device at a time takes payment. The same app works on a counter screen and on a phone, with the cart a tap away.',
     tests: ['e2e/phone-cart.spec.ts'],
     released: true,
   },
