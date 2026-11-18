@@ -2,6 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+test('quick start says how to check the Medusa version', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const need = qs.slice(qs.indexOf('## What you need'), qs.indexOf('## Install the plugin'));
+  const flat = need.replace(/\s+/g, ' ');
+  assert.ok(flat.includes('and access to its configuration. To check, run `npm ls @medusajs/medusa` in your backend\'s directory; on another version, move the store to 2.21.0 first.'), 'quick-start: version check');
+});
+
 test('home shows the phone screenshot at 320 px', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">'), 'home: phone section on the content edges, 320 px column');
