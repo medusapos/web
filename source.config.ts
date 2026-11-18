@@ -19,17 +19,18 @@ export const docs = defineDocs({
 
 type HastNode = { type: string; value?: string; tagName?: string; properties?: Record<string, unknown>; children?: HastNode[] };
 
-// A <wbr> after each '/' that isn't followed by another '/', so a long path
-// (a node_modules script) wraps between folders on a phone instead of
+// A <wbr> after each '/' that isn't followed by another '/', and after each
+// '.' that starts a name (process.env.LOCKING_REDIS_URL), so a long path or
+// member chain wraps between folders or members on a phone instead of
 // mid-word. <wbr> adds no text: the copy button copies the code unchanged.
-function breakAfterSlashes(node: HastNode) {
+function addBreakPoints(node: HastNode) {
   if (!node.children) return;
   node.children = node.children.flatMap((child) => {
-    if (child.type !== 'text' || !child.value?.includes('/')) {
-      breakAfterSlashes(child);
+    if (child.type !== 'text' || child.value === undefined || !/[/.]/.test(child.value)) {
+      addBreakPoints(child);
       return [child];
     }
-    const parts = child.value.split(/(?<=\/)(?!\/)/);
+    const parts = child.value.split(/(?<=\/)(?!\/)|(?<=\.)(?=[A-Za-z_$])/);
     return parts.flatMap((part, i) => [
       ...(part ? [{ type: 'text', value: part }] : []),
       ...(i < parts.length - 1 ? [{ type: 'element', tagName: 'wbr', properties: {}, children: [] }] : []),
@@ -64,7 +65,7 @@ export default defineConfig({
             const text = this.source.split('\n')[line - 1] ?? '';
             const indent = text.length - text.trimStart().length;
             node.properties.style = `--wrap-indent:${indent + 2}ch`;
-            breakAfterSlashes(node as HastNode);
+            addBreakPoints(node as HastNode);
           },
         },
       ],
