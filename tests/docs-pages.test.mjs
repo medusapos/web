@@ -179,6 +179,23 @@ test('home links automated tests to the app CI workflow', () => {
   assert.ok(!home.includes("automated tests, which run on every change"), 'home: no unlinked tests line');
 });
 
+test('docs show the payment screen, the count and the Z report', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  const close = reg.slice(reg.indexOf('## Count and close'), reg.indexOf('## Get manager approval'));
+  for (const [page, name] of [[till, 'till-payment'], [close, 'registers-count'], [close, 'registers-closure']]) {
+    assert.ok(new RegExp(`\\n   !\\[[^\\]]{40,}\\]\\(/screenshots/docs/${name}\\.jpg\\)\\n`).test(page), `${name}: indented image with alt text`);
+    assert.ok(readFileSync(new URL(`../public/screenshots/docs/${name}.jpg`, import.meta.url)).length > 20000, `${name}: file present`);
+  }
+  assert.ok(till.indexOf('till-payment.jpg') > till.indexOf('2. Tap **Checkout**') && till.indexOf('till-payment.jpg') < till.indexOf('3. For cash'), 'till: shot under step 2');
+  assert.ok(close.indexOf('registers-count.jpg') < close.indexOf('3. Tap **Close register** again'), 'registers: count shot under step 2');
+  assert.ok(close.indexOf('registers-closure.jpg') < close.indexOf('4. Tap **Done**'), 'registers: closure shot under step 3');
+  assert.ok(close.includes('4. Tap **Done**. The **Open register** panel now offers **Use the last counted cash**, with the amount you just counted.'), 'registers: step 4 names the button');
+  assert.ok(!reg.includes('open card'), 'registers: no open card');
+  const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
+  assert.ok(mdx.includes('mx-auto w-full max-w-sm border border-fd-border'), 'mdx: framed, narrow screenshots');
+});
+
 test('the quick start says to count and close the register', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const sale = quickStart.slice(quickStart.indexOf('## Make a sale'), quickStart.indexOf('## Known beta limits'));

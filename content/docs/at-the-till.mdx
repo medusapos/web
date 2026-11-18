@@ -20,8 +20,13 @@ Give the till a name in **Settings**. Another till that finds the register open 
 
 {/* Pay flow: medusapos/app@bcd2047 e2e/helpers.ts lines 154-185 (startTender: the current build's Checkout, then the Cash / Card terminal tiles; the v0.2.0 build's Cash and Card terminal buttons and "Payment approved on terminal"), #299, #335, docs/v2-parity/DEMO-PARITY.md row 06a. */}
 
+{/* Screenshot: the live demo (demo.medusapos.com, Demo register), captured 2026-11-18; medusapos/app main was 7f6f380 at capture. */}
+
 1. [Open your register](/docs/registers), then scan a barcode or search for a product. Add items and check the quantities.
 2. Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal** for a card sale.
+
+   ![The payment screen: the €16.95 total, the Cash and Card terminal tiles, amount keys, and the Take €16.95 in Cash button above Complete sale](/screenshots/docs/till-payment.jpg)
+
 3. For cash, key in the amount handed over or tap **Exact**, then tap **Take**. For a card sale, take the payment on your separate terminal, tap **Take** and enter the terminal's reference; the POS records that external payment.
 4. Tap **Complete sale**, then view the receipt and print it if needed.
 5. Tap **New sale** to start the next one.
