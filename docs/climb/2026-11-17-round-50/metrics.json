@@ -1,0 +1,546 @@
+[
+  {
+    "url": "https://medusapos.com",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 2004,
+    "lcpMs": 504,
+    "samples": {
+      "loadMs": [
+        2876,
+        2004,
+        1447
+      ],
+      "lcpMs": [
+        1704,
+        504,
+        304
+      ]
+    },
+    "overflowX": 0,
+    "title": "MedusaPOS – open-source point of sale for Medusa v2",
+    "h1": [
+      "Point of sale for Medusa"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 85531
+  },
+  {
+    "url": "https://medusapos.com",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 2440,
+    "lcpMs": 1476,
+    "samples": {
+      "loadMs": [
+        2440,
+        2587,
+        2090
+      ],
+      "lcpMs": [
+        1340,
+        1540,
+        1476
+      ]
+    },
+    "overflowX": 0,
+    "title": "MedusaPOS – open-source point of sale for Medusa v2",
+    "h1": [
+      "Point of sale for Medusa"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 81586
+  },
+  {
+    "url": "https://medusapos.com/docs/at-the-till",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1256,
+    "lcpMs": 700,
+    "samples": {
+      "loadMs": [
+        1907,
+        1256,
+        1118
+      ],
+      "lcpMs": [
+        1104,
+        700,
+        608
+      ]
+    },
+    "overflowX": 0,
+    "title": "At the till | MedusaPOS",
+    "h1": [
+      "At the till"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 69810
+  },
+  {
+    "url": "https://medusapos.com/docs/at-the-till",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 1398,
+    "lcpMs": 768,
+    "samples": {
+      "loadMs": [
+        1793,
+        1032,
+        1398
+      ],
+      "lcpMs": [
+        768,
+        592,
+        772
+      ]
+    },
+    "overflowX": 0,
+    "title": "At the till | MedusaPOS",
+    "h1": [
+      "At the till"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 64768
+  },
+  {
+    "url": "https://medusapos.com/docs/changelog",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1195,
+    "lcpMs": 420,
+    "samples": {
+      "loadMs": [
+        1918,
+        1153,
+        1195
+      ],
+      "lcpMs": [
+        764,
+        344,
+        420
+      ]
+    },
+    "overflowX": 0,
+    "title": "Changelog | MedusaPOS",
+    "h1": [
+      "Changelog"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 52336
+  },
+  {
+    "url": "https://medusapos.com/docs/changelog",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 2056,
+    "lcpMs": 624,
+    "samples": {
+      "loadMs": [
+        1500,
+        2056,
+        2123
+      ],
+      "lcpMs": [
+        624,
+        1148,
+        368
+      ]
+    },
+    "overflowX": 0,
+    "title": "Changelog | MedusaPOS",
+    "h1": [
+      "Changelog"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51740
+  },
+  {
+    "url": "https://medusapos.com/docs",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1381,
+    "lcpMs": 572,
+    "samples": {
+      "loadMs": [
+        1381,
+        974,
+        1591
+      ],
+      "lcpMs": [
+        572,
+        376,
+        888
+      ]
+    },
+    "overflowX": 0,
+    "title": "Introduction | MedusaPOS",
+    "h1": [
+      "Introduction"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 52342
+  },
+  {
+    "url": "https://medusapos.com/docs",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 996,
+    "lcpMs": 232,
+    "samples": {
+      "loadMs": [
+        1033,
+        996,
+        937
+      ],
+      "lcpMs": [
+        288,
+        232,
+        232
+      ]
+    },
+    "overflowX": 0,
+    "title": "Introduction | MedusaPOS",
+    "h1": [
+      "Introduction"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51146
+  },
+  {
+    "url": "https://medusapos.com/docs/limitations",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 2045,
+    "lcpMs": 1056,
+    "samples": {
+      "loadMs": [
+        2884,
+        2045,
+        1795
+      ],
+      "lcpMs": [
+        1056,
+        1320,
+        1028
+      ]
+    },
+    "overflowX": 0,
+    "title": "Limitations | MedusaPOS",
+    "h1": [
+      "Limitations"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51146
+  },
+  {
+    "url": "https://medusapos.com/docs/limitations",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 947,
+    "lcpMs": 340,
+    "samples": {
+      "loadMs": [
+        930,
+        2034,
+        947
+      ],
+      "lcpMs": [
+        332,
+        680,
+        340
+      ]
+    },
+    "overflowX": 0,
+    "title": "Limitations | MedusaPOS",
+    "h1": [
+      "Limitations"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51146
+  },
+  {
+    "url": "https://medusapos.com/docs/plugin-setup",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 2128,
+    "lcpMs": 556,
+    "samples": {
+      "loadMs": [
+        1165,
+        2128,
+        2189
+      ],
+      "lcpMs": [
+        556,
+        848,
+        408
+      ]
+    },
+    "overflowX": 0,
+    "title": "Plugin setup | MedusaPOS",
+    "h1": [
+      "Plugin setup"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51744
+  },
+  {
+    "url": "https://medusapos.com/docs/plugin-setup",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 1404,
+    "lcpMs": 620,
+    "samples": {
+      "loadMs": [
+        1031,
+        1404,
+        1701
+      ],
+      "lcpMs": [
+        232,
+        620,
+        656
+      ]
+    },
+    "overflowX": 0,
+    "title": "Plugin setup | MedusaPOS",
+    "h1": [
+      "Plugin setup"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51744
+  },
+  {
+    "url": "https://medusapos.com/docs/quick-start",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1111,
+    "lcpMs": 376,
+    "samples": {
+      "loadMs": [
+        2180,
+        1111,
+        1020
+      ],
+      "lcpMs": [
+        1388,
+        328,
+        376
+      ]
+    },
+    "overflowX": 0,
+    "title": "Quick start | MedusaPOS",
+    "h1": [
+      "Quick start"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 85294
+  },
+  {
+    "url": "https://medusapos.com/docs/quick-start",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 1096,
+    "lcpMs": 392,
+    "samples": {
+      "loadMs": [
+        3244,
+        1059,
+        1096
+      ],
+      "lcpMs": [
+        348,
+        392,
+        448
+      ]
+    },
+    "overflowX": 0,
+    "title": "Quick start | MedusaPOS",
+    "h1": [
+      "Quick start"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 79654
+  },
+  {
+    "url": "https://medusapos.com/docs/registers",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1465,
+    "lcpMs": 356,
+    "samples": {
+      "loadMs": [
+        2979,
+        980,
+        1465
+      ],
+      "lcpMs": [
+        1088,
+        356,
+        324
+      ]
+    },
+    "overflowX": 0,
+    "title": "Registers | MedusaPOS",
+    "h1": [
+      "Registers"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 82170
+  },
+  {
+    "url": "https://medusapos.com/docs/registers",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 980,
+    "lcpMs": 476,
+    "samples": {
+      "loadMs": [
+        980,
+        935,
+        1641
+      ],
+      "lcpMs": [
+        476,
+        212,
+        780
+      ]
+    },
+    "overflowX": 0,
+    "title": "Registers | MedusaPOS",
+    "h1": [
+      "Registers"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 74368
+  },
+  {
+    "url": "https://medusapos.com/docs/troubleshooting",
+    "kind": "desktop",
+    "status": 200,
+    "loadMs": 1007,
+    "lcpMs": 416,
+    "samples": {
+      "loadMs": [
+        1420,
+        1007,
+        962
+      ],
+      "lcpMs": [
+        508,
+        416,
+        364
+      ]
+    },
+    "overflowX": 0,
+    "title": "Troubleshooting | MedusaPOS",
+    "h1": [
+      "Troubleshooting"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51740
+  },
+  {
+    "url": "https://medusapos.com/docs/troubleshooting",
+    "kind": "phone",
+    "status": 200,
+    "loadMs": 1453,
+    "lcpMs": 812,
+    "samples": {
+      "loadMs": [
+        1453,
+        1545,
+        973
+      ],
+      "lcpMs": [
+        848,
+        812,
+        376
+      ]
+    },
+    "overflowX": 0,
+    "title": "Troubleshooting | MedusaPOS",
+    "h1": [
+      "Troubleshooting"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [],
+    "approxBytes": 51142
+  },
+  {
+    "url": "https://medusapos.com/this-page-does-not-exist",
+    "kind": "desktop",
+    "status": 404,
+    "loadMs": 1283,
+    "lcpMs": 264,
+    "samples": {
+      "loadMs": [
+        1283,
+        1055,
+        1736
+      ],
+      "lcpMs": [
+        428,
+        264,
+        212
+      ]
+    },
+    "overflowX": 0,
+    "title": "Page not found | MedusaPOS",
+    "h1": [
+      "Page not found"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "approxBytes": 51131
+  },
+  {
+    "url": "https://medusapos.com/this-page-does-not-exist",
+    "kind": "phone",
+    "status": 404,
+    "loadMs": 947,
+    "lcpMs": 244,
+    "samples": {
+      "loadMs": [
+        2840,
+        910,
+        947
+      ],
+      "lcpMs": [
+        1960,
+        244,
+        216
+      ]
+    },
+    "overflowX": 0,
+    "title": "Page not found | MedusaPOS",
+    "h1": [
+      "Page not found"
+    ],
+    "brokenImgs": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "approxBytes": 51131
+  }
+]
