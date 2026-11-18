@@ -34,41 +34,47 @@ Allow the app's origin in `ADMIN_CORS` and `AUTH_CORS` as in [Configure your sto
 
 Configure a shared locking provider: Redis (`@medusajs/medusa/locking-redis`) or Postgres advisory locks (`@medusajs/medusa/locking-postgres`). The default in-memory provider only locks inside one process. Concurrent sales on two instances can lose stock updates and oversell.
 
-With the in-memory provider, the plugin logs a warning once at startup and still starts. One instance is fine. For Redis, add this to `medusa-config.ts`:
+With the in-memory provider, the plugin logs a warning once at startup and still starts. One instance is fine. For Redis, add this entry to the `modules` array in `medusa-config.ts`, keeping the modules already there, such as RBAC:
 
 ```ts
-modules: [{
-  resolve: '@medusajs/medusa/locking',
-  options: {
-    providers: [{
-      resolve: '@medusajs/medusa/locking-redis',
-      id: 'locking-redis',
-      is_default: true,
-      options: {
-        redisUrl: process.env.LOCKING_REDIS_URL,
-      },
-    }],
+modules: [
+  // ...the modules you already have, such as RBAC
+  {
+    resolve: '@medusajs/medusa/locking',
+    options: {
+      providers: [{
+        resolve: '@medusajs/medusa/locking-redis',
+        id: 'locking-redis',
+        is_default: true,
+        options: {
+          redisUrl: process.env.LOCKING_REDIS_URL,
+        },
+      }],
+    },
   },
-}]
+]
 ```
 
 Set `LOCKING_REDIS_URL` in every instance's environment to the URL of the same Redis server.
 
-For Postgres advisory locks, which use your store's own database and need no extra settings, add this instead:
+For Postgres advisory locks, which use your store's own database and need no extra settings, add this entry to `modules` instead:
 
 {/* Postgres locking: docs.medusajs.com/resources/infrastructure-modules/locking/postgres, read 2026-11-18; provider id and migration also in medusapos/app@v0.2.0 packages/medusa-plugin/README.md lines 26-32. */}
 
 ```ts
-modules: [{
-  resolve: '@medusajs/medusa/locking',
-  options: {
-    providers: [{
-      resolve: '@medusajs/medusa/locking-postgres',
-      id: 'locking-postgres',
-      is_default: true,
-    }],
+modules: [
+  // ...the modules you already have, such as RBAC
+  {
+    resolve: '@medusajs/medusa/locking',
+    options: {
+      providers: [{
+        resolve: '@medusajs/medusa/locking-postgres',
+        id: 'locking-postgres',
+        is_default: true,
+      }],
+    },
   },
-}]
+]
 ```
 
 Then run `npx medusa db:migrate` to create its `locking` table.
