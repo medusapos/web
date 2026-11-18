@@ -41,3 +41,8 @@ test('Not there yet no longer lists split tender or customers', () => {
   assert.ok(!source.includes('split one payment'));
   assert.ok(!source.includes('attach a customer'));
 });
+
+test('the phone and counter card says one device takes payment at a time', () => {
+  const card = features.find((feature) => feature.title === 'Phone and counter');
+  assert.ok(card.description.endsWith('Every store has one register, so one device at a time takes payment.'));
+});
