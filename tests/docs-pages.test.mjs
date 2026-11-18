@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+
+test('home hero is the 1000 x 680 capture', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const png = readFileSync(new URL('../public/screenshots/sale-desktop-1000.png', import.meta.url));
+  assert.equal(png.readUInt32BE(16), 2000, 'hero: png width');
+  assert.equal(png.readUInt32BE(20), 1360, 'hero: png height');
+  assert.ok(home.includes("src: '/screenshots/sale-desktop-1000.png',\n    alt: heroAlt,\n    width: 1000,\n    height: 680,"), 'hero: image props');
+  assert.ok(home.includes('width={1000} height={680} />'), 'hero: source size');
+  assert.ok(!/608|553/.test(home), 'hero: old size gone');
+  assert.ok(home.includes('captured 2026-11-18 (medusapos/app main 5fc5b95)'), 'hero: capture cited');
+  assert.ok(!existsSync(new URL('../public/screenshots/sale-desktop.png', import.meta.url)), 'hero: old file gone');
+});
 
 test('quick start says how to check the Medusa version', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');

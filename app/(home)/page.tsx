@@ -31,10 +31,10 @@ export default function HomePage() {
   const spanFirst = features.length % 2 === 1 && features.length % 3 === 2;
   const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
   const { props: heroDesktop } = getImageProps({
-    src: '/screenshots/sale-desktop.png',
+    src: '/screenshots/sale-desktop-1000.png',
     alt: heroAlt,
-    width: 608,
-    height: 553,
+    width: 1000,
+    height: 680,
     sizes: '(min-width: 1024px) 624px, 100vw',
   });
   const { props: heroPhone } = getImageProps({
@@ -88,10 +88,11 @@ export default function HomePage() {
         <figure className="mx-auto w-full max-w-[300px] md:max-w-none">
           <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
             <picture>
-              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={608} height={553} />
+              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1000} height={680} />
               <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
             </picture>
           </div>
+          {/* Desktop shot: the live demo's sale screen at a 1000 x 680 window, device scale 2, captured 2026-11-18 (medusapos/app main 5fc5b95). */}
           {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
             <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
