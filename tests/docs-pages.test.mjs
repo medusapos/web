@@ -379,7 +379,7 @@ test('plugin setup links to the update precautions', () => {
 test('registers says what the last closure shows for sales not yet sent', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const close = reg.slice(reg.indexOf('## Count and close'), reg.indexOf('## Get manager approval'));
-  assert.ok(close.includes("Between sessions, **Register ›** shows the last closure's figures. If sales were still waiting to sync when you closed, it shows a warning such as **1 sale not sent yet · €15.00**; [Check sync status](/docs/troubleshooting#check-sync-status) shows when they reach the store."), 'unsynced: last closure line');
+  assert.ok(close.includes("Between sessions, the register's state shows the last closure's figures. If sales were still waiting to sync when you closed, it shows a warning such as **1 sale not sent yet · €15.00**; [Check sync status](/docs/troubleshooting#check-sync-status) shows when they reach the store."), 'unsynced: last closure line');
   assert.ok(close.includes('register-close.tsx:205-206'), 'unsynced: source cited');
   const trouble = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
   assert.ok(trouble.includes('\n## Check sync status\n'), 'unsynced: link target');
@@ -649,6 +649,8 @@ test('the phone header shows a Docs link on the home and 404 pages', () => {
   const shared = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
   assert.ok(shared.includes('export function homeOptions(): BaseLayoutProps'), 'phone docs: helper');
   assert.ok(/href="\/docs"\s+className="sm:hidden inline-flex min-h-11 items-center/.test(shared), 'phone docs: phone only, 44 px tall');
+  assert.ok(/href=\{siteConfig\.demoUrl\}\s+target="_blank"\s+rel="noreferrer noopener"\s+className="sm:hidden inline-flex min-h-11 items-center/.test(shared), 'phone demo: phone only, 44 px tall, new tab');
+  assert.ok(shared.indexOf('>\n            Docs\n') < shared.indexOf('Live demo\n'), 'phone demo: after Docs');
   assert.ok(shared.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'phone docs: nav link kept');
   for (const file of ['../app/(home)/layout.tsx', '../app/not-found.tsx']) {
     const src = readFileSync(new URL(file, import.meta.url), 'utf8');
@@ -683,4 +685,12 @@ test('At the till says the Order note box does not reach the order', () => {
   assert.ok(notYet.includes('{/* Order note: limitations.mdx line 23'), 'till order note: source cited');
   const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
   assert.ok(lim.includes('The hosted app shows an **Order note** box, but this plugin doesn\'t accept notes, so the note doesn\'t reach the order.'), 'till order note: Limitations says the same');
+});
+
+test('Registers names the register control as Quick start does', () => {
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(!reg.includes('**Register ›**'), 'register name: no Register › in Registers');
+  assert.ok(reg.includes("Tap the register's state to open its panel."), 'register name: open its panel');
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(qs.includes("Tap the register's state, as when you opened it, to open its panel"), 'register name: quick start uses the same name');
 });

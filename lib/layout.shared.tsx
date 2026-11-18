@@ -30,7 +30,7 @@ export function baseOptions(): BaseLayoutProps {
 }
 
 // Below sm, Fumadocs hides the header's nav links behind the menu chevron.
-// The home and 404 pages add a Docs link after the title, shown only there.
+// The home and 404 pages add Docs and Live demo links after the title, shown only there.
 export function homeOptions(): BaseLayoutProps {
   const base = baseOptions();
   return {
@@ -38,12 +38,22 @@ export function homeOptions(): BaseLayoutProps {
     nav: {
       ...base.nav,
       children: (
-        <Link
-          href="/docs"
-          className="sm:hidden inline-flex min-h-11 items-center px-3 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground"
-        >
-          Docs
-        </Link>
+        <>
+          <Link
+            href="/docs"
+            className="sm:hidden inline-flex min-h-11 items-center px-3 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground"
+          >
+            Docs
+          </Link>
+          <a
+            href={siteConfig.demoUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="sm:hidden inline-flex min-h-11 items-center px-3 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground"
+          >
+            Live demo
+          </a>
+        </>
       ),
     },
   };
