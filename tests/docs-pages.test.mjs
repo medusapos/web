@@ -417,3 +417,10 @@ test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there y
   assert.ok(home.includes(li), 'batch: home');
   assert.ok(home.indexOf(li) > home.indexOf('id="not-there-yet"'), 'batch: under not there yet');
 });
+
+test('the hero says one register per store', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const hero = 'It runs in the browser on one register per store, keeps selling when the connection drops';
+  assert.ok(home.includes(hero), 'hero: one register');
+  assert.ok(home.indexOf(hero) < home.indexOf('href={siteConfig.demoUrl}'), 'hero: before the buttons');
+});
