@@ -25,7 +25,7 @@ test('home shows the phone screenshot at 320 px', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">'), 'home: phone section on the content edges, 320 px column');
   assert.ok(!home.includes('max-w-4xl'), 'home: no narrower phone section box');
-  assert.ok(home.includes('<div className="hidden md:block w-[320px] max-w-full'), 'home: phone shot 320 px');
+  assert.ok(home.includes('<figure className="hidden md:block w-[320px] max-w-full">'), 'home: phone shot 320 px');
   assert.ok(!home.includes('220px'), 'home: no 220 px phone shot');
 });
 
@@ -466,4 +466,10 @@ test('the home page links Medusa 2.21.0 exactly to the version check', () => {
   assert.ok(!home.includes('needs a store on Medusa 2.21.0 exactly, with'), 'home: no unlinked 2.21.0');
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(qs.includes('## What you need') && qs.includes('`npm ls @medusajs/medusa`'), 'home: target has the check');
+});
+
+test('the browser band captions its phone screenshot', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('>The same app on a phone</figcaption>'), 'band: caption');
+  assert.ok(home.includes('alt="MedusaPOS on a phone: a café and gift-shop catalogue'), 'band: alt kept');
 });

@@ -188,15 +188,18 @@ export default function HomePage() {
       )}
 
       <section className="grid items-center gap-10 py-12 sm:py-16 md:grid-cols-[320px_1fr] lg:gap-16">
-        <div className="hidden md:block w-[320px] max-w-full rounded-xl border border-fd-border shadow-lg overflow-hidden">
-          <Image
-            src="/screenshots/sale-phone.png"
-            alt="MedusaPOS on a phone: a café and gift-shop catalogue in a two-column product grid, with the cart bar showing 4 items for €31.45"
-            width={360}
-            height={740}
-            className="h-auto w-full"
-          />
-        </div>
+        <figure className="hidden md:block w-[320px] max-w-full">
+          <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
+            <Image
+              src="/screenshots/sale-phone.png"
+              alt="MedusaPOS on a phone: a café and gift-shop catalogue in a two-column product grid, with the cart bar showing 4 items for €31.45"
+              width={360}
+              height={740}
+              className="h-auto w-full"
+            />
+          </div>
+          <figcaption className="mt-2 text-center text-sm text-fd-muted-foreground">The same app on a phone</figcaption>
+        </figure>
         <div className="max-w-prose">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
