@@ -226,6 +226,9 @@ test('docs show the payment screen, the count and the Z report', () => {
   assert.ok(close.indexOf('registers-count.jpg') < close.indexOf('3. Tap **Close register** again'), 'registers: count shot under step 2');
   assert.ok(close.indexOf('registers-closure.jpg') < close.indexOf('4. Tap **Done**'), 'registers: closure shot under step 3');
   assert.ok(close.includes('4. Tap **Done**. The **Open register** panel now offers **Use the last counted cash**, with the amount you just counted.'), 'registers: step 4 names the button');
+  assert.ok(close.includes("To keep a paper copy, tap **Print the Z report**; your browser's print dialog opens, as for receipts."), 'registers: print the Z report');
+  assert.ok(close.indexOf('**Print the Z report**') < close.indexOf('4. Tap **Done**'), 'registers: print before Done');
+  assert.ok(close.includes('register-close.tsx:212') && close.includes('closure-print.ts printHtml'), 'registers: print source cited');
   assert.ok(!reg.includes('open card'), 'registers: no open card');
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
   assert.ok(mdx.includes('mx-auto w-full max-w-sm border border-fd-border'), 'mdx: framed, narrow screenshots');
