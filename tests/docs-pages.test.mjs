@@ -394,3 +394,16 @@ test('quick start gives the sale as numbered steps', () => {
   assert.ok(steps[2].startsWith('3. Tap **Checkout**.') && steps[4].startsWith('5. Tap **Complete sale**'), 'sale steps: checkout then complete');
   assert.ok(sale.includes('[Take a sale](/docs/at-the-till#take-a-sale) has more on each step.'), 'sale steps: link kept');
 });
+
+test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there yet', () => {
+  const [lim, trouble, home] = ['../content/docs/limitations.mdx', '../content/docs/troubleshooting.mdx', '../app/(home)/page.tsx'].map((p) => readFileSync(new URL(p, import.meta.url), 'utf8'));
+  const item = "- The store refuses a batch of more than 50 sales, or one over the size limit, whole. The till can't split it and resend it in smaller pieces yet.";
+  assert.ok(lim.includes(item), 'batch: limitations');
+  assert.ok(lim.indexOf(item) > lim.indexOf('## Till limits'), 'batch: under till limits');
+  const at = trouble.indexOf("there is nothing in the store to fix, and the till can't split it yet");
+  assert.ok(at !== -1, 'batch: troubleshooting');
+  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf("### Saved sales can't be opened"), 'batch: under not accepted');
+  const li = '<li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>';
+  assert.ok(home.includes(li), 'batch: home');
+  assert.ok(home.indexOf(li) > home.indexOf('id="not-there-yet"'), 'batch: under not there yet');
+});
