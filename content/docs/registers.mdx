@@ -67,7 +67,9 @@ To move the register from the counter to a phone, or back, close it on the till 
 
 If a register was left open on a till that's lost, broken or replaced, another till can take it over. It shows which till holds the register, and **Take over** moves the register to this till. The old till's register commands are then refused, and it shows the register closed.
 
-One till at a time holds a register open. With one register per store, a second till can't open **Register 1** while another till holds it; it can only take it over. Sales and cash movements the old till already recorded stay on its session, but that session never closes, so it has no Z report. Account for its cash from the old till's own record.
+{/* Take-over cash: medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 42 (a superseded session keeps its sales and movements, never closes and has no Z; the till's record and the owner account for its cash). Each sale is a Medusa order: plugin-setup.mdx "What a sale records". */}
+
+One till at a time holds a register open. With one register per store, a second till can't open **Register 1** while another till holds it; it can only take it over. Sales and cash movements the old till already sent stay on its session, but that session never closes, so it has no Z report. Count the drawer by hand to account for that session's cash. Its sales are orders in Medusa Admin, under **Orders**; a sale the old till never sent isn't there.
 
 A till that lost its local data and opens the same register again picks up where it left off.
 

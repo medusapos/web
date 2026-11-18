@@ -2,6 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
+test('take over says how to account for the old till\'s cash', () => {
+  const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(registers.includes('Count the drawer by hand to account for that session\'s cash. Its sales are orders in Medusa Admin, under **Orders**; a sale the old till never sent isn\'t there.'), 'registers: take-over cash');
+  assert.ok(!registers.includes('from the old till\'s own record'), 'registers: no own-record line');
+});
+
 test('home lists the slow large-catalogue sync, with no figure', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes('<li>stay fast with a large catalogue: the first sync is slow, and so is search</li>'), 'home: large catalogue item');
