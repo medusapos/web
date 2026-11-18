@@ -277,6 +277,18 @@ test('quick start says how staff get their own logins', () => {
   assert.ok(step6.indexOf('The POS signs in with that email and password.') < step6.indexOf('Give each member of staff'), 'quick-start: invites after the admin user');
 });
 
+test('at the till says how the receipt prints', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const print = till.slice(till.indexOf('## Print the receipt'), till.indexOf('## Use a phone'));
+  assert.match(till, /^## Print the receipt$/m, 'print: heading');
+  assert.ok(till.indexOf('## Read the receipt') < till.indexOf('## Print the receipt'), 'print: after read the receipt');
+  assert.ok(print.includes("Tap **Print receipt** on the receipt. It opens the browser's print dialog"), 'print: button and dialog');
+  assert.ok(print.includes('**Automatically print receipt after checkout** in **Settings → Printing**. It is off by default and is saved on this till only.'), 'print: auto-print setting');
+  assert.ok(print.includes('settings.tsx lines 225-240'), 'print: source cited');
+  assert.ok(till.includes('[print it](#print-the-receipt)'), 'print: take-a-sale link');
+  assert.ok(!/drawer|thermal|80 ?mm/i.test(print), 'print: no hardware claims');
+});
+
 test('at the till names the cart + menu for discounts and charges', () => {
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   const discount = till.slice(till.indexOf('## Apply a discount'), till.indexOf('## Read the receipt'));
