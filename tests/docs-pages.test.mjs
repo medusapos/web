@@ -149,3 +149,10 @@ test('the quick start says to count and close the register', () => {
   const sale = quickStart.slice(quickStart.indexOf('## Make a sale'), quickStart.indexOf('## Known beta limits'));
   assert.ok(sale.includes('At the end of the day, [count and close](/docs/registers#count-and-close) the register.'), 'quick-start: close line');
 });
+
+test('sign in says what the backend URL is', () => {
+  const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const signIn = quickStart.slice(quickStart.indexOf('## Sign in'), quickStart.indexOf('## Make a sale'));
+  assert.ok(signIn.includes('Your backend URL is the address of your Medusa server, such as `https://api.example.com`.'), 'quick-start: backend URL');
+  assert.ok(signIn.includes('leave `/app` off.'), 'quick-start: no /app');
+});
