@@ -42,9 +42,12 @@ test('Not there yet no longer lists split tender or customers', () => {
   assert.ok(!source.includes('attach a customer'));
 });
 
-test('the phone and counter card says one device takes payment at a time', () => {
-  const card = features.find((feature) => feature.title === 'Phone and counter');
-  assert.ok(card.description.endsWith('Every store has one register, so one device at a time takes payment.'));
+test('the counter or phone card opens with one device taking payment at a time', () => {
+  const card = features.find((feature) => feature.title === 'Counter or phone');
+  assert.ok(card, 'counter: card exists');
+  assert.ok(card.description.startsWith('Every store has one register, so one device at a time takes payment. '), 'counter: limit first');
+  assert.ok(card.description.endsWith('with the cart a tap away.'), 'counter: both devices');
+  assert.ok(!features.some((feature) => feature.title === 'Phone and counter'), 'counter: old title gone');
 });
 
 test('the feature lists include fees and one-off items', () => {
