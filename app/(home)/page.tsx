@@ -218,14 +218,14 @@ export default function HomePage() {
           </div>
           <figcaption className="mt-2 text-center text-sm text-fd-muted-foreground">The same app on a phone</figcaption>
         </figure>
-        <div className="max-w-prose">
+        <div className="min-w-0">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
-          <p className="mt-4 text-fd-muted-foreground">
+          <p className="mt-4 max-w-prose text-fd-muted-foreground">
             Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale.
           </p>
           <h2 id="not-there-yet" className="mt-12 scroll-mt-20 text-2xl sm:text-3xl font-semibold tracking-tight">Not there yet</h2>
-          <p className="mt-4 text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
-          <div className="mt-6 space-y-6 text-fd-muted-foreground">
+          <p className="mt-4 max-w-prose text-fd-muted-foreground">MedusaPOS is in beta. Today it does not:</p>
+          <div className="mt-6 grid gap-x-10 gap-y-6 text-fd-muted-foreground lg:grid-cols-2">
             <div>
               <h3 className="text-base font-semibold text-fd-foreground">Registers</h3>
               <ul className="mt-2 list-disc space-y-1.5 pl-6">
@@ -264,7 +264,7 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          <p className="mt-4 text-fd-muted-foreground">
+          <p className="mt-4 max-w-prose text-fd-muted-foreground">
             See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
           </p>
         </div>
