@@ -71,13 +71,3 @@ test('the home page shows the three core cards first and larger', () => {
   assert.ok(source.indexOf('core.map(') < source.indexOf('Also at the till') && source.indexOf('Also at the till') < source.indexOf('more.map('), 'core: order');
   assert.ok(source.includes('<h3 className="text-lg font-semibold sm:mt-4 sm:text-xl">'), 'core: larger titles');
 });
-
-test('phones list the other cards as tap-to-open rows', () => {
-  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  const from = source.indexOf('Also at the till');
-  const rows = source.slice(from, source.indexOf('</section>', from));
-  assert.ok(rows.includes('sm:hidden') && rows.includes('<details key={feature.title} className="group">'), 'rows: phone list');
-  assert.ok(rows.includes('flex min-h-11 cursor-pointer'), 'rows: tap target');
-  assert.ok(rows.includes('mt-4 hidden grid-cols-1 gap-3 sm:grid sm:grid-cols-2'), 'rows: cards from sm up');
-  assert.equal(rows.match(/more\.map\(/g)?.length, 2, 'rows: one list, one grid');
-});

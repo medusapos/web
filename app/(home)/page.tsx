@@ -1,7 +1,7 @@
 import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Banknote, Calculator, ChevronDown, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
+import { Banknote, Calculator, Coins, PackagePlus, Pause, Pencil, Percent, ScanBarcode, Smartphone, Store, UserRound, WifiOff, type LucideIcon } from 'lucide-react';
 import { features, type FeatureIcon } from '@/lib/features';
 import { siteConfig } from '@/lib/site';
 import { homeJsonLd, serializeJsonLd } from '@/lib/structured-data';
@@ -135,26 +135,7 @@ export default function HomePage() {
           })}
         </div>
         <p className="mt-10 font-semibold">Also at the till</p>
-        {/* Phones: one tap-to-open row per card, so the list stays short and Not there yet comes sooner. */}
-        <div className="mt-3 divide-y divide-fd-border rounded-xl border border-fd-border bg-fd-card sm:hidden">
-          {more.map((feature) => {
-            const Icon = icons[feature.icon];
-            return (
-              <details key={feature.title} className="group">
-                <summary className="flex min-h-11 cursor-pointer list-none items-center gap-3 px-4 py-2 [&::-webkit-details-marker]:hidden">
-                  <Icon size={18} className="shrink-0 text-fd-muted-foreground" />
-                  <h3 className="flex-1 text-base font-semibold">{feature.title}</h3>
-                  <ChevronDown size={18} aria-hidden="true" className="shrink-0 text-fd-muted-foreground transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="px-4 pb-3">
-                  {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
-                  <p className="text-sm text-fd-muted-foreground">{feature.description}</p>
-                </div>
-              </details>
-            );
-          })}
-        </div>
-        <div className="mt-4 hidden grid-cols-1 gap-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {more.map((feature, i) => {
             const Icon = icons[feature.icon];
             return (
