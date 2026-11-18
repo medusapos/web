@@ -643,3 +643,14 @@ test('the changelog intro agrees with the hosted-build paragraph', () => {
   const hosted = changelog.indexOf('app.medusapos.com and the live demo run the app\'s latest build.');
   assert.ok(hosted > changelog.indexOf(intro) && hosted < changelog.indexOf('\n## '), 'changelog intro: the hosted-build paragraph follows, before the first entry');
 });
+
+test("the 0.2.0 till bullets each lead with a bold label and a full stop", () => {
+  const log = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
+  const till = log.slice(log.indexOf("### What's new at the till"), log.indexOf('###', log.indexOf("### What's new at the till") + 4));
+  const lines = till.split('\n').filter((line) => line.trim().startsWith('- '));
+  assert.ok(lines.length >= 8, 'till bullets: found');
+  assert.ok(lines.every((line) => line.startsWith('- **')), 'till bullets: no sub-bullets');
+  assert.ok(lines.every((line) => /^- \*\*[^*]+\.\*\* \S/.test(line)), 'till bullets: bold label, full stop, then text');
+  assert.ok(till.includes('- **Line prices.** Change a line\'s price at the till.'), 'till bullets: line price');
+  assert.ok(till.includes("a one-off item to a sale. Your store records the fee") && till.includes('All are taxed at your region\'s rate. Medusa can\'t keep one charge tax-free'), 'till bullets: fees in one paragraph');
+});

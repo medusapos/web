@@ -30,10 +30,8 @@ Update the plugin first (see [Update the plugin](#update-the-plugin)), then the 
 - **Split payments.** Pay part of a sale by card and the rest in cash. Change comes from the cash part only. The Medusa order records both payments, and the receipt lists both.
 - **Customers.** Search for a customer at the till, or create a new one, and attach them to the sale. The Medusa order is linked to that customer. A sale with no customer is a guest sale, as before. If the cashier types an email that matches a stored customer, the order links to that customer whatever the email's case.
 - **Park and resume sales.** Put a sale aside, serve the next customer, and come back to it. A resumed sale is re-priced at today's catalogue prices.
-- **Change a line's price** at the till.
-- **Fees, delivery charges and items not in your catalogue.** Add a bag fee, a delivery charge or a one-off item to a sale.
-  - Your store records the fee and the one-off item as order items without a product, and the delivery as a shipping method. All are taxed at your region's rate.
-  - Medusa can't keep one charge tax-free and has no tax classes, so the till doesn't offer those for your store.
+- **Line prices.** Change a line's price at the till.
+- **Fees, delivery charges and items not in your catalogue.** Add a bag fee, a delivery charge or a one-off item to a sale. Your store records the fee and the one-off item as order items without a product, and the delivery as a shipping method. All are taxed at your region's rate. Medusa can't keep one charge tax-free and has no tax classes, so the till doesn't offer those for your store.
 - **Catalogue grid or table, and categories.** Switch the catalogue between tiles and a table, and narrow it by category. Each till remembers its view. Phones show the categories without the toggle.
 - **Take over a register.** If a register was left open on a till that's lost, broken or replaced, another till can take it over: it shows which till holds the register, and Take over moves the register to this till. The old till's register commands are then refused, and it shows the register closed. A till that lost its local data and opens the same register again picks up where it left off.
 - **Name each till.** Give the till a name in Settings. It's shown to another till that finds the register open.
