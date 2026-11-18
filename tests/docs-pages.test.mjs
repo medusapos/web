@@ -208,3 +208,13 @@ test('quick start names the take step', () => {
   assert.ok(!sale.includes('take the payment,\nthen tap'), 'quick-start: no vague take the payment');
   assert.ok(sale.indexOf('**Take**') < sale.indexOf('**Complete sale**'), 'quick-start: take before complete');
 });
+
+test('quick start says how staff get their own logins', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const step6 = qs.slice(qs.indexOf('6. If you do not have an admin user'), qs.indexOf('7. Optional: choose who may use the POS'));
+  const flat = step6.replace(/\s+/g, ' ');
+  assert.ok(flat.includes('Give each member of staff their own login: in Medusa Admin, go to **Settings → Users**, click **Invite**, enter their email and click **Send invite**.'), 'quick-start: invite steps');
+  assert.ok(flat.includes('choose **Copy invite link** from the invite\'s menu'), 'quick-start: copy invite link');
+  assert.ok(step6.includes('docs.medusajs.com/user-guide/settings/users/invites'), 'quick-start: invite source cited');
+  assert.ok(step6.indexOf('The POS signs in with that email and password.') < step6.indexOf('Give each member of staff'), 'quick-start: invites after the admin user');
+});
