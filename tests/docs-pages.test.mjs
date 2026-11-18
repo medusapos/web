@@ -403,3 +403,16 @@ test("the 2.21.0 requirement links Medusa's update guide", () => {
   const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
   assert.ok(lim.includes(`so move a store on another version to 2.21.0 first. ${guide}`), 'update: limitations');
 });
+
+test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there yet', () => {
+  const [lim, trouble, home] = ['../content/docs/limitations.mdx', '../content/docs/troubleshooting.mdx', '../app/(home)/page.tsx'].map((p) => readFileSync(new URL(p, import.meta.url), 'utf8'));
+  const item = "- The store refuses a batch of more than 50 sales, or one over the size limit, whole. The till can't split it and resend it in smaller pieces yet.";
+  assert.ok(lim.includes(item), 'batch: limitations');
+  assert.ok(lim.indexOf(item) > lim.indexOf('## Till limits'), 'batch: under till limits');
+  const at = trouble.indexOf("there is nothing in the store to fix, and the till can't split it yet");
+  assert.ok(at !== -1, 'batch: troubleshooting');
+  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf("### Saved sales can't be opened"), 'batch: under not accepted');
+  const li = '<li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>';
+  assert.ok(home.includes(li), 'batch: home');
+  assert.ok(home.indexOf(li) > home.indexOf('id="not-there-yet"'), 'batch: under not there yet');
+});

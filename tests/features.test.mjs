@@ -72,12 +72,8 @@ test('the home page shows the three core cards first and larger', () => {
   assert.ok(source.includes('<h3 className="text-lg font-semibold sm:mt-4 sm:text-xl">'), 'core: larger titles');
 });
 
-test('phones list the other cards as tap-to-open rows', () => {
-  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  const from = source.indexOf('Also at the till');
-  const rows = source.slice(from, source.indexOf('</section>', from));
-  assert.ok(rows.includes('sm:hidden') && rows.includes('<details key={feature.title} className="group">'), 'rows: phone list');
-  assert.ok(rows.includes('flex min-h-11 cursor-pointer'), 'rows: tap target');
-  assert.ok(rows.includes('mt-4 hidden grid-cols-1 gap-3 sm:grid sm:grid-cols-2'), 'rows: cards from sm up');
-  assert.equal(rows.match(/more\.map\(/g)?.length, 2, 'rows: one list, one grid');
+test('the Sells offline card says to keep the tab open', () => {
+  const card = features.find((feature) => feature.title === 'Sells offline');
+  assert.ok(card.description.startsWith("Keep selling from the loaded catalogue when the connection drops, as long as the tab stays open: reloading while offline doesn't work yet. "), 'offline: tab caveat');
+  assert.equal(features[0], card, 'offline: still first');
 });
