@@ -28,8 +28,11 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allReleased = features.every((feature) => feature.released);
-  // With an odd count that leaves two over at three columns (none today: there are 12), the first card spans two columns so every row is full at two and three columns.
-  const spanFirst = features.length % 2 === 1 && features.length % 3 === 2;
+  // The first three cards in lib/features.ts are the core till jobs: the home page shows them as a larger first row.
+  const core = features.slice(0, 3);
+  const more = features.slice(3);
+  // With an odd count (9 today), the last of the other cards spans both columns at two columns, so no card sits alone.
+  const spanLast = more.length % 2 === 1;
   const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
   const { props: heroDesktop } = getImageProps({
     src: '/screenshots/sale-desktop-1000.png',
@@ -116,17 +119,33 @@ export default function HomePage() {
         <p className="mt-3 text-sm sm:hidden">
           <a href="#not-there-yet" className="underline">What it doesn&apos;t do yet</a>
         </p>
-        <div className="mt-8 grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, i) => {
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:gap-6 lg:grid-cols-3">
+          {core.map((feature) => {
             const Icon = icons[feature.icon];
             return (
-              <div key={feature.title} className={`rounded-xl border border-fd-border bg-fd-card p-4 sm:p-6${spanFirst && i === 0 ? ' sm:col-span-2' : ''}`}>
-                {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground sm:mb-0 sm:mt-0">In the live demo · next release</p>}
+              <div key={feature.title} className="rounded-xl border border-fd-border bg-fd-card p-5 sm:p-7">
+                {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
                 <div className="flex items-center gap-3 sm:block">
-                  <Icon size={20} className="shrink-0 text-fd-muted-foreground" />
-                  <h3 className={`${feature.released ? 'sm:mt-4' : 'sm:mt-1'} text-base font-semibold sm:text-lg`}>{feature.title}</h3>
+                  <Icon size={24} className="shrink-0 text-fd-foreground" />
+                  <h3 className="text-lg font-semibold sm:mt-4 sm:text-xl">{feature.title}</h3>
                 </div>
-                <p className="mt-1 text-sm text-fd-muted-foreground sm:mt-2 sm:text-base">{feature.description}</p>
+                <p className="mt-2 text-sm text-fd-muted-foreground sm:text-base">{feature.description}</p>
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-10 font-semibold">Also at the till</p>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          {more.map((feature, i) => {
+            const Icon = icons[feature.icon];
+            return (
+              <div key={feature.title} className={`rounded-xl border border-fd-border bg-fd-card p-4 sm:p-5${spanLast && i === more.length - 1 ? ' sm:col-span-2 lg:col-span-1' : ''}`}>
+                {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
+                <div className="flex items-center gap-3">
+                  <Icon size={18} className="shrink-0 text-fd-muted-foreground" />
+                  <h3 className="text-base font-semibold">{feature.title}</h3>
+                </div>
+                <p className="mt-1 text-sm text-fd-muted-foreground sm:mt-2">{feature.description}</p>
               </div>
             );
           })}

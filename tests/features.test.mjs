@@ -32,7 +32,7 @@ test('docs index and quick start link the live demo', () => {
 
 test('home page renders the features list and the comparison table', () => {
   const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  assert.ok(source.split('features.map(').length - 1 >= 2);
+  assert.ok(source.includes('core.map(') && source.includes('more.map(') && source.includes('features.map('), 'home: both card groups and the table render');
   assert.ok(source.includes('scope="row"'));
 });
 
@@ -60,4 +60,14 @@ test('the feature lists include fees and one-off items', () => {
   assert.ok(intro.includes("- Adds a bag fee, a delivery charge or a one-off item that isn't in your catalogue ([At the till](/docs/at-the-till#fees-delivery-charges-and-one-off-items))."), 'fees: introduction');
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   assert.ok(till.includes('## Fees, delivery charges and one-off items'), 'fees: anchor target exists');
+});
+
+test('the home page shows the three core cards first and larger', () => {
+  assert.deepEqual(features.slice(0, 3).map((feature) => feature.title), ['Sells offline', 'Real Medusa orders', 'Cash and card terminal'], 'core: the first three cards');
+  assert.equal(features.slice(3).length % 3, 0, 'core: the other cards fill rows of three');
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(source.includes('const core = features.slice(0, 3);') && source.includes('const more = features.slice(3);'), 'core: split');
+  assert.ok(source.includes('<p className="mt-10 font-semibold">Also at the till</p>'), 'core: label before the others');
+  assert.ok(source.indexOf('core.map(') < source.indexOf('Also at the till') && source.indexOf('Also at the till') < source.indexOf('more.map('), 'core: order');
+  assert.ok(source.includes('<h3 className="text-lg font-semibold sm:mt-4 sm:text-xl">'), 'core: larger titles');
 });
