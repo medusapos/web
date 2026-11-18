@@ -390,7 +390,7 @@ test('quick start gives the sale as numbered steps', () => {
   const steps = sale.split('\n').filter((line) => /^\d\. /.test(line));
   assert.equal(steps.length, 5, 'sale steps: five');
   assert.ok(steps.every((line, i) => line.startsWith(`${i + 1}. `)), 'sale steps: in order');
-  assert.ok(steps[0].startsWith("1. Under the header, tap the register's state, then choose **Register 1**"), 'sale steps: where to tap');
+  assert.ok(steps[0].startsWith("1. Under the header, tap the register's state (it reads **Register** until you choose one), then choose **Register 1**"), 'sale steps: where to tap');
   assert.ok(steps[2].startsWith('3. Tap **Checkout**.') && steps[4].startsWith('5. Tap **Complete sale**'), 'sale steps: checkout then complete');
   assert.ok(sale.includes('[Take a sale](/docs/at-the-till#take-a-sale) has more on each step.'), 'sale steps: link kept');
 });
@@ -494,4 +494,11 @@ test('held sales says where the resolve script is in a workspace', () => {
   const j = ts.indexOf("If your backend is in an npm or Yarn workspace, the plugin is usually installed in the workspace root's `node_modules`");
   const k = ts.indexOf('- `apply`: you have fixed the order by hand.');
   assert.ok(i > 0 && j > i && k > j, 'held sales: workspace note between command and apply');
+});
+
+test('the docs name the register state label', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  assert.ok(qs.includes("1. Under the header, tap the register's state (it reads **Register** until you choose one), then choose **Register 1** and"), 'register label: quick start');
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(reg.includes("The register's state shows under the header; until a register is chosen, it reads **Register**."), 'register label: registers');
 });
