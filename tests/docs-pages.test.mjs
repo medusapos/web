@@ -65,6 +65,12 @@ test('home page points to the limitations page', () => {
   assert.ok(!source.includes('#known-mvp-limits'));
 });
 
+test('registers says how to move the register to another till', () => {
+  const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(registers.indexOf('## Move the register to another till') > -1 && registers.indexOf('## Move the register to another till') < registers.indexOf('## Take over a register'), 'registers: move before take over');
+  assert.ok(registers.includes('close it on the till that holds it, then open it on the other till with a new float.'), 'registers: close then open');
+});
+
 test('quick start links all five store-owner pages', () => {
   const source = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   for (const slug of ['plugin-setup', 'at-the-till', 'registers', 'troubleshooting', 'limitations']) {
