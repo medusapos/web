@@ -112,6 +112,8 @@ test('the docs say the plugin needs exactly Medusa 2.21.0', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(limits.includes('- You need Medusa 2.21.0 exactly. Plugin 0.2.3 names that version, not a range,'), 'limitations: exact version');
   assert.ok(quickStart.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits))'), 'quick-start: exact version');
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('The web app needs a store on Medusa 2.21.0 exactly, with the MedusaPOS plugin installed.'), 'home: exact version');
 });
 
 test('the site says app.medusapos.com runs the latest build', () => {
