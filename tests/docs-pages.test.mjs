@@ -235,6 +235,7 @@ test('docs show the payment screen, the count and the Z report', () => {
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
   assert.ok(mdx.includes('className="mx-auto w-full border border-fd-border"') && !mdx.includes('max-w-sm') && !mdx.includes('max-w-md'), 'mdx: framed screenshots, no fixed box');
   assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: (props) => {') && mdx.includes('<ImageZoom\n'), 'mdx: screenshots zoom');
+  assert.ok(mdx.includes('className="-mt-6 block text-center text-xs text-fd-muted-foreground sm:hidden">') && mdx.includes('Tap to enlarge') && mdx.includes('<span className="block">'), 'mdx: phone screenshots say a tap enlarges them');
   assert.ok(mdx.includes("typeof src === 'object' && src ? Number(src.width)") && mdx.includes('maxWidth: width > 0 ? width / 2 : undefined'), 'mdx: half the static image width, one scale');
 });
 
