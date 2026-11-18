@@ -139,12 +139,12 @@ export default function HomePage() {
           })}
         </div>
         <p className="mt-10 font-semibold">Also at the till</p>
-        {/* Below 640 px the other cards are a two-column list of links to their docs, so the phone page doesn't stack nine full cards. Every row takes the tallest tile's height, and a title's hyphen is non-breaking (U+2011), so "one-off" stays whole. */}
-        <ul className="mt-4 grid auto-rows-fr grid-cols-2 gap-2 sm:hidden">
-          {more.map((feature, i) => {
+        {/* Below 640 px the other cards are a one-column list of links to their docs, so the phone page doesn't stack nine full cards and every title stays on one line. A title's hyphen is non-breaking (U+2011), so "one-off" stays whole. */}
+        <ul className="mt-4 grid gap-2 sm:hidden">
+          {more.map((feature) => {
             const Icon = icons[feature.icon];
             return (
-              <li key={feature.title} className={spanLast && i === more.length - 1 ? 'col-span-2' : undefined}>
+              <li key={feature.title}>
                 <Link href={featureDocs[feature.title]} className="flex h-full min-h-12 items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-3 py-2 text-sm font-medium">
                   <Icon size={16} className="shrink-0 text-fd-muted-foreground" />
                   <span>

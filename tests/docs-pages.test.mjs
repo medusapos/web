@@ -614,3 +614,11 @@ test('Quick start walks through closing the register', () => {
     assert.ok(registers.includes(label), `qs close: ${label} matches Registers`);
   }
 });
+
+test('the optional RBAC section offers a skip to Sign in', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const access = qs.slice(qs.indexOf('## Choose who may use the POS'), qs.indexOf('## Sign in'));
+  const first = access.split('\n\n').find((block) => block.startsWith('This is optional'));
+  assert.ok(first && first.startsWith('This is optional: if every admin user may use the till, skip to\n[Sign in](#sign-in).'), 'rbac skip: first sentence links Sign in');
+  assert.match(qs, /^## Sign in$/m, 'rbac skip: the anchor target exists');
+});
