@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
 test('home hero is the 1000 x 680 capture', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
@@ -153,7 +153,7 @@ test('the docs say the plugin needs exactly Medusa 2.21.0', () => {
   const limits = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(limits.includes('- You need Medusa 2.21.0 exactly. Plugin 0.2.3 names that version, not a range,'), 'limitations: exact version');
-  assert.ok(quickStart.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits))'), 'quick-start: exact version');
+  assert.ok(quickStart.includes('- A store on Medusa 2.21.0 exactly ([why this version](/docs/limitations#store-setup-limits))'), 'quick-start: exact version');
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   assert.ok(home.includes(" resets every night. The web app needs a store on{' '}") && home.includes('Medusa 2.21.0 exactly\n') && home.includes(', with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.'), 'home: exact version');
   assert.ok(home.includes('The live demo signs you in with one click and resets every night.'), 'home: demo one click');
@@ -182,7 +182,7 @@ test('the quick start says the till shows only the channel\'s products', () => {
 
 test('the quick start says to link one stock location', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  assert.ok(/Link only that one stock location to the channel\s+\(\[why\]\(\/docs\/limitations#store-setup-limits\)\)\./.test(quickStart), 'quick-start: one location');
+  assert.ok(/Link only that one stock location to the channel\s+\(\[why one location\]\(\/docs\/limitations#store-setup-limits\)\)\./.test(quickStart), 'quick-start: one location');
 });
 
 test('configure your store names the admin paths', () => {
@@ -560,7 +560,7 @@ test('Not there yet sits beside the phone screenshot', () => {
 test('the introduction asks for Medusa 2.21.0 exactly', () => {
   const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
   const need = intro.slice(intro.indexOf('## What you need'), intro.indexOf('## Status'));
-  assert.ok(need.includes('- A store on Medusa 2.21.0 exactly ([why](/docs/limitations#store-setup-limits)), with the MedusaPOS plugin installed.\n'), 'intro: exactly, with the why link');
+  assert.ok(need.includes('- A store on Medusa 2.21.0 exactly ([why this version](/docs/limitations#store-setup-limits)), with the MedusaPOS plugin installed.\n'), 'intro: exactly, with the why link');
   assert.ok(!intro.includes('A Medusa 2.21.0 store'), 'intro: no bare version');
 });
 
@@ -667,4 +667,11 @@ test("the 0.2.0 till bullets each lead with a bold label and a full stop", () =>
   assert.ok(lines.every((line) => /^- \*\*[^*]+\.\*\* \S/.test(line)), 'till bullets: bold label, full stop, then text');
   assert.ok(till.includes('- **Line prices.** Change a line\'s price at the till.'), 'till bullets: line price');
   assert.ok(till.includes("a one-off item to a sale. Your store records the fee") && till.includes('All are taxed at your region\'s rate. Medusa can\'t keep one charge tax-free'), 'till bullets: fees in one paragraph');
+});
+
+test('no docs link is a bare "why"', () => {
+  for (const file of readdirSync(new URL('../content/docs/', import.meta.url)).filter((name) => name.endsWith('.mdx'))) {
+    const src = readFileSync(new URL(`../content/docs/${file}`, import.meta.url), 'utf8');
+    assert.ok(!/\[why\]\(/i.test(src), `why links: ${file}`);
+  }
 });
