@@ -40,6 +40,8 @@ Set up your store like this:
 
 ## Till limits
 
+{/* Batch limit: medusapos/app v0.2.0 notes ("Oversized batches get a clear answer"); medusapos/app#134, MAX_COMMANDS = 50. */}
+
 At the till, expect this:
 
 - Only one tab per store stays live.
@@ -48,6 +50,7 @@ At the till, expect this:
 - Stock refreshes every 5 minutes, prices every 30 minutes and base prices nightly, not to the second.
 - Deleted products leave the till at app start or within 24 hours while it stays open.
 - Stock may go negative when an offline sale oversells, with a warning on the order.
+- The store refuses a batch of more than 50 sales, or one over the size limit, whole. The till can't split it and resend it in smaller pieces yet.
 - Medusa's reports can differ from receipts by fractions of a cent. The payment always equals the POS total.
 - The manager-approval limit is fixed at 500 of the currency's smallest unit (€5.00 in a euro store). You can't change it yet.
 - With plugin 0.2.3, any login for your store can approve a large difference, including the cashier's own. The till checks the email and password, not the user's role.
