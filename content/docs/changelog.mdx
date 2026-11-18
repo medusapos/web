@@ -3,7 +3,7 @@ title: Changelog
 description: Released versions of MedusaPOS, newest first.
 ---
 
-Each entry is the release note published with that version on [GitHub](https://github.com/medusapos/app/releases). Unreleased work is not listed.
+Each entry follows the release note published with that version on [GitHub](https://github.com/medusapos/app/releases), edited for this site. Notes the site added start with **Site note**. Unreleased work is not listed.
 
 {/* Hosted build: medusapos/app@34efcbc apps/expo/package.json:4 ("version": "0.2.0"); Checkout: #299; Order note: limitations.mdx line 23. */}
 
@@ -44,7 +44,7 @@ Update the plugin first (see [Update the plugin](#update-the-plugin)), then the 
 
 {/* Pay flow at v0.2.0: medusapos/app@bcd2047 e2e/helpers.ts lines 154-185 (startTender: the v0.2.0 build's Cash and Card terminal buttons and "Payment approved on terminal"); docs/v2-parity/DEMO-PARITY.md row 06c. Moved from At the till in climb round 21. */}
 
-If you run 0.2.0 from its tag instead of the hosted app, the cart has **Cash** and **Card terminal** buttons in place of **Checkout**, and a card sale ends with **Payment approved on terminal**. For a split payment, choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
+**Site note:** if you run 0.2.0 from its tag instead of the hosted app, the cart has **Cash** and **Card terminal** buttons in place of **Checkout**, and a card sale ends with **Payment approved on terminal**. For a split payment, choose **Cash**, then **Split payment**. Pick card terminal or cash for each part, enter its amount and add it. The summary shows **Paid**, **Remaining** and, once cash covers the rest, **Change**.
 
 ### What's new for your store
 
@@ -148,4 +148,4 @@ Then register `@medusapos/medusa-plugin` in `medusa-config.ts`, run `npx medusa 
 - With a large catalogue (about 2,000 products), the first sync takes about 45 s, and search is slow. A fix is in progress.
 - No card charging, refunds or returns yet.
 
-Site note, November 2026: the 0.2.0 release notes list no fix for the large-catalogue sync. See [Limitations](/docs/limitations).
+**Site note**, November 2026: the 0.2.0 release notes list no fix for the large-catalogue sync. See [Limitations](/docs/limitations).
