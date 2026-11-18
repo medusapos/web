@@ -502,3 +502,11 @@ test('the docs name the register state label', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(reg.includes("The register's state shows under the header; until a register is chosen, it reads **Register**."), 'register label: registers');
 });
+
+test('the docs layout drops the shared Docs link', () => {
+  const layout = readFileSync(new URL('../app/docs/layout.tsx', import.meta.url), 'utf8');
+  assert.ok(layout.includes("link.url === '/docs'"), 'docs layout: filters the Docs link');
+  assert.ok(layout.includes('{...base} links={links}'), 'docs layout: filtered links win over the shared ones');
+  const shared = readFileSync(new URL('../lib/layout.shared.tsx', import.meta.url), 'utf8');
+  assert.ok(shared.includes("{ text: 'Docs', url: '/docs', active: 'none' },"), 'docs layout: home header keeps Docs');
+});
