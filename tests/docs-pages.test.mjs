@@ -592,12 +592,17 @@ test('Plugin setup adds locking to the existing modules array', () => {
   assert.ok(section.includes("resolve: '@medusajs/medusa/locking-redis'") && section.includes("resolve: '@medusajs/medusa/locking-postgres'"), 'locking: both providers kept');
 });
 
-test('code blocks get a break point after each slash', () => {
+test('code blocks get a break point after each slash and before each member name', () => {
   const config = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
-  assert.ok(config.includes("const parts = child.value.split(/(?<=\\/)(?!\\/)/);"), 'code wrap: split after a slash not followed by a slash');
+  assert.ok(config.includes("const parts = child.value.split(/(?<=\\/)(?!\\/)|(?<=\\.)(?=[A-Za-z_$])/);"), 'code wrap: split after a slash, or after a dot before a name');
   assert.ok(config.includes("tagName: 'wbr'"), 'code wrap: wbr element');
   const hook = config.slice(config.indexOf("name: 'medusapos:wrap-indent'"));
-  assert.ok(hook.includes('breakAfterSlashes(node'), 'code wrap: called from the line hook');
+  assert.ok(hook.includes('addBreakPoints(node'), 'code wrap: called from the line hook');
+  const split = (s) => s.split(/(?<=\/)(?!\/)|(?<=\.)(?=[A-Za-z_$])/);
+  assert.deepEqual(split('process.env.LOCKING_REDIS_URL,'), ['process.', 'env.', 'LOCKING_REDIS_URL,'], 'code wrap: member chain splits before each name');
+  assert.deepEqual(split('0.2.3'), ['0.2.3'], 'code wrap: version numbers stay whole');
+  assert.deepEqual(split('@medusajs/medusa/locking'), ['@medusajs/', 'medusa/', 'locking'], 'code wrap: paths still split after each slash');
+  assert.deepEqual(split('https://x'), ['https://', 'x'], 'code wrap: no break between the two slashes of //');
   const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
   assert.ok(css.includes('overflow-wrap: anywhere;'), 'code wrap: anywhere stays as the fallback');
 });
