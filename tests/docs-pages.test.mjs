@@ -89,6 +89,7 @@ test('registers says how to move the register to another till', () => {
 test('the quick start names Register 1', () => {
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(quickStart.includes('choose **Register 1** and [open it](/docs/registers#open-with-your-float)'), 'quick-start: Register 1');
+  assert.ok(quickStart.includes('You can browse and fill the cart before that. In the live demo, choose **Demo register** instead.'), 'quick-start: demo register');
   assert.ok(!quickStart.includes('choose a register'), 'quick-start: no generic register');
 });
 
