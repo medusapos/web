@@ -43,7 +43,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'scan-barcode',
     title: 'Scan or search',
-    description: 'Use a keyboard-wedge barcode scanner, or search by name, SKU or barcode.',
+    description: 'Use a USB or Bluetooth barcode scanner set to type like a keyboard, or search by name, SKU or barcode.',
     tests: ['apps/expo/tests/catalogue.test.tsx', 'e2e/phone-cart.spec.ts'],
     released: true,
   },
