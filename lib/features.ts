@@ -51,7 +51,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'smartphone',
     title: 'Counter or phone',
-    description: 'Every store has one register, so one device at a time takes payment. The same app works on a counter screen and on a phone, with the cart a tap away.',
+    description: 'Every store has one register, so one device at a time takes payment. The same app works on a counter screen and on a phone; to switch, close the register on one and open it on the other.',
     tests: ['e2e/phone-cart.spec.ts'],
     released: true,
   },
