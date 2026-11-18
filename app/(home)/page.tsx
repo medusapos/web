@@ -175,7 +175,7 @@ export default function HomePage() {
         <div className="max-w-prose">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">In the browser you already have</h2>
           <p className="mt-4 text-fd-muted-foreground">
-            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale. Offline, the app can&apos;t reload or reopen, so keep the tab open until you&apos;re back online.
+            Open app.medusapos.com in a current Chrome, Edge, Safari or Firefox and sign in with your store&apos;s backend URL and an admin account. The catalogue and unsent sales are kept in the browser&apos;s own storage, so a dropped connection doesn&apos;t lose a sale, and online a reload keeps every unsent sale.
           </p>
         </div>
       </section>
@@ -196,7 +196,7 @@ export default function HomePage() {
           <li>run as a native iOS, Android or desktop app (it runs in the browser)</li>
           <li>support more than one stock location per sales channel</li>
           {/* One till at a time: content/docs/registers.mdx lines 19 and 64; medusapos/app@v0.2.0 docs/adr/0022-register-v2.md line 8. */}
-          <li>add or rename registers: every store has one, Register 1, so one till at a time takes payment</li>
+          <li>add or rename registers: every store has one, Register 1</li>
         </ul>
         <p className="mt-4 text-fd-muted-foreground">
           See the <Link href="/docs/limitations" className="underline">limitations page</Link> for the full list.
