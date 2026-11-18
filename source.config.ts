@@ -19,10 +19,15 @@ export const docs = defineDocs({
 
 type HastNode = { type: string; value?: string; tagName?: string; properties?: Record<string, unknown>; children?: HastNode[] };
 
-// A <wbr> after each '/' that isn't followed by another '/', and after each
-// '.' that starts a name (process.env.LOCKING_REDIS_URL), so a long path or
-// member chain wraps between folders or members on a phone instead of
-// mid-word. <wbr> adds no text: the copy button copies the code unchanged.
+// A <wbr> lets a long code line wrap at a sensible place on a phone instead
+// of mid-word. Text holding a '/' is a path: it breaks after each '/' that
+// isn't followed by another '/', so ./node_modules/x/.medusa/y.js wraps only
+// between folders. Other text breaks after a '.' that follows a name and
+// starts one (process.env.LOCKING_REDIS_URL), but not before a file
+// extension (medusa-config.ts), in a version (0.2.3) or in '...'.
+// <wbr> adds no text: the copy button copies the code unchanged.
+const PATH_BREAK = /(?<=\/)(?!\/)/;
+const MEMBER_BREAK = /(?<=[\w$)\]]\.)(?=[A-Za-z_$])(?!(?:[cm]?[jt]sx?|json)\b)/;
 function addBreakPoints(node: HastNode) {
   if (!node.children) return;
   node.children = node.children.flatMap((child) => {
@@ -30,7 +35,7 @@ function addBreakPoints(node: HastNode) {
       addBreakPoints(child);
       return [child];
     }
-    const parts = child.value.split(/(?<=\/)(?!\/)|(?<=\.)(?=[A-Za-z_$])/);
+    const parts = child.value.split(child.value.includes('/') ? PATH_BREAK : MEMBER_BREAK);
     return parts.flatMap((part, i) => [
       ...(part ? [{ type: 'text', value: part }] : []),
       ...(i < parts.length - 1 ? [{ type: 'element', tagName: 'wbr', properties: {}, children: [] }] : []),

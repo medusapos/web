@@ -594,15 +594,20 @@ test('Plugin setup adds locking to the existing modules array', () => {
 
 test('code blocks get a break point after each slash and before each member name', () => {
   const config = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
-  assert.ok(config.includes("const parts = child.value.split(/(?<=\\/)(?!\\/)|(?<=\\.)(?=[A-Za-z_$])/);"), 'code wrap: split after a slash, or after a dot before a name');
+  assert.ok(config.includes('const PATH_BREAK = /(?<=\\/)(?!\\/)/;'), 'code wrap: path break after a slash');
+  assert.ok(config.includes('const MEMBER_BREAK = /(?<=[\\w$)\\]]\\.)(?=[A-Za-z_$])(?!(?:[cm]?[jt]sx?|json)\\b)/;'), 'code wrap: member break after a dot that follows a name');
+  assert.ok(config.includes("const parts = child.value.split(child.value.includes('/') ? PATH_BREAK : MEMBER_BREAK);"), 'code wrap: a path breaks only at slashes');
   assert.ok(config.includes("tagName: 'wbr'"), 'code wrap: wbr element');
   const hook = config.slice(config.indexOf("name: 'medusapos:wrap-indent'"));
   assert.ok(hook.includes('addBreakPoints(node'), 'code wrap: called from the line hook');
-  const split = (s) => s.split(/(?<=\/)(?!\/)|(?<=\.)(?=[A-Za-z_$])/);
+  const split = (s) => s.split(s.includes('/') ? /(?<=\/)(?!\/)/ : /(?<=[\w$)\]]\.)(?=[A-Za-z_$])(?!(?:[cm]?[jt]sx?|json)\b)/);
   assert.deepEqual(split('process.env.LOCKING_REDIS_URL,'), ['process.', 'env.', 'LOCKING_REDIS_URL,'], 'code wrap: member chain splits before each name');
   assert.deepEqual(split('0.2.3'), ['0.2.3'], 'code wrap: version numbers stay whole');
   assert.deepEqual(split('@medusajs/medusa/locking'), ['@medusajs/', 'medusa/', 'locking'], 'code wrap: paths still split after each slash');
   assert.deepEqual(split('https://x'), ['https://', 'x'], 'code wrap: no break between the two slashes of //');
+  assert.deepEqual(split('./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-pos-roles.js'), ['./', 'node_modules/', '@medusapos/', 'medusa-plugin/', '.medusa/', 'server/', 'src/', 'scripts/', 'tally-pos-roles.js'], 'code wrap: a path keeps .medusa and .js whole');
+  assert.deepEqual(split('medusa-config.ts'), ['medusa-config.ts'], 'code wrap: no break before a file extension');
+  assert.deepEqual(split('...rest'), ['...rest'], 'code wrap: no break inside a spread');
   const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
   assert.ok(css.includes('overflow-wrap: anywhere;'), 'code wrap: anywhere stays as the fallback');
 });
