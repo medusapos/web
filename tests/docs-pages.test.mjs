@@ -764,3 +764,8 @@ test('Limitations does not repeat its subtitle', () => {
   assert.match(lim, /^MedusaPOS is in beta\.$/m, 'limitations: intro is one sentence');
   assert.equal(lim.split("what it expects of your store and till").length, 2, 'limitations: said once');
 });
+
+test('Source on GitHub has a 44 px tap height', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<a href={siteConfig.githubUrl} className="py-2.5 underline">Source on GitHub</a>'), 'source: padded link');
+});
