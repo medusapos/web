@@ -138,3 +138,13 @@ test('the split card has the name of its docs heading', () => {
   assert.ok(!features.some((feature) => feature.title === 'Split tender'), 'split: old title gone');
   assert.equal(featureDocs['Split payment'], '/docs/at-the-till#split-payment', 'split: docs link');
 });
+
+test('from sm up each Also at the till card links to its docs section', () => {
+  const source = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const cards = source.slice(source.indexOf('hidden gap-3 sm:grid'), source.indexOf('</section>', source.indexOf('hidden gap-3 sm:grid')));
+  assert.ok(cards.includes('<Link key={feature.title} href={featureDocs[feature.title]} className={`block rounded-xl border border-fd-border bg-fd-card p-4 transition-colors hover:bg-fd-accent sm:p-5'), 'cards: each is a link to its docs');
+  assert.ok(/<\/h3>\s*<ChevronRight size=\{16\} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" \/>/.test(cards), 'cards: a chevron after the title');
+  assert.ok(!cards.includes('<div key={feature.title}'), 'cards: no plain card left');
+  const core = source.slice(source.indexOf('core.map('), source.indexOf('Also at the till'));
+  assert.ok(!core.includes('<Link'), 'cards: the headline cards stay static');
+});

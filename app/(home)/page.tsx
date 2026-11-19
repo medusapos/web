@@ -170,14 +170,15 @@ export default function HomePage() {
           {more.map((feature, i) => {
             const Icon = icons[feature.icon];
             return (
-              <div key={feature.title} className={`rounded-xl border border-fd-border bg-fd-card p-4 sm:p-5${spanLast && i === more.length - 1 ? ' sm:col-span-2 lg:col-span-1' : ''}`}>
+              <Link key={feature.title} href={featureDocs[feature.title]} className={`block rounded-xl border border-fd-border bg-fd-card p-4 transition-colors hover:bg-fd-accent sm:p-5${spanLast && i === more.length - 1 ? ' sm:col-span-2 lg:col-span-1' : ''}`}>
                 {!feature.released && <p className="mb-2 text-sm text-fd-muted-foreground">In the live demo · next release</p>}
                 <div className="flex items-center gap-3">
                   <Icon size={18} className="shrink-0 text-fd-muted-foreground" />
                   <h3 className="text-base font-semibold">{feature.title}</h3>
+                  <ChevronRight size={16} aria-hidden="true" className="ml-auto shrink-0 text-fd-muted-foreground" />
                 </div>
                 <p className="mt-1 text-sm text-fd-muted-foreground sm:mt-2">{feature.description}</p>
-              </div>
+              </Link>
             );
           })}
         </div>
