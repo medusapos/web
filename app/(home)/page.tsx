@@ -294,7 +294,7 @@ export default function HomePage() {
           >
             Quick start
           </Link>
-          <a href={siteConfig.githubUrl} className="underline">Source on GitHub</a>
+          <a href={siteConfig.githubUrl} className="py-2.5 underline">Source on GitHub</a>
         </div>
       </section>
     </main>
