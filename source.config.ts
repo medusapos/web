@@ -25,19 +25,36 @@ type HastNode = { type: string; value?: string; tagName?: string; properties?: R
 // between folders. Other text breaks after a '.' that follows a name and
 // starts one (process.env.LOCKING_REDIS_URL), but not before a file
 // extension (medusa-config.ts), in a version (0.2.3) or in '...'.
-// <wbr> adds no text: the copy button copies the code unchanged.
+// <wbr> adds no text: the copy button copies the code unchanged. A short run
+// holding a hyphen between two letters or digits is kept on one row (see
+// keepHyphenRuns).
 const PATH_BREAK = /(?<=\/)(?!\/)/;
 const MEMBER_BREAK = /(?<=[\w$)\]]\.)(?=[A-Za-z_$])(?!(?:[cm]?[jt]sx?|json)\b)/;
+const HYPHEN_RUN = /([^\s/]*[A-Za-z0-9]-[A-Za-z0-9][^\s/]*)/;
+// A run of up to 32 characters with no space or slash that holds a hyphen
+// between two letters or digits (medusa-plugin@0.2.3, tally-pos-roles.js)
+// goes in a nowrap span, so the browser doesn't break it at the hyphen.
+// A longer run is left alone and can still wrap.
+function keepHyphenRuns(value: string): HastNode[] {
+  return value
+    .split(HYPHEN_RUN)
+    .filter((piece) => piece !== '')
+    .map((piece) =>
+      HYPHEN_RUN.test(piece) && piece.length <= 32 && !/[\s/]/.test(piece)
+        ? { type: 'element', tagName: 'span', properties: { style: 'white-space:nowrap' }, children: [{ type: 'text', value: piece }] }
+        : { type: 'text', value: piece },
+    );
+}
 function addBreakPoints(node: HastNode) {
   if (!node.children) return;
   node.children = node.children.flatMap((child) => {
-    if (child.type !== 'text' || child.value === undefined || !/[/.]/.test(child.value)) {
+    if (child.type !== 'text' || child.value === undefined || !/[/.-]/.test(child.value)) {
       addBreakPoints(child);
       return [child];
     }
     const parts = child.value.split(child.value.includes('/') ? PATH_BREAK : MEMBER_BREAK);
     return parts.flatMap((part, i) => [
-      ...(part ? [{ type: 'text', value: part }] : []),
+      ...keepHyphenRuns(part),
       ...(i < parts.length - 1 ? [{ type: 'element', tagName: 'wbr', properties: {}, children: [] }] : []),
     ]);
   });
