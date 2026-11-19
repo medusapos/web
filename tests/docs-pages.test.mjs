@@ -870,3 +870,8 @@ test('the hero keeps its top padding and has a small bottom padding', () => {
   assert.ok(home.includes('<section className="grid items-center gap-10 pt-12 pb-4 sm:pt-16 sm:pb-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">'), 'hero gap: padding');
   assert.ok(!home.includes('grid items-center gap-10 py-12'), 'hero gap: old padding gone');
 });
+
+test('from lg the demo note sits right under the 2.21.0 note', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<p className="mt-4 lg:mt-1 text-sm text-fd-muted-foreground">\n            The live demo signs you in with one click and resets every night.'), 'fine print: demo note 4px under from lg');
+});
