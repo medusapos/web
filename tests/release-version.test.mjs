@@ -21,5 +21,12 @@ test('the docs index and plugin setup name the release', () => {
 
 test('the prerendered home page shows the release', () => {
   const html = readFileSync('.next/server/app/index.html', 'utf8');
-  assert.ok(html.includes(`version ${release}`));
+  assert.ok(html.includes(`Beta · app ${release}`));
+});
+
+test('the home badge labels the release as the app', () => {
+  const home = readFileSync('app/(home)/page.tsx', 'utf8');
+  assert.ok(home.includes('{`Beta · app ${siteConfig.release}`}'), 'badge: app label from siteConfig');
+  assert.ok(!home.includes('Beta · version'), 'badge: unlabelled version gone');
+  assert.ok(!/Beta · app \d/.test(home), 'badge: number not typed by hand');
 });

@@ -59,7 +59,7 @@ export default function HomePage() {
       />
       <section className="grid items-center gap-10 pt-12 pb-4 sm:pt-16 sm:pb-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">
         <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
-          <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
+          <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · app ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
             MedusaPOS is an open-source till, free of charge under the MIT licence, for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser on one register per store, keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice in your Medusa store.
