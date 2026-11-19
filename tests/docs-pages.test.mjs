@@ -416,7 +416,7 @@ test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there y
   assert.ok(lim.indexOf(item) > lim.indexOf('## Till limits'), 'batch: under till limits');
   const at = trouble.indexOf("there is nothing in the store to fix, and the till can't split it yet");
   assert.ok(at !== -1, 'batch: troubleshooting');
-  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf("### Saved sales can't be opened"), 'batch: under not accepted');
+  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf('## "This account can\'t use the POS"'), 'batch: under not accepted');
   const li = '<li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>';
   assert.ok(home.includes(li), 'batch: home');
   assert.ok(home.indexOf(li) > home.indexOf('id="not-there-yet"'), 'batch: under not there yet');
@@ -763,4 +763,15 @@ test('Limitations does not repeat its subtitle', () => {
   assert.ok(lim.includes("description: What MedusaPOS doesn't do yet, and what it expects of your store and till."), 'limitations: subtitle');
   assert.match(lim, /^MedusaPOS is in beta\.$/m, 'limitations: intro is one sentence');
   assert.equal(lim.split("what it expects of your store and till").length, 2, 'limitations: said once');
+});
+
+test('Troubleshooting gives the full-screen saved-sales message its own section', () => {
+  const tr = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  const banners = tr.slice(tr.indexOf('## Read the banners'), tr.indexOf('## "This account can\'t use the POS"'));
+  assert.ok(!banners.includes("Saved sales can't be opened"), 'saved sales: not under banners');
+  assert.match(tr, /^## Saved sales can't be opened$/m, 'saved sales: own H2');
+  const i = tr.indexOf("## Saved sales can't be opened");
+  assert.ok(tr.indexOf("## If a sale can't be saved") < i && i < tr.indexOf('## Storage messages'), 'saved sales: between the save and storage sections');
+  assert.ok(tr.slice(i).includes('The full-screen message says "Saved sales can\'t be opened on this device.'), 'saved sales: text kept');
+  assert.equal(tr.split("Saved sales can't be opened on this device").length, 2, 'saved sales: said once');
 });

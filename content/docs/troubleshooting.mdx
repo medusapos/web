@@ -29,10 +29,6 @@ The store refuses a whole batch. The strip says "N sales not accepted · Details
 
 A batch refused for its size, more than 50 sales or over the size limit, is different: there is nothing in the store to fix, and the till can't split it yet. The sales stay on the till; splitting comes in a later version ([Till limits](/docs/limitations#till-limits)).
 
-### Saved sales can't be opened
-
-The full-screen message says "Saved sales can't be opened on this device. Nothing has been deleted. Reload to try again, or report the problem." It offers **Reload** and **Report a problem**, sometimes with an error code underneath.
-
 ## "This account can't use the POS"
 
 The store has Medusa RBAC on, and this user has neither POS role. A store owner gives them the **POS cashier** or **POS manager** role in Medusa Admin, as in the quick start's [Choose who may use the POS](/docs/quick-start#choose-who-may-use-the-pos).
@@ -79,6 +75,10 @@ A browser without the private storage MedusaPOS needs shows "MedusaPOS can't run
 The payment screen stays on the sale. **Complete sale** tries again; pressing it again never saves the sale twice.
 
 Once the sale is saved on the till, **Continue** starts the next sale and the saved one is sent as usual. **Sign out** stays greyed out until the sale is saved or you continue. If **Continue** never appears, write the sale down, reload the app and report it.
+
+## Saved sales can't be opened
+
+The full-screen message says "Saved sales can't be opened on this device. Nothing has been deleted. Reload to try again, or report the problem." It offers **Reload** and **Report a problem**, sometimes with an error code underneath.
 
 ## Storage messages
 
