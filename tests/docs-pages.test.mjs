@@ -764,3 +764,16 @@ test('Limitations does not repeat its subtitle', () => {
   assert.match(lim, /^MedusaPOS is in beta\.$/m, 'limitations: intro is one sentence');
   assert.equal(lim.split("what it expects of your store and till").length, 2, 'limitations: said once');
 });
+
+test('Registers shows where and how to open the register', () => {
+  const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const open = reg.slice(reg.indexOf('## Open with your float'), reg.indexOf('## Record cash in and out'));
+  for (const file of ['till-register-control.jpg', 'quick-start-open-register.jpg']) {
+    const line = qs.split('\n').map((l) => l.trim()).find((l) => l.startsWith('![') && l.includes(`/screenshots/docs/${file})`));
+    assert.ok(line, `registers open: ${file} in quick start`);
+    assert.ok(open.includes(line), `registers open: ${file} with the same alt text`);
+  }
+  assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register.jpg'), 'registers open: control before panel');
+  assert.ok(open.indexOf('Tap it to choose or open the register.') < open.indexOf('till-register-control.jpg'), 'registers open: after the text');
+});
