@@ -57,8 +57,8 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd(siteConfig)) }}
       />
-      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        <div>
+      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">
+        <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
@@ -78,6 +78,23 @@ export default function HomePage() {
               Quick start
             </Link>
           </div>
+        </div>
+        <figure className="mx-auto w-full max-w-[300px] md:max-w-none lg:col-start-2 lg:row-start-1 lg:row-span-2">
+          <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
+            <picture>
+              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1000} height={680} />
+              <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
+            </picture>
+          </div>
+          {/* Desktop shot: the live demo's sale screen at a 1000 x 680 window, device scale 2, captured 2026-11-18 (medusapos/app main 5fc5b95). */}
+          {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
+          <figcaption className="mt-3 text-sm text-fd-muted-foreground">
+            <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
+            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
+          </figcaption>
+        </figure>
+        {/* Fine print: after the screenshot below lg, so a phone's first screen shows the till; under the buttons from lg. */}
+        <div className="-mt-6 lg:mt-0 lg:col-start-1 lg:row-start-2 lg:self-start">
           <p className="mt-4 text-sm text-fd-muted-foreground">
             The live demo signs you in with one click and resets every night. The web app needs a store on{' '}
             <Link href="/docs/quick-start#what-you-need" className="underline">
@@ -93,20 +110,6 @@ export default function HomePage() {
             .
           </p>
         </div>
-        <figure className="mx-auto w-full max-w-[300px] md:max-w-none">
-          <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
-            <picture>
-              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1000} height={680} />
-              <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
-            </picture>
-          </div>
-          {/* Desktop shot: the live demo's sale screen at a 1000 x 680 window, device scale 2, captured 2026-11-18 (medusapos/app main 5fc5b95). */}
-          {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
-          <figcaption className="mt-3 text-sm text-fd-muted-foreground">
-            <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
-            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
-          </figcaption>
-        </figure>
       </section>
 
       <section className="py-12 sm:py-16">
