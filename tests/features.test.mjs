@@ -132,3 +132,9 @@ test('Not there yet lays its four groups in two columns on a wide screen', () =>
   assert.ok(band.includes('<div className="min-w-0">'), 'not there yet grid: column may shrink');
   assert.equal(band.split('<p className="mt-4 max-w-prose text-fd-muted-foreground">').length - 1, 3, 'not there yet grid: paragraphs keep the prose measure');
 });
+
+test('the split card has the name of its docs heading', () => {
+  assert.ok(features.some((feature) => feature.title === 'Split payment'), 'split: card title');
+  assert.ok(!features.some((feature) => feature.title === 'Split tender'), 'split: old title gone');
+  assert.equal(featureDocs['Split payment'], '/docs/at-the-till#split-payment', 'split: docs link');
+});
