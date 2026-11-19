@@ -62,7 +62,8 @@ export default function HomePage() {
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
           <p className="mt-6 text-lg text-fd-muted-foreground">
-            MedusaPOS is an open-source till, free of charge under the MIT licence, for shops that run a Medusa v2 store and sell in person from the same catalogue. It runs in the browser on one register per store, keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice in your Medusa store.
+            MedusaPOS is an open-source till, free of charge under the MIT licence, for shops that run a Medusa v2 store and sell in person from the same catalogue.
+            <span className="hidden sm:inline"> It runs in the browser on one register per store, keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice in your Medusa store.</span>
           </p>
           <div className="mt-8 flex gap-3 sm:gap-4">
             <a
@@ -78,6 +79,10 @@ export default function HomePage() {
               Quick start
             </Link>
           </div>
+          {/* Phone: the lede's second sentence moves under the buttons, so the first screen shows them; from sm it stays in the lede above. */}
+          <p className="mt-6 text-fd-muted-foreground sm:hidden">
+            It runs in the browser on one register per store, keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice in your Medusa store.
+          </p>
           <p className="mt-4 text-sm text-fd-muted-foreground">
             The web app needs a store on{' '}
             <Link href="/docs/quick-start#what-you-need" className="underline">
