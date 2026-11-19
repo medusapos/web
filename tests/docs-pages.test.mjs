@@ -694,3 +694,13 @@ test('Registers names the register control as Quick start does', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(qs.includes("Tap the register's state, as when you opened it, to open its panel"), 'register name: quick start uses the same name');
 });
+
+test('the receipt example right-aligns amounts and bolds the total', () => {
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  const rec = till.slice(till.indexOf('## Read the receipt'), till.indexOf('## Print the receipt'));
+  assert.ok(rec.includes('| Receipt line | Amount |\n| --- | ---: |\n'), 'receipt: amounts right-aligned');
+  assert.ok(rec.includes('| **Total** | **€3.88** |'), 'receipt: total bold');
+  for (const row of ['| 2 × €2.00 | €4.00 |', '| 10% off | −€0.40 |', '| Order discount | −€0.50 |', '| Subtotal | €4.00 |', '| Discount | −€0.90 |', '| VAT 25% | €0.78 |']) {
+    assert.ok(rec.includes(row), `receipt: ${row}`);
+  }
+});
