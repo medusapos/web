@@ -856,3 +856,9 @@ test('docs prose links have a 1px underline at half the text colour', () => {
   assert.ok(body.includes('text-decoration-color: color-mix(in oklab, currentColor 50%, transparent);'), 'links: half colour');
   assert.ok(css.includes(":where([class~='not-prose'], [class~='not-prose'] *)):hover {\n  text-decoration-color: currentColor;"), 'links: hover full colour');
 });
+
+test('the hero keeps its top padding and has a small bottom padding', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<section className="grid items-center gap-10 pt-12 pb-4 sm:pt-16 sm:pb-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">'), 'hero gap: padding');
+  assert.ok(!home.includes('grid items-center gap-10 py-12'), 'hero gap: old padding gone');
+});
