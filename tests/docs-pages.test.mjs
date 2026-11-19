@@ -797,7 +797,7 @@ test('Troubleshooting gives the full-screen saved-sales message its own section'
 test('the hero states the offline condition', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const features = readFileSync(new URL('../lib/features.ts', import.meta.url), 'utf8');
-  assert.ok(home.includes('keeps selling when the connection drops as long as the tab stays open, and never records the same sale twice'), 'offline: hero condition');
+  assert.ok(home.includes('keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice'), 'offline: hero condition');
   assert.ok(features.includes('when the connection drops, as long as the tab stays open.'), 'offline: card says the same');
 });
 
