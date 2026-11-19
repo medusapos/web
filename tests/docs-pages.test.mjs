@@ -844,7 +844,8 @@ test('the Z report says it counts tenders and is not a sales report', () => {
   const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(features.includes(line), 'z report: home card');
   assert.ok(intro.includes(line), 'z report: introduction');
-  assert.ok(registers.includes("each tender's counted amount, expected amount and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
+  assert.ok(registers.includes("each tender's counted amount, expected amount and difference. It has no sales or tax totals ([Limitations](/docs/limitations)): each sale is an order in Medusa Admin, under **Orders**, so look there for the day's sales."), 'z report: registers');
+  assert.ok(!registers.includes('It has no sales or tax totals; see [Limitations]'), 'z report: the old sentence is gone');
 });
 
 test('the closure lists each tender\'s counted amount, expected amount and difference', () => {
