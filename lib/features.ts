@@ -85,7 +85,7 @@ export const features: readonly Feature[] = [
   },
   {
     icon: 'coins',
-    title: 'Split tender',
+    title: 'Split payment',
     description: 'Split one sale between your card terminal and cash. Change comes from the cash part only, and the Medusa order records both payments.',
     tests: ['e2e/split-tender.spec.ts', 'apps/expo/tests/split-tender.test.tsx', 'packages/medusa-plugin/integration-tests/http/order-create.spec.ts'],
     released: true,
@@ -109,6 +109,6 @@ export const featureDocs: Readonly<Record<string, string>> = {
   'Parked sales': '/docs/at-the-till#parked-sales',
   'Line price edit': '/docs/at-the-till#line-price-edit',
   'Fees and one-off items': '/docs/at-the-till#fees-delivery-charges-and-one-off-items',
-  'Split tender': '/docs/at-the-till#split-payment',
+  'Split payment': '/docs/at-the-till#split-payment',
   Customers: '/docs/at-the-till#customers',
 };
