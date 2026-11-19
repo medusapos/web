@@ -843,5 +843,13 @@ test('the Z report says it counts tenders and is not a sales report', () => {
   const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   assert.ok(features.includes(line), 'z report: home card');
   assert.ok(intro.includes(line), 'z report: introduction');
-  assert.ok(registers.includes("each tender's counted, expected and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
+  assert.ok(registers.includes("each tender's counted amount, expected amount and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
+});
+
+test('the closure lists each tender\'s counted amount, expected amount and difference', () => {
+  for (const page of ['quick-start', 'registers']) {
+    const text = readFileSync(new URL(`../content/docs/${page}.mdx`, import.meta.url), 'utf8');
+    assert.ok(text.includes("each tender's counted amount, expected amount and difference"), `tender wording: ${page}`);
+    assert.ok(!text.includes("each tender's counted, expected and difference"), `tender wording: ${page} old phrase gone`);
+  }
 });
