@@ -745,3 +745,10 @@ test('docs screenshots use the home page frame', () => {
   assert.ok(mdx.includes('rounded-xl border border-fd-border shadow-lg'), 'frame: docs use it');
   assert.ok(mdx.includes("Framed like the home page's screenshots"), 'frame: comment');
 });
+
+test('Limitations does not repeat its subtitle', () => {
+  const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
+  assert.ok(lim.includes("description: What MedusaPOS doesn't do yet, and what it expects of your store and till."), 'limitations: subtitle');
+  assert.match(lim, /^MedusaPOS is in beta\.$/m, 'limitations: intro is one sentence');
+  assert.equal(lim.split("what it expects of your store and till").length, 2, 'limitations: said once');
+});
