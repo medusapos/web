@@ -824,3 +824,14 @@ test('Quick start gives closing the register its own heading', () => {
   const selling = qs.slice(sale, close);
   assert.ok(selling.includes('You can keep selling from the loaded catalogue if the connection drops.') && selling.includes('Open **Orders** to review sales'), 'close heading: selling notes in Make a sale');
 });
+
+test('every medusa exec command starts its path with ./node_modules', () => {
+  for (const page of ['quick-start', 'troubleshooting']) {
+    const text = readFileSync(new URL(`../content/docs/${page}.mdx`, import.meta.url), 'utf8');
+    const paths = [...text.matchAll(/npx medusa exec (\S+)/g)].map((m) => m[1]);
+    assert.ok(paths.length > 0, `medusa exec: ${page} has a command`);
+    for (const path of paths) {
+      assert.ok(path.startsWith('./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/'), `medusa exec: ${page} ${path}`);
+    }
+  }
+});

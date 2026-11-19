@@ -48,7 +48,7 @@ tally order.create needs admin: command <commandId>, order <orderId>: <detail>
 Whoever runs the Medusa backend clears it from the store's backend directory, using the command id from that line:
 
 ```sh
-npx medusa exec node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-ledger-resolve.js <commandId> apply
+npx medusa exec ./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/tally-ledger-resolve.js <commandId> apply
 ```
 
 If your backend is in an npm or Yarn workspace, the plugin is usually installed in the workspace root's `node_modules`, not the backend's. If that path doesn't exist, point the command at the plugin's copy there, for example `../../node_modules/@medusapos/medusa-plugin/…`.
