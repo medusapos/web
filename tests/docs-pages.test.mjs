@@ -317,9 +317,9 @@ test('registers says who can approve a large difference', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const limits = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
-  assert.ok(features.includes('then count and close. The closure is your Z report.') && !features.includes('asks for a sign-in'), 'approval: home card');
+  assert.ok(features.includes('then count and close. The closure is your Z report: ') && !features.includes('asks for a sign-in'), 'approval: home card');
   assert.ok(!features.includes("cashier's own"), 'approval: caveat not on the card');
-  assert.ok(intro.includes('count and close. The closure is your Z report.') && !intro.includes('asks for a sign-in'), 'approval: introduction');
+  assert.ok(intro.includes('count and close. The closure is your Z report: ') && !intro.includes('asks for a sign-in'), 'approval: introduction');
   assert.ok(home.includes('<li>check who approves a large difference: with plugin 0.2.3 any login for your store can, including the cashier&apos;s own</li>'), 'approval: in Not there yet');
   assert.ok(home.indexOf('id="not-there-yet"') < home.indexOf('check who approves a large difference'), 'approval: under Not there yet');
   assert.ok(limits.includes("- With plugin 0.2.3, any login for your store can approve a large difference, including the cashier's own."), 'approval: limitations');
@@ -834,4 +834,14 @@ test('every medusa exec command starts its path with ./node_modules', () => {
       assert.ok(path.startsWith('./node_modules/@medusapos/medusa-plugin/.medusa/server/src/scripts/'), `medusa exec: ${page} ${path}`);
     }
   }
+});
+
+test('the Z report says it counts tenders and is not a sales report', () => {
+  const line = 'The closure is your Z report: each tender counted against expected, not a sales report.';
+  const features = readFileSync(new URL('../lib/features.ts', import.meta.url), 'utf8');
+  const intro = readFileSync(new URL('../content/docs/index.mdx', import.meta.url), 'utf8');
+  const registers = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
+  assert.ok(features.includes(line), 'z report: home card');
+  assert.ok(intro.includes(line), 'z report: introduction');
+  assert.ok(registers.includes("each tender's counted, expected and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
 });

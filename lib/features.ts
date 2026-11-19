@@ -36,7 +36,7 @@ export const features: readonly Feature[] = [
   {
     icon: 'calculator',
     title: 'Registers',
-    description: "Open with a float, record cash paid in and out, then count and close. The closure is your Z report.",
+    description: "Open with a float, record cash paid in and out, then count and close. The closure is your Z report: each tender counted against expected, not a sales report.",
     tests: ['e2e/register.spec.ts'],
     released: true,
   },
