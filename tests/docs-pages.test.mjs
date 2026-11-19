@@ -845,3 +845,14 @@ test('the Z report says it counts tenders and is not a sales report', () => {
   assert.ok(intro.includes(line), 'z report: introduction');
   assert.ok(registers.includes("each tender's counted, expected and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
 });
+
+test('docs prose links have a 1px underline at half the text colour', () => {
+  const css = readFileSync(new URL('../app/global.css', import.meta.url), 'utf8');
+  const rule = ".prose :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {";
+  const at = css.indexOf(rule);
+  assert.ok(at > 0, 'links: rule present');
+  const body = css.slice(at, css.indexOf('}', at));
+  assert.ok(body.includes('text-decoration-thickness: 1px;'), 'links: 1px');
+  assert.ok(body.includes('text-decoration-color: color-mix(in oklab, currentColor 50%, transparent);'), 'links: half colour');
+  assert.ok(css.includes(":where([class~='not-prose'], [class~='not-prose'] *)):hover {\n  text-decoration-color: currentColor;"), 'links: hover full colour');
+});
