@@ -722,11 +722,12 @@ test('the receipt example right-aligns amounts and bolds the total', () => {
 test('Quick start shows the Open register panel under step 1', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('## Known beta limits'));
-  const shot = '\n   ![The Open register panel: Cash in the drawer to start (€) with 100 typed in, above the Open register button](/screenshots/docs/quick-start-open-register.jpg)\n';
+  const shot = '\n   ![The Open register panel: Cash in the drawer to start (€) with 100 typed in, above the Open register button](/screenshots/docs/quick-start-open-register-390.jpg)\n';
   assert.ok(sale.includes(shot), 'open register: indented image with alt text');
   assert.ok(sale.indexOf(shot) > sale.indexOf('till-register-control.jpg') && sale.indexOf(shot) < sale.indexOf('2. Scan a barcode'), 'open register: under step 1, after the header shot');
   assert.ok(sale.includes('{/* Screenshot: demo.medusapos.com/demo, Demo register closed, captured 2026-11-19'), 'open register: source');
-  assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)).length > 20000, 'open register: file present');
+  assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register-390.jpg', import.meta.url)).length > 20000, 'open register: file present');
+  assert.ok(!existsSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)), 'open register: the 1280 px shot is gone');
 });
 
 test('Quick start sets up shared locking before the migration', () => {
@@ -769,12 +770,12 @@ test('Registers shows where and how to open the register', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const open = reg.slice(reg.indexOf('## Open with your float'), reg.indexOf('## Record cash in and out'));
-  for (const file of ['till-register-control.jpg', 'quick-start-open-register.jpg']) {
+  for (const file of ['till-register-control.jpg', 'quick-start-open-register-390.jpg']) {
     const line = qs.split('\n').map((l) => l.trim()).find((l) => l.startsWith('![') && l.includes(`/screenshots/docs/${file})`));
     assert.ok(line, `registers open: ${file} in quick start`);
     assert.ok(open.includes(line), `registers open: ${file} with the same alt text`);
   }
-  assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register.jpg'), 'registers open: control before panel');
+  assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register-390.jpg'), 'registers open: control before panel');
   assert.ok(open.indexOf('Tap it to choose or open the register.') < open.indexOf('till-register-control.jpg'), 'registers open: after the text');
 });
 
