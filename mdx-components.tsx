@@ -12,7 +12,7 @@ function DocImage({ preload, ...props }: ComponentProps<'img'> & { preload?: boo
       {/* fumadocs's ImageProps type lacks preload; its Image spreads every prop to next/image. */}
       <ImageZoom
         {...({ ...props, preload } as ImageZoomProps)}
-        className="mx-auto w-full border border-fd-border"
+        className="mx-auto w-full rounded-xl border border-fd-border shadow-lg"
         style={{ maxWidth: width > 0 ? width / 2 : undefined }}
       />
       <span aria-hidden="true" className="-mt-6 block text-center text-xs text-fd-muted-foreground sm:hidden">
@@ -27,7 +27,9 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...defaultMdxComponents,
     // Docs screenshots are captured at device scale 2. Each shows at half its
     // pixel width, the app's own size, so every shot shares one scale; in a
-    // narrower column it fills the width. Framed and centred, and a click or
+    // narrower column it fills the width.
+    // Framed like the home page's screenshots (rounded, with a shadow) and
+    // centred, and a click or
     // tap opens it full size. Below 640 px a muted line under each one says a
     // tap opens it. A page can write `<DocImage … preload />` for a screenshot
     // in its first screen.

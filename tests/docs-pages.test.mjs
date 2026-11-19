@@ -235,7 +235,7 @@ test('docs show the payment screen, the count and the Z report', () => {
   assert.ok(close.includes('register-close.tsx:212') && close.includes('closure-print.ts printHtml'), 'registers: print source cited');
   assert.ok(!reg.includes('open card'), 'registers: no open card');
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
-  assert.ok(mdx.includes('className="mx-auto w-full border border-fd-border"') && !mdx.includes('max-w-sm') && !mdx.includes('max-w-md'), 'mdx: framed screenshots, no fixed box');
+  assert.ok(mdx.includes('className="mx-auto w-full rounded-xl border border-fd-border shadow-lg"') && !mdx.includes('max-w-sm') && !mdx.includes('max-w-md'), 'mdx: framed screenshots, no fixed box');
   assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: DocImage') && mdx.includes('<ImageZoom\n'), 'mdx: screenshots zoom');
   assert.ok(mdx.includes('className="-mt-6 block text-center text-xs text-fd-muted-foreground sm:hidden">') && mdx.includes('Tap to enlarge') && mdx.includes('<span className="block">'), 'mdx: phone screenshots say a tap enlarges them');
   assert.ok(mdx.includes("typeof src === 'object' && src ? Number(src.width)") && mdx.includes('maxWidth: width > 0 ? width / 2 : undefined'), 'mdx: half the static image width, one scale');
@@ -727,4 +727,12 @@ test('Quick start shows the Open register panel under step 1', () => {
   assert.ok(sale.indexOf(shot) > sale.indexOf('till-register-control.jpg') && sale.indexOf(shot) < sale.indexOf('2. Scan a barcode'), 'open register: under step 1, after the header shot');
   assert.ok(sale.includes('{/* Screenshot: demo.medusapos.com/demo, Demo register closed, captured 2026-11-19'), 'open register: source');
   assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)).length > 20000, 'open register: file present');
+});
+
+test('docs screenshots use the home page frame', () => {
+  const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('rounded-xl border border-fd-border shadow-lg'), 'frame: home frame');
+  assert.ok(mdx.includes('rounded-xl border border-fd-border shadow-lg'), 'frame: docs use it');
+  assert.ok(mdx.includes("Framed like the home page's screenshots"), 'frame: comment');
 });
