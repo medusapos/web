@@ -416,7 +416,7 @@ test('the 50-sale batch limit is in Limitations, Troubleshooting and Not there y
   assert.ok(lim.indexOf(item) > lim.indexOf('## Till limits'), 'batch: under till limits');
   const at = trouble.indexOf("there is nothing in the store to fix, and the till can't split it yet");
   assert.ok(at !== -1, 'batch: troubleshooting');
-  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf("### Saved sales can't be opened"), 'batch: under not accepted');
+  assert.ok(at > trouble.indexOf('### Not accepted') && at < trouble.indexOf('## "This account can\'t use the POS"'), 'batch: under not accepted');
   const li = '<li>send a batch of more than 50 sales: the store refuses it whole, and the till can&apos;t split it yet</li>';
   assert.ok(home.includes(li), 'batch: home');
   assert.ok(home.indexOf(li) > home.indexOf('id="not-there-yet"'), 'batch: under not there yet');
@@ -776,4 +776,20 @@ test('Registers shows where and how to open the register', () => {
   }
   assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register.jpg'), 'registers open: control before panel');
   assert.ok(open.indexOf('Tap it to choose or open the register.') < open.indexOf('till-register-control.jpg'), 'registers open: after the text');
+});
+
+test('Source on GitHub has a 44 px tap height', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<a href={siteConfig.githubUrl} className="py-2.5 underline">Source on GitHub</a>'), 'source: padded link');
+});
+
+test('Troubleshooting gives the full-screen saved-sales message its own section', () => {
+  const tr = readFileSync(new URL('../content/docs/troubleshooting.mdx', import.meta.url), 'utf8');
+  const banners = tr.slice(tr.indexOf('## Read the banners'), tr.indexOf('## "This account can\'t use the POS"'));
+  assert.ok(!banners.includes("Saved sales can't be opened"), 'saved sales: not under banners');
+  assert.match(tr, /^## Saved sales can't be opened$/m, 'saved sales: own H2');
+  const i = tr.indexOf("## Saved sales can't be opened");
+  assert.ok(tr.indexOf("## If a sale can't be saved") < i && i < tr.indexOf('## Storage messages'), 'saved sales: between the save and storage sections');
+  assert.ok(tr.slice(i).includes('The full-screen message says "Saved sales can\'t be opened on this device.'), 'saved sales: text kept');
+  assert.equal(tr.split("Saved sales can't be opened on this device").length, 2, 'saved sales: said once');
 });
