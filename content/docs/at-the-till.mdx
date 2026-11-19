@@ -2,6 +2,8 @@
 title: At the till
 description: Take a sale, scan, discount and print the receipt, and set up a till.
 ---
+import tillPayment from '../../public/screenshots/docs/till-payment.jpg';
+
 {/* Source: medusapos/app@c2db7b2 docs/testers.md, README.md, docs/release-notes/v0.1.0.md, docs/release-notes/next.md, e2e/split-tender.spec.ts, e2e/customers.spec.ts, e2e/parked-sales.spec.ts */}
 {/* 0.2.0 lines: medusapos/app@v0.2.0 docs/release-notes/v0.2.0.md */}
 {/* Also from medusapos/app@c2db7b2: docs/QUICKSTART.md (Make a sale), apps/expo/tests/store-settings-flow.test.tsx, apps/expo/lib/catalogue.test.ts, apps/expo/tests/products-screen.test.tsx, apps/expo/tests/discount.test.tsx, apps/expo/tests/parked-sales.test.tsx. */}
@@ -15,7 +17,7 @@ description: Take a sale, scan, discount and print the receipt, and set up a til
 1. [Open your register](/docs/registers), then scan a barcode or search for a product. Add items and check the quantities.
 2. Tap **Checkout**. The payment screen opens on **Cash**; tap **Card terminal** for a card sale.
 
-   ![The payment screen: the €16.95 total, the Cash and Card terminal tiles, amount keys, and the Take €16.95 in Cash button above Complete sale](/screenshots/docs/till-payment.jpg)
+   <DocImage src={tillPayment} alt="The payment screen: the €16.95 total, the Cash and Card terminal tiles, amount keys, and the Take €16.95 in Cash button above Complete sale" preload />
 
 3. For cash, key in the amount handed over or tap **Exact**, then tap **Take**. For a card sale, take the payment on your separate terminal, tap **Take** and enter the terminal's reference; the POS records that external payment.
 4. Tap **Complete sale**, then view the receipt and [print it](#print-the-receipt) if needed.
