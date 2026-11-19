@@ -164,7 +164,8 @@ test('the site says app.medusapos.com runs the latest build', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
   const quickStart = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(!home.includes('the version you install today'), 'home: install-today framing');
-  assert.ok(home.includes('Everything below works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store.'), 'home: hosted intro');
+  assert.ok(home.includes('Every feature in this section works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store.'), 'home: hosted intro');
+  assert.ok(!home.includes('Everything below works today'), 'home: hosted intro says this section, not everything below');
   assert.ok(home.includes('runs the app&apos;s latest build, the same as app.medusapos.com.'), 'home: hosted build caption');
   assert.ok(home.includes('<li>keep an order note with plugin 0.2.3: the hosted app shows an Order note box'), 'home: order note limit');
   assert.ok(quickStart.includes("The hosted app at `https://app.medusapos.com` runs the app's latest build"), 'quick-start: hosted build');
