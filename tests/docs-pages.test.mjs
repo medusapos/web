@@ -188,7 +188,7 @@ test('the quick start says to link one stock location', () => {
 
 test('configure your store names the admin paths', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const configure = qs.slice(qs.indexOf('## Configure your store'), qs.indexOf('5. **A publishable API key.** Create (or reuse) a publishable API key'));
+  const configure = qs.slice(qs.indexOf('## Configure your store'), qs.indexOf('### 5. A publishable API key'));
   assert.ok(/\*\*Settings → Locations & Shipping\*\*, open the location, and edit its\s+\*\*Sales Channels\*\* section\./.test(configure), 'quick-start: location path');
   assert.ok(/[Cc]lick \*\*Create option\*\*\s+and choose the profile in the \*\*Shipping Profile\*\* field\./.test(configure), 'quick-start: shipping option path');
   assert.ok(/go to \*\*Settings → Tax\s+Regions\*\* and create a region for that country\./.test(configure), 'quick-start: tax path');
@@ -282,7 +282,7 @@ test('quick start names the take step', () => {
 
 test('quick start says how staff get their own logins', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const step6 = qs.slice(qs.indexOf('6. **Admin and staff logins.** If you do not have an admin user'), qs.indexOf('## Choose who may use the POS'));
+  const step6 = qs.slice(qs.indexOf('### 6. Admin and staff logins'), qs.indexOf('## Choose who may use the POS'));
   const flat = step6.replace(/\s+/g, ' ');
   assert.ok(flat.includes('Give each member of staff their own login: in Medusa Admin, go to **Settings → Users**, click **Invite**, enter their email and click **Send invite**.'), 'quick-start: invite steps');
   assert.ok(flat.includes('choose **Copy invite link** from the invite\'s menu'), 'quick-start: copy invite link');
@@ -349,10 +349,10 @@ test('quick start gives POS access its own section', () => {
 
 test('quick start sets up the sales region', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const start = qs.indexOf('4. **A region, prices and tax.** Make sure a region covers');
+  const start = qs.indexOf('### 4. A region, prices and tax');
   assert.ok(start > qs.indexOf('## Configure your store'), 'region: step 4');
-  const step = qs.slice(start, qs.indexOf('5. **A publishable API key.** Create (or reuse) a publishable API key')).replace(/\s+/g, ' ');
-  assert.ok(step.startsWith("4. **A region, prices and tax.** Make sure a region covers the location's country, in the currency you sell in:"), 'region: step');
+  const step = qs.slice(start, qs.indexOf('### 5. A publishable API key')).replace(/\s+/g, ' ');
+  assert.ok(step.startsWith("### 4. A region, prices and tax Make sure a region covers the location's country, in the currency you sell in:"), 'region: step');
   assert.ok(step.includes('go to **Settings → Regions**; if no region lists that country, click **Create**, choose the **Currency** and add the country under **Countries**.'), 'region: admin path');
   assert.ok(step.includes("so give each product you'll sell in person a price in its currency."), 'region: prices');
   assert.ok(step.indexOf('**Settings → Regions**') < step.indexOf('**Settings → Tax Regions**'), 'region: before tax');
@@ -362,12 +362,12 @@ test('quick start sets up the sales region', () => {
 
 test('the quick start splits steps 3 and 4 into substeps', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const three = qs.slice(qs.indexOf('3. **A shipping option.** Create a shipping option'), qs.indexOf('4. **A region, prices and tax.** Make sure a region covers'));
-  assert.ok(three.includes("On the location's page:\n   1. Enable **Pickup** (or **Shipping**).\n   2. Add a service zone"), 'substeps: step 3 opens its list');
-  assert.ok(three.includes('\n   3. Click **Create option**'), 'substeps: step 3 ends with the option');
-  const four = qs.slice(qs.indexOf('4. **A region, prices and tax.** Make sure a region covers'), qs.indexOf('5. **A publishable API key.** Create (or reuse) a publishable API key'));
-  assert.ok(four.includes('sell in:\n   1. In the Medusa admin, go to **Settings → Regions**'), 'substeps: step 4 opens its list');
-  assert.ok(four.includes('\n   3. Tax is set up separately: go to **Settings → Tax Regions**'), 'substeps: step 4 ends with tax');
+  const three = qs.slice(qs.indexOf('### 3. A shipping option'), qs.indexOf('### 4. A region, prices and tax'));
+  assert.ok(three.includes("On the location's page:\n\n1. Enable **Pickup** (or **Shipping**).\n2. Add a service zone"), 'substeps: step 3 opens its list');
+  assert.ok(three.includes('\n3. Click **Create option**'), 'substeps: step 3 ends with the option');
+  const four = qs.slice(qs.indexOf('### 4. A region, prices and tax'), qs.indexOf('### 5. A publishable API key'));
+  assert.ok(four.includes('sell in:\n\n1. In the Medusa admin, go to **Settings → Regions**'), 'substeps: step 4 opens its list');
+  assert.ok(four.includes('\n3. Tax is set up separately: go to **Settings → Tax Regions**'), 'substeps: step 4 ends with tax');
 });
 
 test('plugin setup links to the update precautions', () => {
@@ -488,8 +488,8 @@ test('wrapped code lines keep their indentation', () => {
 
 test('Configure your store shows the CORS lines', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  assert.ok(qs.includes('   ```text\n   ADMIN_CORS=<your existing origins>,https://app.medusapos.com\n   AUTH_CORS=<your existing origins>,https://app.medusapos.com\n   ```'), 'cors: block inside step 1');
-  assert.ok(qs.includes('after\n   the origins already there and separated by a comma.'), 'cors: comma rule');
+  assert.ok(qs.includes('```text\nADMIN_CORS=<your existing origins>,https://app.medusapos.com\nAUTH_CORS=<your existing origins>,https://app.medusapos.com\n```'), 'cors: block inside step 1');
+  assert.ok(qs.includes('after\nthe origins already there and separated by a comma.'), 'cors: comma rule');
 });
 
 test('held sales says where the resolve script is in a workspace', () => {
@@ -524,17 +524,17 @@ test('the changelog says its entries are edited and marks the site notes', () =>
   assert.ok(/\n\*\*Site note:\*\* if you run 0\.2\.0 from its tag/.test(pay), 'changelog intro: pay screen is a site note');
 });
 
-test('configure your store gives each step a bold lead', () => {
+test('configure your store gives each step a numbered heading', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const configure = qs.slice(qs.indexOf('## Configure your store'), qs.indexOf('## Choose who may use the POS'));
-  const leads = [...configure.matchAll(/^(\d)\. \*\*([^*]+)\*\* /gm)].map((m) => `${m[1]} ${m[2]}`);
+  const leads = [...configure.matchAll(/^### (\d)\. (.+)$/gm)].map((m) => `${m[1]} ${m[2]}`);
   assert.deepEqual(leads, [
-    '1 Allow the POS origin.',
-    '2 One stock location.',
-    '3 A shipping option.',
-    '4 A region, prices and tax.',
-    '5 A publishable API key.',
-    '6 Admin and staff logins.',
+    '1 Allow the POS origin',
+    '2 One stock location',
+    '3 A shipping option',
+    '4 A region, prices and tax',
+    '5 A publishable API key',
+    '6 Admin and staff logins',
   ], 'configure leads: six, in order');
 });
 
