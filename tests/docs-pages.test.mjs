@@ -617,7 +617,7 @@ test('code blocks get a break point after each slash and before each member name
 
 test('Quick start walks through closing the register', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
-  const close = qs.slice(qs.indexOf('At the end of the day'), qs.indexOf('You can keep selling from the loaded catalogue'));
+  const close = qs.slice(qs.indexOf('At the end of the day'), qs.indexOf('## Known beta limits'));
   assert.ok(close.includes('1. Tap the register\'s state, as when you opened it, to open its panel, then tap **Close register**. On a phone, **Close register** is in the cart view.'), 'qs close: open the count');
   assert.ok(close.includes('2. Tap the note and coin tiles, or type the cash in the drawer.'), 'qs close: count');
   assert.ok(close.includes('3. Tap **Close register** again. The closure is your Z report') && close.includes('**Print the Z report**') && close.includes('**Done**'), 'qs close: Z report');
@@ -722,11 +722,12 @@ test('the receipt example right-aligns amounts and bolds the total', () => {
 test('Quick start shows the Open register panel under step 1', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('## Known beta limits'));
-  const shot = '\n   ![The Open register panel: Cash in the drawer to start (€) with 100 typed in, above the Open register button](/screenshots/docs/quick-start-open-register.jpg)\n';
+  const shot = '\n   ![The Open register panel: Cash in the drawer to start (€) with 100 typed in, above the Open register button](/screenshots/docs/quick-start-open-register-390.jpg)\n';
   assert.ok(sale.includes(shot), 'open register: indented image with alt text');
   assert.ok(sale.indexOf(shot) > sale.indexOf('till-register-control.jpg') && sale.indexOf(shot) < sale.indexOf('2. Scan a barcode'), 'open register: under step 1, after the header shot');
   assert.ok(sale.includes('{/* Screenshot: demo.medusapos.com/demo, Demo register closed, captured 2026-11-19'), 'open register: source');
-  assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)).length > 20000, 'open register: file present');
+  assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register-390.jpg', import.meta.url)).length > 20000, 'open register: file present');
+  assert.ok(!existsSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)), 'open register: the 1280 px shot is gone');
 });
 
 test('Quick start sets up shared locking before the migration', () => {
@@ -769,12 +770,12 @@ test('Registers shows where and how to open the register', () => {
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   const open = reg.slice(reg.indexOf('## Open with your float'), reg.indexOf('## Record cash in and out'));
-  for (const file of ['till-register-control.jpg', 'quick-start-open-register.jpg']) {
+  for (const file of ['till-register-control.jpg', 'quick-start-open-register-390.jpg']) {
     const line = qs.split('\n').map((l) => l.trim()).find((l) => l.startsWith('![') && l.includes(`/screenshots/docs/${file})`));
     assert.ok(line, `registers open: ${file} in quick start`);
     assert.ok(open.includes(line), `registers open: ${file} with the same alt text`);
   }
-  assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register.jpg'), 'registers open: control before panel');
+  assert.ok(open.indexOf('till-register-control.jpg') < open.indexOf('quick-start-open-register-390.jpg'), 'registers open: control before panel');
   assert.ok(open.indexOf('Tap it to choose or open the register.') < open.indexOf('till-register-control.jpg'), 'registers open: after the text');
 });
 
@@ -809,6 +810,19 @@ test('the hero keeps the 2.21.0 requirement under the buttons', () => {
   assert.ok(req > hero.indexOf('Quick start') && req < figure, 'requirement: under the buttons, before the screenshot');
   assert.ok(hero.indexOf('The live demo signs you in with one click and resets every night.\n') > hero.indexOf('</figure>'), 'requirement: demo note stays after the screenshot');
   assert.equal(hero.split('Medusa 2.21.0 exactly').length, 2, 'requirement: said once');
+});
+
+test('Quick start gives closing the register its own heading', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.indexOf('## Make a sale');
+  const close = qs.indexOf('\n## Close the register\n');
+  const limits = qs.indexOf('## Known beta limits');
+  assert.ok(sale > 0 && close > sale && limits > close, 'close heading: between Make a sale and Known beta limits');
+  const section = qs.slice(close, limits);
+  assert.ok(section.includes('At the end of the day, [count and close](/docs/registers#count-and-close) the register.'), 'close heading: close line under it');
+  assert.ok(!section.includes('You can keep selling') && !section.includes('Open **Orders**'), 'close heading: selling notes stay in Make a sale');
+  const selling = qs.slice(sale, close);
+  assert.ok(selling.includes('You can keep selling from the loaded catalogue if the connection drops.') && selling.includes('Open **Orders** to review sales'), 'close heading: selling notes in Make a sale');
 });
 
 test('every medusa exec command starts its path with ./node_modules', () => {
