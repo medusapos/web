@@ -121,7 +121,7 @@ export default function HomePage() {
         {/* Tests: medusapos/app@c027779 .github/workflows/ci.yml runs pnpm test, pnpm e2e and pnpm e2e:rbac on every pull request and push to main. */}
         <p className="mt-4 text-fd-muted-foreground">
           {allReleased
-            ? 'Everything below works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store. Each feature is covered by the app\'s '
+            ? 'Every feature in this section works today at app.medusapos.com, the hosted app, with version 0.2.3 of the plugin in your store. Each feature is covered by the app\'s '
             : 'Everything listed here is covered by the app\'s '}
           <a href={`${siteConfig.githubUrl}/actions/workflows/ci.yml`} className="underline">automated tests</a>
           {', which run on every change.'}
