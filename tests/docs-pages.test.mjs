@@ -877,6 +877,19 @@ test('from lg the demo note sits right under the 2.21.0 note', () => {
   assert.ok(home.includes('<p className="mt-4 lg:mt-1 text-sm text-fd-muted-foreground">\n            The live demo signs you in with one click and resets every night.'), 'fine print: demo note 4px under from lg');
 });
 
+test('code blocks keep a short hyphenated name on one row', () => {
+  const config = readFileSync(new URL('../source.config.ts', import.meta.url), 'utf8');
+  assert.ok(config.includes('const HYPHEN_RUN = /([^\\s/]*[A-Za-z0-9]-[A-Za-z0-9][^\\s/]*)/;'), 'hyphen: run pattern');
+  assert.ok(config.includes("properties: { style: 'white-space:nowrap' }"), 'hyphen: nowrap span');
+  assert.ok(config.includes('piece.length <= 32'), 'hyphen: only short runs');
+  assert.ok(config.includes('...keepHyphenRuns(part)'), 'hyphen: applied to each part');
+  const run = /([^\s/]*[A-Za-z0-9]-[A-Za-z0-9][^\s/]*)/;
+  assert.deepEqual('npm install @medusapos/'.split(run), ['npm install @medusapos/'], 'hyphen: no run before the slash');
+  assert.deepEqual('medusa-plugin@0.2.3'.split(run).filter(Boolean), ['medusa-plugin@0.2.3'], 'hyphen: the package name is one run');
+  assert.deepEqual("{ resolve: '@medusapos/".split(run), ["{ resolve: '@medusapos/"], 'hyphen: a string start has no run');
+  assert.deepEqual('a -- b'.split(run), ['a -- b'], 'hyphen: a lone dash is not a run');
+});
+
 test('the changelog order note limit says which build has the box', () => {
   const log = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
   const start = log.indexOf('### Known limits', log.indexOf('## 0.2.0'));
