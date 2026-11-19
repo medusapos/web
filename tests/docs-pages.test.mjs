@@ -893,3 +893,16 @@ test('code blocks keep a short hyphenated name on one row', () => {
   assert.deepEqual("{ resolve: '@medusapos/".split(run), ["{ resolve: '@medusapos/"], 'hyphen: a string start has no run');
   assert.deepEqual('a -- b'.split(run), ['a -- b'], 'hyphen: a lone dash is not a run');
 });
+
+test('on a phone the hero lede is one sentence and the rest sits under the buttons', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const first = 'MedusaPOS is an open-source till, free of charge under the MIT licence, for shops that run a Medusa v2 store and sell in person from the same catalogue.';
+  const second = 'It runs in the browser on one register per store, keeps selling when the connection drops, as long as the tab stays open, and never records the same sale twice in your Medusa store.';
+  const buttons = home.indexOf('href={siteConfig.demoUrl}');
+  assert.ok(home.includes(`${first}\n            <span className="hidden sm:inline"> ${second}</span>`), 'lede: from sm both sentences in one paragraph');
+  const phone = home.indexOf('<p className="mt-6 text-fd-muted-foreground sm:hidden">');
+  assert.ok(phone > buttons, 'lede: phone copy after the buttons');
+  assert.ok(phone < home.indexOf('The web app needs a store on'), 'lede: phone copy before the fine print');
+  assert.ok(home.slice(phone, phone + 300).includes(second), 'lede: phone copy is the second sentence, unchanged');
+  assert.equal(home.split(second).length - 1, 2, 'lede: the second sentence appears twice, once per width');
+});
