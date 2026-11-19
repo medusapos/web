@@ -845,3 +845,9 @@ test('the Z report says it counts tenders and is not a sales report', () => {
   assert.ok(intro.includes(line), 'z report: introduction');
   assert.ok(registers.includes("each tender's counted, expected and difference. It has no sales or tax totals; see [Limitations](/docs/limitations)."), 'z report: registers');
 });
+
+test('the hero keeps its top padding and has a small bottom padding', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  assert.ok(home.includes('<section className="grid items-center gap-10 pt-12 pb-4 sm:pt-16 sm:pb-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">'), 'hero gap: padding');
+  assert.ok(!home.includes('grid items-center gap-10 py-12'), 'hero gap: old padding gone');
+});
