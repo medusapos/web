@@ -694,3 +694,13 @@ test('Registers names the register control as Quick start does', () => {
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(qs.includes("Tap the register's state, as when you opened it, to open its panel"), 'register name: quick start uses the same name');
 });
+
+test('Quick start shows the Open register panel under step 1', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const sale = qs.slice(qs.indexOf('## Make a sale'), qs.indexOf('## Known beta limits'));
+  const shot = '\n   ![The Open register panel: Cash in the drawer to start (€) with 100 typed in, above the Open register button](/screenshots/docs/quick-start-open-register.jpg)\n';
+  assert.ok(sale.includes(shot), 'open register: indented image with alt text');
+  assert.ok(sale.indexOf(shot) > sale.indexOf('till-register-control.jpg') && sale.indexOf(shot) < sale.indexOf('2. Scan a barcode'), 'open register: under step 1, after the header shot');
+  assert.ok(sale.includes('{/* Screenshot: demo.medusapos.com/demo, Demo register closed, captured 2026-11-19'), 'open register: source');
+  assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)).length > 20000, 'open register: file present');
+});
