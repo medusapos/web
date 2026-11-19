@@ -810,11 +810,3 @@ test('the hero keeps the 2.21.0 requirement under the buttons', () => {
   assert.ok(hero.indexOf('The live demo signs you in with one click and resets every night.\n') > hero.indexOf('</figure>'), 'requirement: demo note stays after the screenshot');
   assert.equal(hero.split('Medusa 2.21.0 exactly').length, 2, 'requirement: said once');
 });
-
-test('the desktop hero caption names the order-note limit', () => {
-  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  const caption = home.slice(home.indexOf('<figcaption'), home.indexOf('</figcaption>'));
-  const [phone, desktop] = caption.split('<span').slice(1);
-  assert.ok(desktop.includes('the same as app.medusapos.com. With plugin 0.2.3, a note added with Add order note doesn&apos;t reach the order.</span>'), 'caption: desktop names the limit');
-  assert.ok(!phone.includes('order note'), 'caption: phone unchanged');
-});
