@@ -2,15 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
-test('home hero is the 1000 x 680 capture', () => {
+test('home hero is the cart column of the 1000 x 680 capture', () => {
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  const png = readFileSync(new URL('../public/screenshots/sale-desktop-1000.png', import.meta.url));
-  assert.equal(png.readUInt32BE(16), 2000, 'hero: png width');
-  assert.equal(png.readUInt32BE(20), 1360, 'hero: png height');
-  assert.ok(home.includes("src: '/screenshots/sale-desktop-1000.png',\n    alt: heroAlt,\n    width: 1000,\n    height: 680,"), 'hero: image props');
-  assert.ok(home.includes('width={1000} height={680} />'), 'hero: source size');
+  const png = readFileSync(new URL('../public/screenshots/sale-desktop-cart.png', import.meta.url));
+  assert.equal(png.readUInt32BE(16), 936, 'hero: png width');
+  assert.equal(png.readUInt32BE(20), 960, 'hero: png height');
+  assert.ok(home.includes("src: '/screenshots/sale-desktop-cart.png',\n    alt: heroAlt,\n    width: 468,\n    height: 480,"), 'hero: image props');
+  assert.ok(home.includes('width={468} height={480} />'), 'hero: source size');
+  assert.ok(!home.includes("src: '/screenshots/sale-desktop-1000.png'"), 'hero: full frame no longer the hero');
   assert.ok(!/608|553/.test(home), 'hero: old size gone');
-  assert.ok(home.includes('captured 2026-11-18 (medusapos/app main 5fc5b95)'), 'hero: capture cited');
+  assert.ok(home.includes('captured 2026-11-18, medusapos/app main 5fc5b95), cropped at 2x to 936 x 960 from x 1064, y 290.'), 'hero: crop cited');
+  assert.ok(home.includes("const heroAlt = 'MedusaPOS sale screen in the browser, with a cart of four items and its total';"), 'hero: alt fits both shots');
+  assert.ok(existsSync(new URL('../public/screenshots/sale-desktop-1000.png', import.meta.url)), 'hero: source frame kept for the docs crop');
   assert.ok(!existsSync(new URL('../public/screenshots/sale-desktop.png', import.meta.url)), 'hero: old file gone');
 });
 

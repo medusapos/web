@@ -33,12 +33,12 @@ export default function HomePage() {
   const more = features.slice(3);
   // With an odd count (9 today), the last of the other cards spans both columns at two columns, so no card sits alone.
   const spanLast = more.length % 2 === 1;
-  const heroAlt = 'MedusaPOS sale screen in the browser: the product grid with prices and stock, and a cart of four items with its total';
+  const heroAlt = 'MedusaPOS sale screen in the browser, with a cart of four items and its total';
   const { props: heroDesktop } = getImageProps({
-    src: '/screenshots/sale-desktop-1000.png',
+    src: '/screenshots/sale-desktop-cart.png',
     alt: heroAlt,
-    width: 1000,
-    height: 680,
+    width: 468,
+    height: 480,
     sizes: '(min-width: 1024px) 624px, 100vw',
   });
   const { props: heroPhone } = getImageProps({
@@ -89,11 +89,11 @@ export default function HomePage() {
         <figure className="mx-auto w-full max-w-[300px] md:max-w-none lg:col-start-2 lg:row-start-1 lg:row-span-2">
           <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
             <picture>
-              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={1000} height={680} />
+              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} width={468} height={480} />
               <img {...heroPhone} alt={heroAlt} className="h-auto w-full" />
             </picture>
           </div>
-          {/* Desktop shot: the live demo's sale screen at a 1000 x 680 window, device scale 2, captured 2026-11-18 (medusapos/app main 5fc5b95). */}
+          {/* Desktop shot: the cart column of public/screenshots/sale-desktop-1000.png (the live demo's sale screen at a 1000 x 680 window, device scale 2, captured 2026-11-18, medusapos/app main 5fc5b95), cropped at 2x to 936 x 960 from x 1064, y 290. */}
           {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
             <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
