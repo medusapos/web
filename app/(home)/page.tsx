@@ -78,6 +78,13 @@ export default function HomePage() {
               Quick start
             </Link>
           </div>
+          <p className="mt-4 text-sm text-fd-muted-foreground">
+            The web app needs a store on{' '}
+            <Link href="/docs/quick-start#what-you-need" className="underline">
+              Medusa 2.21.0 exactly
+            </Link>
+            , with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.
+          </p>
         </div>
         <figure className="mx-auto w-full max-w-[300px] md:max-w-none lg:col-start-2 lg:row-start-1 lg:row-span-2">
           <div className="rounded-xl border border-fd-border shadow-lg overflow-hidden">
@@ -93,14 +100,10 @@ export default function HomePage() {
             <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
           </figcaption>
         </figure>
-        {/* Fine print: after the screenshot below lg, so a phone's first screen shows the till; under the buttons from lg. */}
+        {/* Fine print: after the screenshot below lg, so a phone's first screen shows the till; under the buttons from lg. The 2.21.0 requirement stays under the buttons at every width. */}
         <div className="-mt-6 lg:mt-0 lg:col-start-1 lg:row-start-2 lg:self-start">
           <p className="mt-4 text-sm text-fd-muted-foreground">
-            The live demo signs you in with one click and resets every night. The web app needs a store on{' '}
-            <Link href="/docs/quick-start#what-you-need" className="underline">
-              Medusa 2.21.0 exactly
-            </Link>
-            , with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.
+            The live demo signs you in with one click and resets every night.
           </p>
           <p className="mt-1 text-sm text-fd-muted-foreground">
             Already installed? Staff start at{' '}
