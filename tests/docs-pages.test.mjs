@@ -155,7 +155,7 @@ test('the docs say the plugin needs exactly Medusa 2.21.0', () => {
   assert.ok(limits.includes('- You need Medusa 2.21.0 exactly. Plugin 0.2.3 names that version, not a range,'), 'limitations: exact version');
   assert.ok(quickStart.includes('- A store on Medusa 2.21.0 exactly ([why this version](/docs/limitations#store-setup-limits))'), 'quick-start: exact version');
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
-  assert.ok(home.includes(" resets every night. The web app needs a store on{' '}") && home.includes('Medusa 2.21.0 exactly\n') && home.includes(', with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.'), 'home: exact version');
+  assert.ok(home.includes("The web app needs a store on{' '}") && home.includes('Medusa 2.21.0 exactly\n') && home.includes(', with the MedusaPOS plugin installed: a one-time job for whoever runs your Medusa backend.'), 'home: exact version');
   assert.ok(home.includes('The live demo signs you in with one click and resets every night.'), 'home: demo one click');
   assert.ok(!home.includes('Installing the plugin is a one-time job'), 'home: hero fine print is two sentences');
 });
@@ -792,4 +792,14 @@ test('Troubleshooting gives the full-screen saved-sales message its own section'
   assert.ok(tr.indexOf("## If a sale can't be saved") < i && i < tr.indexOf('## Storage messages'), 'saved sales: between the save and storage sections');
   assert.ok(tr.slice(i).includes('The full-screen message says "Saved sales can\'t be opened on this device.'), 'saved sales: text kept');
   assert.equal(tr.split("Saved sales can't be opened on this device").length, 2, 'saved sales: said once');
+});
+
+test('the hero keeps the 2.21.0 requirement under the buttons', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const hero = home.slice(home.indexOf('<section'), home.indexOf('</section>'));
+  const figure = hero.indexOf('<figure');
+  const req = hero.indexOf("The web app needs a store on{' '}");
+  assert.ok(req > hero.indexOf('Quick start') && req < figure, 'requirement: under the buttons, before the screenshot');
+  assert.ok(hero.indexOf('The live demo signs you in with one click and resets every night.\n') > hero.indexOf('</figure>'), 'requirement: demo note stays after the screenshot');
+  assert.equal(hero.split('Medusa 2.21.0 exactly').length, 2, 'requirement: said once');
 });
