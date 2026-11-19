@@ -745,3 +745,15 @@ test('docs screenshots use the home page frame', () => {
   assert.ok(mdx.includes('rounded-xl border border-fd-border shadow-lg'), 'frame: docs use it');
   assert.ok(mdx.includes("Framed like the home page's screenshots"), 'frame: comment');
 });
+
+test('on phones the hero fine print follows the screenshot', () => {
+  const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
+  const hero = home.slice(home.indexOf('<section'), home.indexOf('</section>'));
+  const figureEnd = hero.indexOf('</figure>');
+  assert.ok(figureEnd > 0, 'fine print: hero has a figure');
+  assert.ok(hero.indexOf('The live demo signs you in with one click') > figureEnd, 'fine print: demo note after the screenshot');
+  assert.ok(hero.indexOf('Already installed? Staff start at') > figureEnd, 'fine print: staff line after the screenshot');
+  assert.ok(hero.indexOf('Point of sale for Medusa') < figureEnd, 'fine print: heading stays before the screenshot');
+  assert.ok(hero.includes('lg:col-start-1 lg:row-start-2'), 'fine print: under the buttons from lg');
+  assert.ok(hero.includes('lg:row-span-2'), 'fine print: screenshot spans both rows from lg');
+});
