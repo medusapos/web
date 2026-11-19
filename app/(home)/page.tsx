@@ -102,7 +102,7 @@ export default function HomePage() {
         </figure>
         {/* Fine print: after the screenshot below lg, so a phone's first screen shows the till; under the buttons from lg. The 2.21.0 requirement stays under the buttons at every width. */}
         <div className="-mt-6 lg:mt-0 lg:col-start-1 lg:row-start-2 lg:self-start">
-          <p className="mt-4 text-sm text-fd-muted-foreground">
+          <p className="mt-4 lg:mt-1 text-sm text-fd-muted-foreground">
             The live demo signs you in with one click and resets every night.
           </p>
           <p className="mt-1 text-sm text-fd-muted-foreground">
