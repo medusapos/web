@@ -97,7 +97,7 @@ export default function HomePage() {
           {/* One build: medusapos/app@bcd2047 apps/expo/vercel.json serves app.medusapos.com and the demo from one deployment. Order note: see the Not there yet item below. */}
           <figcaption className="mt-3 text-sm text-fd-muted-foreground">
             <span className="md:hidden">From the live demo on a phone, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
-            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com.</span>
+            <span className="hidden md:inline">From the live demo, which runs the app&apos;s latest build, the same as app.medusapos.com. With plugin 0.2.3, a note added with Add order note doesn&apos;t reach the order.</span>
           </figcaption>
         </figure>
         {/* Fine print: after the screenshot below lg, so a phone's first screen shows the till; under the buttons from lg. The 2.21.0 requirement stays under the buttons at every width. */}
