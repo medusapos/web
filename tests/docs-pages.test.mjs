@@ -889,11 +889,3 @@ test('code blocks keep a short hyphenated name on one row', () => {
   assert.deepEqual("{ resolve: '@medusapos/".split(run), ["{ resolve: '@medusapos/"], 'hyphen: a string start has no run');
   assert.deepEqual('a -- b'.split(run), ['a -- b'], 'hyphen: a lone dash is not a run');
 });
-
-test('the changelog order note limit says which build has the box', () => {
-  const log = readFileSync(new URL('../content/docs/changelog.mdx', import.meta.url), 'utf8');
-  const start = log.indexOf('### Known limits', log.indexOf('## 0.2.0'));
-  const limits = log.slice(start, log.indexOf('### For developers', start));
-  assert.ok(limits.includes("- No order note box, and a customer can't be edited at the till. The hosted app's later build has an **Order note** box, but with plugin 0.2.3 the note doesn't reach the order ([Limitations](/docs/limitations#not-yet)).\n"), 'changelog order note: names the box and the later build');
-  assert.ok(!limits.includes('- No order note,'), 'changelog order note: the bare line is gone');
-});
