@@ -55,14 +55,14 @@ You can set these optional IDs inside `options`:
   location's earliest shipping option on the sale's products' shipping
   profile is used.
 
+If you run more than one Medusa instance, set up a shared locking provider
+first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-instance).
+
 Then apply the plugin's database migrations and restart your Medusa backend:
 
 ```sh
 npx medusa db:migrate
 ```
-
-If you run more than one Medusa instance, set up a shared locking provider
-first, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-instance).
 
 ## Configure your store
 

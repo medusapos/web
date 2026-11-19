@@ -729,6 +729,15 @@ test('Quick start shows the Open register panel under step 1', () => {
   assert.ok(readFileSync(new URL('../public/screenshots/docs/quick-start-open-register.jpg', import.meta.url)).length > 20000, 'open register: file present');
 });
 
+test('Quick start sets up shared locking before the migration', () => {
+  const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
+  const install = qs.slice(qs.indexOf('## Install the plugin'), qs.indexOf('## Configure your store'));
+  const lock = install.indexOf('If you run more than one Medusa instance, set up a shared locking provider\nfirst, as in [Plugin setup](/docs/plugin-setup#if-you-run-more-than-one-medusa-instance).');
+  assert.ok(lock > install.indexOf('`shippingOptionId`'), 'locking: after the options');
+  assert.ok(lock < install.indexOf("Then apply the plugin's database migrations"), 'locking: before the migration');
+  assert.ok(install.trimEnd().endsWith('npx medusa db:migrate\n```'), 'locking: the section ends with the migration');
+});
+
 test('docs screenshots use the home page frame', () => {
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
   const home = readFileSync(new URL('../app/(home)/page.tsx', import.meta.url), 'utf8');
