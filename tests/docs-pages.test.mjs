@@ -220,11 +220,13 @@ test('docs show the payment screen, the count and the Z report', () => {
   const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
   const reg = readFileSync(new URL('../content/docs/registers.mdx', import.meta.url), 'utf8');
   const close = reg.slice(reg.indexOf('## Count and close'), reg.indexOf('## Get manager approval'));
-  for (const [page, name] of [[till, 'till-payment'], [close, 'registers-count'], [close, 'registers-closure']]) {
+  assert.ok(till.includes('\n   <DocImage src={tillPayment} alt="The payment screen: the €16.95 total, the Cash and Card terminal tiles, amount keys, and the Take €16.95 in Cash button above Complete sale" preload />\n'), 'till-payment: indented preloaded image with alt text');
+  assert.ok(readFileSync(new URL('../public/screenshots/docs/till-payment.jpg', import.meta.url)).length > 20000, 'till-payment: file present');
+  for (const [page, name] of [[close, 'registers-count'], [close, 'registers-closure']]) {
     assert.ok(new RegExp(`\\n   !\\[[^\\]]{40,}\\]\\(/screenshots/docs/${name}\\.jpg\\)\\n`).test(page), `${name}: indented image with alt text`);
     assert.ok(readFileSync(new URL(`../public/screenshots/docs/${name}.jpg`, import.meta.url)).length > 20000, `${name}: file present`);
   }
-  assert.ok(till.indexOf('till-payment.jpg') > till.indexOf('2. Tap **Checkout**') && till.indexOf('till-payment.jpg') < till.indexOf('3. For cash'), 'till: shot under step 2');
+  assert.ok(till.indexOf('<DocImage src={tillPayment}') > till.indexOf('2. Tap **Checkout**') && till.indexOf('<DocImage src={tillPayment}') < till.indexOf('3. For cash'), 'till: shot under step 2');
   assert.ok(close.indexOf('registers-count.jpg') < close.indexOf('3. Tap **Close register** again'), 'registers: count shot under step 2');
   assert.ok(close.indexOf('registers-closure.jpg') < close.indexOf('4. Tap **Done**'), 'registers: closure shot under step 3');
   assert.ok(close.includes('4. Tap **Done**. The **Open register** panel now offers **Use the last counted cash**, with the amount you just counted.'), 'registers: step 4 names the button');
@@ -234,7 +236,7 @@ test('docs show the payment screen, the count and the Z report', () => {
   assert.ok(!reg.includes('open card'), 'registers: no open card');
   const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
   assert.ok(mdx.includes('className="mx-auto w-full border border-fd-border"') && !mdx.includes('max-w-sm') && !mdx.includes('max-w-md'), 'mdx: framed screenshots, no fixed box');
-  assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: (props) => {') && mdx.includes('<ImageZoom\n'), 'mdx: screenshots zoom');
+  assert.ok(mdx.includes("from 'fumadocs-ui/components/image-zoom'") && mdx.includes('img: DocImage') && mdx.includes('<ImageZoom\n'), 'mdx: screenshots zoom');
   assert.ok(mdx.includes('className="-mt-6 block text-center text-xs text-fd-muted-foreground sm:hidden">') && mdx.includes('Tap to enlarge') && mdx.includes('<span className="block">'), 'mdx: phone screenshots say a tap enlarges them');
   assert.ok(mdx.includes("typeof src === 'object' && src ? Number(src.width)") && mdx.includes('maxWidth: width > 0 ? width / 2 : undefined'), 'mdx: half the static image width, one scale');
 });
@@ -693,4 +695,16 @@ test('Registers names the register control as Quick start does', () => {
   assert.ok(reg.includes("Tap the register's state to open its panel."), 'register name: open its panel');
   const qs = readFileSync(new URL('../content/docs/quick-start.mdx', import.meta.url), 'utf8');
   assert.ok(qs.includes("Tap the register's state, as when you opened it, to open its panel"), 'register name: quick start uses the same name');
+});
+
+test('At the till preloads only its first screenshot', () => {
+  const mdx = readFileSync(new URL('../mdx-components.tsx', import.meta.url), 'utf8');
+  assert.ok(mdx.includes('img: DocImage') && mdx.includes('{...({ ...props, preload } as ImageZoomProps)}'), 'preload: DocImage is the markdown image and passes preload');
+  const till = readFileSync(new URL('../content/docs/at-the-till.mdx', import.meta.url), 'utf8');
+  assert.equal(till.split('preload').length, 2, 'preload: once on At the till');
+  assert.ok(till.includes("import tillPayment from '../../public/screenshots/docs/till-payment.jpg';"), 'preload: static import');
+  const dir = new URL('../content/docs/', import.meta.url);
+  for (const file of readdirSync(dir).filter((f) => f.endsWith('.mdx') && f !== 'at-the-till.mdx')) {
+    assert.ok(!readFileSync(new URL(file, dir), 'utf8').includes(' preload'), `preload: none on ${file}`);
+  }
 });
