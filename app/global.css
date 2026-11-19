@@ -59,3 +59,18 @@ figure.shiki .fd-scroll-container .line {
 [data-toc-popover-trigger] > svg[role='progressbar'] {
   display: none;
 }
+
+/*
+ * Docs prose links: a 1px underline at half the text colour instead of
+ * Fumadocs' 1.5px near-black one, so a line with several links doesn't
+ * stack heavy bars. Weight and text colour stay, so links still stand out
+ * from body text. Hover brings the underline to the full text colour.
+ */
+.prose :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, currentColor 50%, transparent);
+}
+
+.prose :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)):hover {
+  text-decoration-color: currentColor;
+}

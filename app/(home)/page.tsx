@@ -57,7 +57,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd(siteConfig)) }}
       />
-      <section className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">
+      <section className="grid items-center gap-10 pt-12 pb-4 sm:pt-16 sm:pb-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-0">
         <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
           <p className="mb-4 text-sm text-fd-muted-foreground">{`Beta · version ${siteConfig.release}`}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Point of sale for Medusa</h1>
