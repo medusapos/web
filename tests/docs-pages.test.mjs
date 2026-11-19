@@ -757,3 +757,10 @@ test('on phones the hero fine print follows the screenshot', () => {
   assert.ok(hero.includes('lg:col-start-1 lg:row-start-2'), 'fine print: under the buttons from lg');
   assert.ok(hero.includes('lg:row-span-2'), 'fine print: screenshot spans both rows from lg');
 });
+
+test('Limitations does not repeat its subtitle', () => {
+  const lim = readFileSync(new URL('../content/docs/limitations.mdx', import.meta.url), 'utf8');
+  assert.ok(lim.includes("description: What MedusaPOS doesn't do yet, and what it expects of your store and till."), 'limitations: subtitle');
+  assert.match(lim, /^MedusaPOS is in beta\.$/m, 'limitations: intro is one sentence');
+  assert.equal(lim.split("what it expects of your store and till").length, 2, 'limitations: said once');
+});
